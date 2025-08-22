@@ -1,0 +1,42 @@
+{
+  "name": "amsync-landing-page",
+  "version": "1.0.0",
+  "description": "Landing page profissional para AMSync Ads com sistema de pagamentos integrado",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "build": "echo 'Build completed'",
+    "test": "echo 'No tests specified'"
+  },
+  "keywords": [
+    "amsync",
+    "whatsapp",
+    "automation",
+    "ai",
+    "landing-page",
+    "payment",
+    "moçambique"
+  ],
+  "author": "AMSync Oficial",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "body-parser": "^1.20.2",
+    "axios": "^1.6.0",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/amsync/landing-page.git"
+  },
+  "homepage": "https://amsync.online"
+}

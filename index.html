@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMSync Ads - Automação Inteligente para WhatsApp</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Facebook Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '2096237854232667');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=2096237854232667&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Facebook Pixel Code -->
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="logo-container">
+                    <img src="logotipo Moderno da Amsync.png" alt="AMSync Ads" class="logo">
+                    <h2 class="logo-text">AMSync Ads</h2>
+                </div>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="#sobre" class="nav-link">Sobre</a></li>
+                    <li><a href="#diferenciais" class="nav-link">Diferenciais</a></li>
+                    <li><a href="#demonstracao" class="nav-link">Demo</a></li>
+                    <li><a href="#missao" class="nav-link">Missão</a></li>
+                    <li><a href="#planos" class="nav-link">Planos</a></li>
+                    <li><a href="#contato" class="nav-link">Contato</a></li>
+                </ul>
+                <button class="cta-button header-cta" onclick="scrollToSection('planos'); fbq('track', 'Lead', {content_name: 'Header CTA'});">Quero meu Chatbot</button>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Automação inteligente para WhatsApp com IA de verdade
+                </h1>
+                <p class="hero-subtitle">
+                    A solução definitiva para empresas que querem automatizar o atendimento com inteligência artificial
+                </p>
+                <button class="cta-button hero-cta" onclick="scrollToSection('planos'); fbq('track', 'Lead', {content_name: 'Hero CTA'});">
+                    Começar Agora
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+            <div class="hero-image">
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <div class="chat-header">
+                            <div class="chat-avatar">
+                                <div class="chat-avatar-hexagon">
+                                    <div class="chat-avatar-monogram">AS</div>
+                                </div>
+                            </div>
+                            <div class="chat-info">
+                                <h4>AMSync Bot</h4>
+                                <span>Online</span>
+                            </div>
+                        </div>
+                        <div class="chat-messages">
+                            <div class="message bot">
+                                <p>Olá! 👋 Sou o AMSync Bot, seu assistente virtual inteligente!</p>
+                            </div>
+                            <div class="message bot">
+                                <p>Como posso ajudar você hoje? Posso responder perguntas sobre produtos, preços e muito mais! 🚀</p>
+                            </div>
+                            <div class="message user">
+                                <p>Quero saber sobre os planos disponíveis</p>
+                            </div>
+                            <div class="message bot">
+                                <p>Perfeito! Temos 5 planos incríveis:</p>
+                            </div>
+                            <div class="message bot">
+                                <p>• Inicial: 199 MT/mês<br>• Essencial: 499 MT/mês<br>• Crescimento: 1.000 MT/mês<br>• Profissional: 1.800 MT/mês<br>• Ilimitado: 2.475 MT/mês</p>
+                            </div>
+                            <div class="message bot">
+                                <p>Qual plano te interessa mais? 😊</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre Section -->
+    <section class="sobre" id="sobre">
+        <div class="container">
+            <div class="section-header">
+                <h2>Sobre o AMSync Ads</h2>
+            </div>
+            <div class="sobre-content">
+                <p>
+                    O AMSync Ads é a solução definitiva para empresas que querem automatizar o atendimento no WhatsApp, 
+                    usando o poder da Inteligência Artificial (OpenAI) e uma plataforma visual, fácil e segura.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Diferenciais Section -->
+    <section class="diferenciais" id="diferenciais">
+        <div class="container">
+            <div class="section-header">
+                <h2>Por que escolher o AMSync Ads?</h2>
+            </div>
+            <div class="diferenciais-grid">
+                <div class="diferencial-card" data-aos="fade-up">
+                    <div class="diferencial-icon">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h3>Criação Fácil de Bots</h3>
+                    <p>Configure regras, produtos, localização e mais em uma interface web intuitiva.</p>
+                </div>
+                <div class="diferencial-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="diferencial-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Inteligência Artificial Real</h3>
+                    <p>Respostas naturais, rápidas e personalizadas com a API da OpenAI.</p>
+                </div>
+                <div class="diferencial-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="diferencial-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <h3>Gerenciamento Centralizado</h3>
+                    <p>Monitore e controle todos os seus bots em um painel único e seguro.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Casos de Sucesso Section -->
+    <section class="casos-sucesso" id="casos-sucesso">
+        <div class="container">
+            <div class="section-header">
+                <h2>Números que impressionam</h2>
+                <p>Resultados reais das empresas que confiam no AMSync Ads</p>
+            </div>
+            <div class="estatisticas-grid">
+                <div class="estatistica-card" data-aos="fade-up">
+                    <div class="estatistica-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div class="estatistica-numero" data-target="500">0</div>
+                    <h3>+500 empresas atendidas</h3>
+                    <p>Em todo o país</p>
+                </div>
+                <div class="estatistica-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="estatistica-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div class="estatistica-numero" data-target="1000000">0</div>
+                    <h3>+1M mensagens processadas</h3>
+                    <p>Com IA avançada</p>
+                </div>
+                <div class="estatistica-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="estatistica-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="estatistica-numero" data-target="99">0</div>
+                    <h3>99% de satisfação</h3>
+                    <p>Dos nossos clientes</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Como Funciona Section -->
+    <section class="como-funciona" id="como-funciona">
+        <div class="container">
+            <div class="section-header">
+                <h2>Como funciona o AMSync Ads</h2>
+                <p>4 passos simples para transformar seu atendimento</p>
+            </div>
+            <div class="passos-grid">
+                <div class="passo-card" data-aos="fade-up">
+                    <div class="passo-numero">1</div>
+                    <div class="passo-icon">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h3>Crie seu bot</h3>
+                    <p>Interface visual intuitiva para configurar seu chatbot personalizado</p>
+                </div>
+                <div class="passo-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="passo-numero">2</div>
+                    <div class="passo-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Configure o atendimento</h3>
+                    <p>Defina regras, produtos e respostas automáticas inteligentes</p>
+                </div>
+                <div class="passo-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="passo-numero">3</div>
+                    <div class="passo-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Atenda clientes 24/7</h3>
+                    <p>Seu bot funciona dia e noite, sem interrupções</p>
+                </div>
+                <div class="passo-card" data-aos="fade-up" data-aos-delay="600">
+                    <div class="passo-numero">4</div>
+                    <div class="passo-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Venda mais</h3>
+                    <p>Acompanhe resultados e otimize suas conversões</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demonstração em Vídeo Section -->
+    <section class="demonstracao-video" id="demonstracao">
+        <div class="container">
+            <div class="section-header">
+                <h2>Veja como conectar o AMSync ao seu WhatsApp</h2>
+                <p>Tutorial completo: conecte seu WhatsApp em poucos minutos</p>
+            </div>
+            <div class="video-container" data-aos="fade-up">
+                <div class="video-wrapper">
+                    <iframe 
+                        src="https://www.youtube.com/embed/gT0OUgUBKM0" 
+                        title="Como conectar AMSync ao WhatsApp"
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen
+                        onload="if(typeof fbq !== 'undefined') fbq('track', 'ViewContent', {content_name: 'Video Tutorial Loaded', content_category: 'Tutorial'});">
+                    </iframe>
+                </div>
+                <div class="video-description">
+                    <h3><i class="fas fa-play-circle"></i> Tutorial Passo a Passo</h3>
+                    <p>Neste vídeo, você aprenderá:</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Como fazer o download e instalação</li>
+                        <li><i class="fas fa-check"></i> Processo de conexão com WhatsApp</li>
+                        <li><i class="fas fa-check"></i> Configuração inicial do seu bot</li>
+                        <li><i class="fas fa-check"></i> Primeiros passos para automatização</li>
+                    </ul>
+                    <div class="video-cta">
+                        <p><strong>Pronto para começar?</strong> Escolha seu plano e comece a automatizar hoje mesmo!</p>
+                        <button class="cta-button" onclick="scrollToSection('planos'); fbq('track', 'Lead', {content_name: 'Video CTA'});">
+                            <i class="fas fa-rocket"></i>
+                            Ver Planos
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Missão Section -->
+    <section class="missao" id="missao">
+        <div class="container">
+            <div class="section-header">
+                <h2>Nossa Missão</h2>
+            </div>
+            <div class="missao-content">
+                <p>
+                    Ajudar empresas a vender mais, atender melhor e economizar tempo com automação inteligente no WhatsApp. 
+                    Seja para responder perguntas frequentes, apresentar produtos, captar leads ou manter o canal aberto 24/7, 
+                    o AMSync Ads é seu parceiro para um atendimento moderno e eficiente.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Planos Section -->
+    <section class="planos" id="planos">
+        <div class="container">
+            <div class="section-header">
+                <h2>Planos e Preços</h2>
+                <p>Escolha o plano ideal para o seu negócio</p>
+            </div>
+            <div class="planos-grid">
+                <div class="plano-card" data-aos="fade-up">
+                    <div class="plano-header">
+                        <h3>Inicial</h3>
+                        <div class="plano-preco">
+                            <div class="preco-antigo">
+                                <span class="moeda">MT</span>
+                                <span class="valor-riscado">399</span>
+                                <span class="periodo">/mês</span>
+                            </div>
+                            <div class="preco-atual">
+                                <span class="moeda">MT</span>
+                                <span class="valor">199</span>
+                                <span class="periodo">/mês</span>
+                                <span class="economia">Economia de 50%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="plano-features">
+                        <li><i class="fas fa-check"></i> 500 mensagens/mês</li>
+                        <li><i class="fas fa-check"></i> Gerenciamento de bloqueios</li>
+                    </ul>
+                    <button class="plano-cta" onclick="openPaymentModal('inicial', 199, 'Plano Inicial'); fbq('track', 'InitiateCheckout', {content_name: 'Plano Inicial', value: 199, currency: 'MZN'});">Quero este plano</button>
+                </div>
+
+                <div class="plano-card featured" data-aos="fade-up" data-aos-delay="100">
+                    <div class="plano-badge">Mais Popular</div>
+                    <div class="plano-header">
+                        <h3>Essencial</h3>
+                        <div class="plano-preco">
+                            <div class="preco-antigo">
+                                <span class="moeda">MT</span>
+                                <span class="valor-riscado">999</span>
+                                <span class="periodo">/mês</span>
+                            </div>
+                            <div class="preco-atual">
+                                <span class="moeda">MT</span>
+                                <span class="valor">499</span>
+                                <span class="periodo">/mês</span>
+                                <span class="economia">Economia de 50%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="plano-features">
+                        <li><i class="fas fa-check"></i> 1.200 mensagens/mês</li>
+                        <li><i class="fas fa-check"></i> Gerenciamento de bloqueios</li>
+                    </ul>
+                    <button class="plano-cta" onclick="openPaymentModal('essencial', 499, 'Plano Essencial'); fbq('track', 'InitiateCheckout', {content_name: 'Plano Essencial', value: 499, currency: 'MZN'});">Quero este plano</button>
+                </div>
+
+                <div class="plano-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="plano-header">
+                        <h3>Crescimento</h3>
+                        <div class="plano-preco">
+                            <div class="preco-antigo">
+                                <span class="moeda">MT</span>
+                                <span class="valor-riscado">2.000</span>
+                                <span class="periodo">/mês</span>
+                            </div>
+                            <div class="preco-atual">
+                                <span class="moeda">MT</span>
+                                <span class="valor">1.000</span>
+                                <span class="periodo">/mês</span>
+                                <span class="economia">Economia de 50%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="plano-features">
+                        <li><i class="fas fa-check"></i> 2.500 mensagens/mês</li>
+                        <li><i class="fas fa-check"></i> Suporte prioritário</li>
+                        <li><i class="fas fa-check"></i> Remarketing</li>
+                        <li><i class="fas fa-check"></i> Envio de fotos e vídeos</li>
+                    </ul>
+                    <button class="plano-cta" onclick="openPaymentModal('crescimento', 1000, 'Plano Crescimento'); fbq('track', 'InitiateCheckout', {content_name: 'Plano Crescimento', value: 1000, currency: 'MZN'});">Quero este plano</button>
+                </div>
+
+                <div class="plano-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="plano-header">
+                        <h3>Profissional</h3>
+                        <div class="plano-preco">
+                            <div class="preco-antigo">
+                                <span class="moeda">MT</span>
+                                <span class="valor-riscado">3.600</span>
+                                <span class="periodo">/mês</span>
+                            </div>
+                            <div class="preco-atual">
+                                <span class="moeda">MT</span>
+                                <span class="valor">1.800</span>
+                                <span class="periodo">/mês</span>
+                                <span class="economia">Economia de 50%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="plano-features">
+                        <li><i class="fas fa-check"></i> 10.000 mensagens/mês</li>
+                        <li><i class="fas fa-check"></i> Múltiplos usuários</li>
+                        <li><i class="fas fa-check"></i> API</li>
+                        <li><i class="fas fa-check"></i> Remarketing</li>
+                        <li><i class="fas fa-check"></i> Envio de fotos e vídeos</li>
+                    </ul>
+                    <button class="plano-cta" onclick="openPaymentModal('profissional', 1800, 'Plano Profissional'); fbq('track', 'InitiateCheckout', {content_name: 'Plano Profissional', value: 1800, currency: 'MZN'});">Quero este plano</button>
+                </div>
+
+                <div class="plano-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="plano-header">
+                        <h3>Ilimitado</h3>
+                        <div class="plano-preco">
+                            <div class="preco-antigo">
+                                <span class="moeda">MT</span>
+                                <span class="valor-riscado">4.950</span>
+                                <span class="periodo">/mês</span>
+                            </div>
+                            <div class="preco-atual">
+                                <span class="moeda">MT</span>
+                                <span class="valor">2.475</span>
+                                <span class="periodo">/mês</span>
+                                <span class="economia">Economia de 50%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="plano-features">
+                        <li><i class="fas fa-check"></i> Mensagens ilimitadas</li>
+                        <li><i class="fas fa-check"></i> Suporte dedicado no WhatsApp</li>
+                    </ul>
+                    <button class="plano-cta" onclick="openPaymentModal('ilimitado', 2475, 'Plano Ilimitado'); fbq('track', 'InitiateCheckout', {content_name: 'Plano Ilimitado', value: 2475, currency: 'MZN'});">Quero este plano</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2>Perguntas Frequentes</h2>
+                <p>Tire suas dúvidas sobre o AMSync Ads</p>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-item" data-aos="fade-up">
+                    <div class="faq-question">
+                        <h3>Posso testar antes de pagar?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sim! Oferecemos um período de teste gratuito de 50 Mensagens para você conhecer todas as funcionalidades do AMSync Ads.</p>
+                    </div>
+                </div>
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="faq-question">
+                        <h3>O plano pode ser cancelado quando quiser?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Claro! Você pode cancelar sua assinatura a qualquer momento, sem multas ou taxas ocultas.</p>
+                    </div>
+                </div>
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="400">
+                    <div class="faq-question">
+                        <h3>Preciso de conhecimento técnico?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Não! Nossa interface é intuitiva e você pode configurar seu bot em poucos minutos, sem conhecimento técnico.</p>
+                    </div>
+                </div>
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="600">
+                    <div class="faq-question">
+                        <h3>O suporte é em português?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sim! Nossa equipe de suporte fala português e está disponível para ajudar você sempre que precisar.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Garantia Section -->
+    <section class="garantia" id="garantia">
+        <div class="container">
+            <div class="section-header">
+                <h2>Garantia e Confiança</h2>
+                <p>Seu investimento está 100% protegido</p>
+            </div>
+            <div class="garantia-grid">
+                <div class="garantia-card" data-aos="fade-up">
+                    <div class="garantia-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Garantia de 30 dias</h3>
+                    <p>Se não ficar satisfeito, devolvemos 100% do seu dinheiro</p>
+                </div>
+                <div class="garantia-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="garantia-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3>Pagamento Seguro</h3>
+                    <p>Transações protegidas com criptografia SSL de ponta</p>
+                </div>
+                <div class="garantia-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="garantia-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Suporte Premium</h3>
+                    <p>Equipe especializada disponível para ajudar você</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formulário de Lead Section -->
+    <section class="formulario-lead" id="formulario-lead">
+        <div class="container">
+            <div class="lead-content">
+                <div class="lead-text">
+                    <h2>Quer receber novidades e dicas sobre automação?</h2>
+                    <p>Deixe seu email e receba conteúdo exclusivo sobre como aumentar suas vendas com WhatsApp automatizado</p>
+                </div>
+                <form class="lead-form" onsubmit="fbq('track', 'Lead', {content_name: 'Email Capture'}); return true;">
+                    <input type="email" placeholder="Seu melhor email" required>
+                    <button type="submit" class="cta-button">
+                        <i class="fas fa-paper-plane"></i>
+                        Quero receber dicas
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Assistentes Section -->
+    <section class="assistentes" id="assistentes">
+        <div class="container">
+            <div class="assistentes-content">
+                <h2>Meus Assistentes de Vendas</h2>
+                <p>Você ainda não criou nenhum assistente de vendas. Clique em 'Novo Assistente de Vendas' para começar.</p>
+                <button class="cta-button" onclick="scrollToSection('planos'); fbq('track', 'Lead', {content_name: 'Novo Assistente CTA'});">
+                    <i class="fas fa-plus"></i>
+                    Novo Assistente de Vendas
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contato">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>AMSync Ads</h3>
+                    <p>Automação inteligente para WhatsApp com IA de verdade.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Links Úteis</h4>
+                    <ul>
+                        <li><a href="#">Termos de Uso</a></li>
+                        <li><a href="#">Política de Privacidade</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contato Rápido</h4>
+                    <div class="contato-info">
+                        <a href="https://wa.me/258874006962" class="whatsapp-link" onclick="fbq('track', 'Contact', {content_name: 'Footer WhatsApp'});">
+                            <i class="fab fa-whatsapp"></i>
+                            +258 87 400 6962
+                        </a>
+                        <a href="tel:+258841006962" class="phone-link" onclick="fbq('track', 'Contact', {content_name: 'Footer Phone'});">
+                            <i class="fas fa-phone"></i>
+                            +258 84 100 6962
+                        </a>
+                        <a href="amsyncoficial@amsync.online" class="email-link" onclick="fbq('track', 'Contact', {content_name: 'Footer Email'});">
+                            <i class="fas fa-envelope"></i>
+                            amsyncoficial@amsync.online
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 AMSync Oficial. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal de Pagamento -->
+    <div id="paymentModal" class="payment-modal">
+        <div class="payment-modal-content">
+            <div class="payment-modal-header">
+                <h3>Pagamento - <span id="modalPlanName">Plano</span></h3>
+                <span class="close" onclick="closePaymentModal()">&times;</span>
+            </div>
+            <div class="payment-modal-body">
+                <div class="selected-plan-info">
+                    <h4>Plano Selecionado: <span id="modalSelectedPlanName">-</span></h4>
+                    <p>Valor: <strong id="modalSelectedPlanAmount">-</strong> MT</p>
+                </div>
+
+                <form id="paymentFormElement">
+                    <div class="form-group">
+                        <label for="useremail">Email *</label>
+                        <input type="email" id="useremail" name="useremail" required placeholder="seu@email.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="userwhatsApp">WhatsApp *</label>
+                        <input type="tel" id="userwhatsApp" name="userwhatsApp" required placeholder="84 123 4567">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Número Mpesa/Emola para Cobrança *</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="84 123 4567">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="paymentMethod">Método de Pagamento *</label>
+                        <select id="paymentMethod" name="method" required>
+                            <option value="">Selecione o método</option>
+                            <option value="mpesa">M-Pesa</option>
+                            <option value="emola">E-Mola</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="context">Observações (opcional)</label>
+                        <textarea id="context" name="context" placeholder="Alguma observação sobre seu pedido..."></textarea>
+                    </div>
+
+                    <button type="submit" class="payment-submit-btn" onclick="fbq('track', 'Purchase', {value: selectedAmount, currency: 'MZN'});">
+                        <i class="fas fa-credit-card"></i>
+                        Pagar Agora
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Status do Pagamento -->
+    <div id="paymentStatus" class="payment-status-modal" style="display: none;">
+        <div class="payment-status-content">
+            <div class="status-icon">
+                <i class="fas fa-spinner fa-spin"></i>
+            </div>
+            <h3 id="statusTitle">Processando Pagamento...</h3>
+            <p id="statusMessage">Aguarde enquanto processamos sua transação...</p>
+            <div class="payment-details" id="paymentDetails"></div>
+        </div>
+    </div>
+
+    <!-- WhatsApp Flutuante -->
+    <a href="https://wa.me/258874006962" class="whatsapp-float" target="_blank" rel="noopener noreferrer" onclick="fbq('track', 'Contact', {content_name: 'WhatsApp Float'});">
+        <div class="whatsapp-glow"></div>
+        <i class="fab fa-whatsapp"></i>
+        <div class="whatsapp-particles">
+            <div class="whatsapp-particle" style="top: 20%; left: 20%; animation-delay: 0s;"></div>
+            <div class="whatsapp-particle" style="top: 80%; left: 80%; animation-delay: 0.5s;"></div>
+            <div class="whatsapp-particle" style="top: 40%; left: 60%; animation-delay: 1s;"></div>
+            <div class="whatsapp-particle" style="top: 60%; left: 40%; animation-delay: 1.5s;"></div>
+        </div>
+    </a>
+
+    <script src="script.js"></script>
+</body>
+</html>
