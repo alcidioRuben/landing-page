@@ -63,10 +63,16 @@
                 <p class="hero-subtitle">
                     A solução definitiva para empresas que querem automatizar o atendimento com inteligência artificial
                 </p>
-                <button class="cta-button hero-cta" onclick="scrollToSection('planos'); fbq('track', 'Lead', {content_name: 'Hero CTA'});">
-                    Começar Agora
-                    <i class="fas fa-arrow-right"></i>
-                </button>
+                <div class="hero-buttons">
+                    <button class="cta-button hero-cta primary" onclick="scrollToSection('planos'); fbq('track', 'Lead', {content_name: 'Hero CTA'});">
+                        Começar Agora
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button class="cta-button hero-cta secondary" onclick="window.open('https://assistente.amsync.online', '_blank'); fbq('track', 'Lead', {content_name: 'Instalar App'});">
+                        <i class="fas fa-download"></i>
+                        Instalar App
+                    </button>
+                </div>
             </div>
             <div class="hero-image">
                 <div class="phone-mockup">
