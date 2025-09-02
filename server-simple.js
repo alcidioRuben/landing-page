@@ -21,6 +21,17 @@ const mimeTypes = {
 const server = http.createServer((req, res) => {
     let filePath = '.' + req.url;
     
+    // Health check endpoint for Railway
+    if (req.url === '/health') {
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ 
+            status: 'OK', 
+            timestamp: new Date().toISOString(),
+            uptime: process.uptime()
+        }));
+        return;
+    }
+    
     // Default to index.html
     if (filePath === './') {
         filePath = './index.html';

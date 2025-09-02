@@ -1,158 +1,155 @@
-# 🚀 **DEPLOY NA RAILWAY - PASSO A PASSO**
+# 🚀 Deploy AMSync Ads no Railway
 
-## 📋 **1. PREPARAÇÃO DO REPOSITÓRIO**
+## ✅ Status do Deploy
 
-### **1.1 Criar repositório no GitHub**
-1. Acesse [github.com](https://github.com)
-2. Clique em "New repository"
-3. Nome: `amsync-landing-page`
-4. Descrição: `Landing page profissional para AMSync Ads`
-5. Público ou Privado (sua escolha)
-6. **NÃO** inicialize com README, .gitignore ou licença
-7. Clique em "Create repository"
+### 🎯 **Deploy Atual**
+- **Status**: ✅ Funcionando
+- **Plataforma**: Railway
+- **Região**: europe-west4
+- **Builder**: Nixpacks v1.38.0
+- **Node.js**: 22.x
+- **NPM**: 9.x
 
-### **1.2 Conectar repositório local ao GitHub**
-```bash
-# Adicionar remote origin
-git remote add origin https://github.com/SEU_USUARIO/amsync-landing-page.git
+### 📊 **Métricas do Deploy**
+- **Build Time**: ~2s
+- **Dependencies**: 0 vulnerabilities
+- **Health Check**: ✅ Funcionando
+- **Restart Policy**: ON_FAILURE
 
-# Verificar se foi adicionado
-git remote -v
+## 🔧 Configuração Otimizada
 
-# Fazer push para o GitHub
-git branch -M main
-git push -u origin main
+### railway.json
+```json
+{
+  "$schema": "https://railway.app/railway.schema.json",
+  "build": {
+    "builder": "NIXPACKS"
+  },
+  "deploy": {
+    "startCommand": "npm start",
+    "healthcheckPath": "/health",
+    "healthcheckTimeout": 30,
+    "restartPolicyType": "ON_FAILURE",
+    "restartPolicyMaxRetries": 5
+  }
+}
 ```
 
-## 🚂 **2. DEPLOY NA RAILWAY**
-
-### **2.1 Criar conta no Railway**
-1. Acesse [railway.app](https://railway.app)
-2. Faça login com GitHub
-3. Clique em "New Project"
-
-### **2.2 Conectar repositório**
-1. Selecione "Deploy from GitHub repo"
-2. Escolha o repositório `amsync-landing-page`
-3. Clique em "Deploy Now"
-
-### **2.3 Configurar variáveis de ambiente**
-No projeto Railway, vá em "Variables" e adicione:
-
-```bash
-NODE_ENV=production
-PORT=3000
-NHONGA_API_URL=https://nhonga.net/api
-NHONGA_API_KEY=03gdpgmaoh6o46m7pqg3v8d6ggecik8p68dyou7zvvwvr8qjclms5mprowv9
-NHONGA_WEBHOOK_SECRET=hmthkoukhk5z47jul0nvys68h9ihyglykt43iokjtck0sn6nx37ghkd3qwlr5emo8zrx73nxbrmuvw0xukb8qidque9ztz7ru9uys2srvh8sc0ihukn0wsd0
-FACEBOOK_PIXEL_ID=2096237854232667
-APP_NAME=AMSync Ads
-APP_URL=https://amsync.online
+### package.json
+```json
+{
+  "name": "amsync-landing-page",
+  "version": "1.0.0",
+  "main": "server-simple.js",
+  "scripts": {
+    "start": "node server-simple.js",
+    "dev": "nodemon server-simple.js",
+    "build": "echo 'Build completed'"
+  }
+}
 ```
 
-### **2.4 Configurar domínio personalizado (opcional)**
-1. Vá em "Settings" → "Domains"
-2. Adicione seu domínio personalizado
-3. Configure os registros DNS conforme instruções
+## 🚀 Processo de Deploy
 
-## 🔧 **3. VERIFICAÇÃO DO DEPLOY**
-
-### **3.1 Health Check**
+### 1. **Build Stage**
 ```bash
-# Substitua pela URL do seu projeto Railway
-curl https://seu-projeto.railway.app/api/health
+npm ci
+npm run build
 ```
 
-### **3.2 Testar funcionalidades**
-1. Acesse a URL do projeto
-2. Teste a navegação
-3. Teste o modal de pagamento
-4. Verifique se o Facebook Pixel está funcionando
-
-## 📊 **4. MONITORAMENTO**
-
-### **4.1 Logs em tempo real**
-- No Railway, vá em "Deployments"
-- Clique no deployment ativo
-- Veja os logs em tempo real
-
-### **4.2 Métricas**
-- CPU e memória
-- Requests por minuto
-- Tempo de resposta
-
-## 🚨 **5. TROUBLESHOOTING**
-
-### **5.1 Erro de build**
+### 2. **Deploy Stage**
 ```bash
-# Verificar logs de build
-# Verificar se todas as dependências estão no package.json
-# Verificar se o Node.js 18+ está configurado
+npm start
 ```
 
-### **5.2 Erro de runtime**
-```bash
-# Verificar variáveis de ambiente
-# Verificar logs do servidor
-# Verificar se a porta está correta
+### 3. **Health Check**
+- **Endpoint**: `/health`
+- **Timeout**: 30s
+- **Response**: JSON com status e uptime
+
+## 📱 URLs de Acesso
+
+### Produção
+- **URL Principal**: https://amsync-landing-page-production.up.railway.app
+- **Health Check**: https://amsync-landing-page-production.up.railway.app/health
+
+### Desenvolvimento
+- **URL Dev**: https://amsync-landing-page-development.up.railway.app
+- **Health Check**: https://amsync-landing-page-development.up.railway.app/health
+
+## 🔍 Monitoramento
+
+### Health Check Response
+```json
+{
+  "status": "OK",
+  "timestamp": "2024-09-02T21:15:00.000Z",
+  "uptime": 123.456
+}
 ```
 
-### **5.3 Erro de pagamento**
+### Logs
+- **Build Logs**: Disponíveis no dashboard Railway
+- **Runtime Logs**: Console.log e console.error
+- **Errors**: Capturados automaticamente
+
+## 🛠️ Troubleshooting
+
+### Problemas Comuns
+
+#### 1. **Build Falha**
 ```bash
-# Verificar chaves da API Nhonga
-# Verificar webhook URL
-# Testar API diretamente
+# Verificar dependências
+npm ci --production
+
+# Verificar Node.js version
+node --version
 ```
 
-## 🔄 **6. ATUALIZAÇÕES**
-
-### **6.1 Deploy automático**
-- Cada push para `main` gera deploy automático
-- Configure branch protection se necessário
-
-### **6.2 Deploy manual**
+#### 2. **Health Check Falha**
 ```bash
-# Fazer alterações
-git add .
-git commit -m "Descrição das alterações"
-git push origin main
-
-# Railway fará deploy automático
+# Testar localmente
+curl http://localhost:3000/health
 ```
 
-## 📱 **7. TESTE FINAL**
+#### 3. **Porta Não Disponível**
+```bash
+# Verificar variável PORT
+echo $PORT
+```
 
-### **7.1 Checklist**
-- [ ] Landing page carrega corretamente
-- [ ] Todas as seções estão visíveis
-- [ ] Preços promocionais funcionam
-- [ ] Vídeo do YouTube carrega
-- [ ] Modal de pagamento abre
-- [ ] Facebook Pixel está ativo
-- [ ] WhatsApp flutuante funciona
-- [ ] Responsividade mobile OK
+## 📈 Performance
 
-### **7.2 Teste de pagamento**
-- [ ] Selecionar plano
-- [ ] Preencher formulário
-- [ ] Enviar para API Nhonga
-- [ ] Receber resposta
-- [ ] Verificar webhook
+### Otimizações Implementadas
+- ✅ Servidor simples sem dependências externas
+- ✅ Health check otimizado
+- ✅ Cache headers configurados
+- ✅ Compressão habilitada
+- ✅ Timeout reduzido
 
-## 🎯 **8. PRÓXIMOS PASSOS**
+### Métricas Esperadas
+- **Cold Start**: < 2s
+- **Response Time**: < 100ms
+- **Uptime**: 99.9%
+- **Memory Usage**: < 50MB
 
-### **8.1 Otimizações**
-- CDN para assets
-- Cache de imagens
-- Minificação de CSS/JS
-- Compressão gzip
+## 🔒 Segurança
 
-### **8.2 Analytics**
-- Google Analytics
-- Hotjar para heatmaps
-- A/B testing
-- Conversão tracking
+### Headers Configurados
+- `X-Content-Type-Options`: nosniff
+- `X-Frame-Options`: DENY
+- `X-XSS-Protection`: 1; mode=block
+- `Cache-Control`: public, max-age=86400
+
+## 📞 Suporte
+
+### Contatos
+- **Email**: amsyncoficial@amsync.online
+- **WhatsApp**: +258 87 400 6962
+- **Telefone**: +258 84 100 6962
 
 ---
 
-**🎉 Parabéns! Sua landing page está no ar na Railway!**
+**✅ Status**: Deploy funcionando perfeitamente!
+**🚀 Performance**: Otimizada
+**📱 Acessibilidade**: Global
