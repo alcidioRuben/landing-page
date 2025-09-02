@@ -1,0 +1,225 @@
+// Serviço para integração com Nhonga.net
+const NHONGA_API_BASE = 'https://nhonga.net/api'
+const API_KEY = '03gdpgmaoh6o46m7pqg3v8d6ggecik8p68dyou7zvvwvr8qjclms5mprowv9'
+const WEBHOOK_SECRET = 'hmthkoukhk5z47jul0nvys68h9ihyglykt43iokjtck0sn6nx37ghkd3qwlr5emo8zrx73nxbrmuvw0xukb8qidque9ztz7ru9uys2srvh8sc0ihukn0wsd0'
+
+// Configurações padrão
+const DEFAULT_CONFIG = {
+  currency: 'MZN',
+  environment: 'prod'
+}
+
+/**
+ * Criar uma transação de pagamento
+ * @param {Object} paymentData - Dados do pagamento
+ * @param {number} paymentData.amount - Valor em centavos
+ * @param {string} paymentData.context - Descrição do pagamento
+ * @param {string} paymentData.callbackUrl - URL do webhook
+ * @param {string} paymentData.returnUrl - URL de retorno
+ * @param {string} [paymentData.currency='MZN'] - Moeda
+ * @param {string} [paymentData.environment='prod'] - Ambiente
+ * @returns {Promise<Object>} Resposta da API
+ */
+export const createPayment = async (paymentData) => {
+  try {
+    const payload = {
+      amount: paymentData.amount,
+      context: paymentData.context,
+      callbackUrl: paymentData.callbackUrl,
+      returnUrl: paymentData.returnUrl,
+      currency: paymentData.currency || DEFAULT_CONFIG.currency,
+      environment: paymentData.environment || DEFAULT_CONFIG.environment
+    }
+
+    const response = await fetch(`${NHONGA_API_BASE}/payment/create`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apiKey': API_KEY
+      },
+      body: JSON.stringify(payload)
+    })
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}))
+      throw new Error(errorData.message || `HTTP ${response.status}: ${response.statusText}`)
+    }
+
+    const data = await response.json()
+    
+    if (!data.success) {
+      throw new Error(data.error || 'Erro ao criar pagamento')
+    }
+
+    return {
+      success: true,
+      redirectUrl: data.redirectUrl,
+      transactionId: data.id,
+      data: data
+    }
+  } catch (error) {
+    console.error('Erro ao criar pagamento:', error)
+    return {
+      success: false,
+      error: error.message || 'Erro desconhecido ao criar pagamento'
+    }
+  }
+}
+
+/**
+ * Verificar status de uma transação
+ * @param {string} transactionId - ID da transação
+ * @returns {Promise<Object>} Status da transação
+ */
+export const getTransactionStatus = async (transactionId) => {
+  try {
+    const response = await fetch(`${NHONGA_API_BASE}/payment/status/${transactionId}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${API_KEY}`,
+        'X-API-Key': API_KEY
+      }
+    })
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+    }
+
+    const data = await response.json()
+    return {
+      success: true,
+      status: data.status,
+      data: data
+    }
+  } catch (error) {
+    console.error('Erro ao verificar status:', error)
+    return {
+      success: false,
+      error: error.message || 'Erro ao verificar status da transação'
+    }
+  }
+}
+
+/**
+ * Verificar assinatura do webhook
+ * @param {string} payload - Payload do webhook
+ * @param {string} signature - Assinatura recebida
+ * @returns {boolean} Se a assinatura é válida
+ */
+export const verifyWebhookSignature = (payload, signature) => {
+  try {
+    // Implementar verificação de assinatura HMAC
+    // Por enquanto, retorna true para desenvolvimento
+    // Em produção, implementar verificação real com crypto
+    return true
+  } catch (error) {
+    console.error('Erro ao verificar assinatura:', error)
+    return false
+  }
+}
+
+/**
+ * Processar webhook de pagamento
+ * @param {Object} webhookData - Dados do webhook
+ * @returns {Object} Resultado do processamento
+ */
+export const processWebhook = (webhookData) => {
+  try {
+    const {
+      transactionId,
+      status,
+      amount,
+      currency,
+      context,
+      timestamp
+    } = webhookData
+
+    // Verificar se o pagamento foi aprovado
+    const isApproved = status === 'approved' || status === 'completed'
+    
+    return {
+      success: true,
+      transactionId,
+      status,
+      amount,
+      currency,
+      context,
+      timestamp,
+      isApproved,
+      data: webhookData
+    }
+  } catch (error) {
+    console.error('Erro ao processar webhook:', error)
+    return {
+      success: false,
+      error: error.message || 'Erro ao processar webhook'
+    }
+  }
+}
+
+/**
+ * Formatar valor para exibição
+ * @param {number} amount - Valor em centavos
+ * @param {string} currency - Moeda
+ * @returns {string} Valor formatado
+ */
+export const formatAmount = (amount, currency = 'MZN') => {
+  // Se o valor for menor que 1000, assume que já está em unidades
+  const value = amount < 1000 ? amount : amount / 100
+  return new Intl.NumberFormat('pt-MZ', {
+    style: 'currency',
+    currency: currency
+  }).format(value)
+}
+
+/**
+ * Converter valor para centavos
+ * @param {number} value - Valor em unidades
+ * @returns {number} Valor em centavos
+ */
+export const toCents = (value) => {
+  return Math.round(value * 100)
+}
+
+/**
+ * Configurações do curso
+ */
+export const COURSE_CONFIG = {
+  name: 'Curso Completo de Dropshipping',
+  description: 'Aprenda dropshipping do zero e comece a faturar online',
+  amount: 300, // 300 MZN (valor direto para Nhonga.net)
+  currency: 'MZN',
+  amountMZN: 300 // 300 MZN
+}
+
+/**
+ * URLs do sistema
+ */
+export const SYSTEM_URLS = {
+  base: process.env.NODE_ENV === 'production' 
+    ? 'https://lacasadigital.com' 
+    : 'http://localhost:3000',
+  
+  get callbackUrl() {
+    return `${this.base}/api/webhook/nhonga`
+  },
+  
+  get returnUrl() {
+    return `${this.base}/payment-success`
+  },
+  
+  get cancelUrl() {
+    return `${this.base}/payment`
+  }
+}
+
+export default {
+  createPayment,
+  getTransactionStatus,
+  verifyWebhookSignature,
+  processWebhook,
+  formatAmount,
+  toCents,
+  COURSE_CONFIG,
+  SYSTEM_URLS
+}

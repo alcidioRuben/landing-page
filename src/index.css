@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-200;
+  }
+  
+  /* Campos de entrada */
+  .input-field {
+    @apply w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300;
+  }
+  
+  /* Garantir que os botões tenham cores visíveis */
+  .btn-primary {
+    @apply bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-blue-700 transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl;
+  }
+  
+  .btn-secondary {
+    @apply bg-gray-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-gray-700 transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl;
+  }
+  
+  .btn-outline {
+    @apply border-2 border-blue-600 text-blue-600 font-semibold py-3 px-6 rounded-lg hover:bg-blue-600 hover:text-white transition-all duration-200 transform hover:scale-105;
+  }
+  
+  .btn-gradient {
+    @apply bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl;
+  }
+  
+  /* Garantir visibilidade de todos os botões CTA */
+  .btn-primary,
+  .btn-secondary, 
+  .btn-gradient {
+    color: white !important;
+    background-color: #2563eb !important;
+    border: none !important;
+  }
+  
+  .btn-primary:hover {
+    background-color: #1d4ed8 !important;
+    color: white !important;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #4b5563 !important;
+    color: white !important;
+  }
+  
+  .btn-gradient:hover {
+    background: linear-gradient(to right, #1d4ed8, #7c3aed) !important;
+    color: white !important;
+  }
+  
+  .btn-outline {
+    color: #2563eb !important;
+    border-color: #2563eb !important;
+    background-color: transparent !important;
+  }
+  
+  .btn-outline:hover {
+    color: white !important;
+    background-color: #2563eb !important;
+    border-color: #2563eb !important;
+  }
+
+  /* Estilos específicos para botões de chamada para ação */
+  .bg-gradient-primary {
+    background: linear-gradient(to right, #2563eb, #7c3aed) !important;
+    color: white !important;
+  }
+
+  /* Garantir que todos os botões tenham contraste adequado */
+  button, .btn-primary, .btn-secondary, .btn-gradient, .btn-outline {
+    min-height: 44px !important;
+    font-weight: 600 !important;
+    text-shadow: none !important;
+  }
+
+  /* Forçar visibilidade em todos os botões CTA */
+  a[class*="btn-"], button[class*="btn-"] {
+    color: white !important;
+    background-color: #2563eb !important;
+  }
+
+  /* Botões outline específicos */
+  a[class*="btn-outline"], button[class*="btn-outline"] {
+    color: #2563eb !important;
+    background-color: transparent !important;
+    border: 2px solid #2563eb !important;
+  }
+
+  a[class*="btn-outline"]:hover, button[class*="btn-outline"]:hover {
+    color: white !important;
+    background-color: #2563eb !important;
+  }
+}
