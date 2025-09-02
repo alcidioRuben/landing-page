@@ -176,10 +176,14 @@ export const AuthProvider = ({ children }) => {
       
       if (!userDoc.exists()) {
         // Criar novo usuário
+        const displayName = result.user.displayName || 
+                           result.user.email?.split('@')[0] || 
+                           'Usuário Google'
+        
         const userProfile = {
           uid: result.user.uid,
           email: result.user.email,
-          name: result.user.displayName || 'Usuário Google',
+          name: displayName,
           isPaid: false,
           createdAt: new Date(),
           lastLogin: new Date(),

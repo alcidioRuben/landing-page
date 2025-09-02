@@ -238,7 +238,7 @@ const Home = () => {
             >
               <div className="relative bg-white rounded-2xl p-8 shadow-2xl">
                 <img 
-                  src="/src/logo/logo.png" 
+                  src="/logo.png" 
                   alt="LacasaDigital" 
                   className="w-full h-auto rounded-xl"
                 />

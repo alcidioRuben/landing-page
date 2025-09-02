@@ -29,7 +29,7 @@ const Navbar = () => {
           >
             <Link to="/" className="flex items-center">
               <img 
-                src="/src/logo/logo.png" 
+                src="/logo.png" 
                 alt="LacasaDigital" 
                 className="h-12 w-auto"
               />

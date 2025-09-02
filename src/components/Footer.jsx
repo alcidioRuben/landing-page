@@ -92,7 +92,7 @@ const Footer = () => {
             <div className="flex items-center space-x-2 mb-4">
               <div className="w-16 h-16 rounded-xl bg-white flex items-center justify-center overflow-hidden shadow-lg border-2 border-gray-200 p-2">
                 <img 
-                  src="/src/logo/logo.png" 
+                  src="/logo.png" 
                   alt="LacasaDigital" 
                   className="w-full h-full object-contain"
                 />

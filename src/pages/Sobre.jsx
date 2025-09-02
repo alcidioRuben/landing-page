@@ -48,19 +48,19 @@ const Sobre = () => {
       name: "Carlos Silva",
       role: "Fundador & CEO",
       bio: "Especialista em marketing digital com mais de 10 anos de experiência em dropshipping.",
-      image: "/src/logo/logo.png"
+      image: "/logo.png"
     },
     {
       name: "Ana Costa",
       role: "Head de Educação",
       bio: "Pedagoga especializada em cursos online com foco em resultados práticos.",
-      image: "/src/logo/logo.png"
+      image: "/logo.png"
     },
           {
         name: "Santos jose",
         role: "Especialista em Dropshipping",
         bio: "Empreendedor que já faturou mais de R$ 2 milhões com dropshipping.",
-        image: "/src/Nossa Equipe/Santos Soje.jpg"
+        image: "/santos-soje.jpg"
       }
   ];
 
