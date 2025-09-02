@@ -5,8 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AMSync Ads - Automação Inteligente para WhatsApp</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" media="print" onload="this.media='all'">
+    
+    <!-- Fallback for fonts -->
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    </noscript>
     
     <!-- Facebook Pixel Code -->
     <script>
@@ -663,6 +669,14 @@
         </div>
     </a>
 
+    <!-- Initialize page -->
+    <script>
+        // Optimized for instant loading
+        document.addEventListener('DOMContentLoaded', function() {
+            // Page is ready - no loading screen needed
+            console.log('AMSync Ads - Page loaded successfully');
+        });
+    </script>
     <script src="script.js"></script>
 </body>
 </html>

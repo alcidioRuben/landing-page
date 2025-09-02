@@ -1,20 +1,34 @@
-// DOM Elements
+// Performance optimization: Use requestAnimationFrame for smooth animations
+let ticking = false;
+
+// DOM Elements - Cache them for better performance
 const header = document.getElementById('header');
 const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('nav-menu');
 const navLinks = document.querySelectorAll('.nav-link');
 
-// Smooth scroll to section function
+// Smooth scroll to section function with performance optimization
 function scrollToSection(sectionId) {
     const section = document.getElementById(sectionId);
     if (section) {
-        const headerHeight = document.getElementById('header').offsetHeight;
-        const offsetPosition = section.offsetTop - headerHeight - 20; // 20px extra padding
+        const headerHeight = header.offsetHeight;
+        const offsetPosition = section.offsetTop - headerHeight - 20;
         
-        window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-        });
+        // Use requestAnimationFrame for smooth scrolling
+        const startPosition = window.pageYOffset;
+        const distance = offsetPosition - startPosition;
+        const duration = 800;
+        let start = null;
+        
+        function animation(currentTime) {
+            if (start === null) start = currentTime;
+            const timeElapsed = currentTime - start;
+            const run = easeInOutCubic(timeElapsed, startPosition, distance, duration);
+            window.scrollTo(0, run);
+            if (timeElapsed < duration) requestAnimationFrame(animation);
+        }
+        
+        requestAnimationFrame(animation);
         
         // Facebook Pixel - Seção visualizada
         if (typeof fbq !== 'undefined') {
@@ -28,48 +42,71 @@ function scrollToSection(sectionId) {
     }
 }
 
-// Header scroll effect
-window.addEventListener('scroll', () => {
+// Easing function for smooth scrolling
+function easeInOutCubic(t, b, c, d) {
+    t /= d / 2;
+    if (t < 1) return c / 2 * t * t * t + b;
+    t -= 2;
+    return c / 2 * (t * t * t + 2) + b;
+}
+
+// Optimized header scroll effect using requestAnimationFrame
+function updateHeader() {
     if (window.scrollY > 100) {
         header.classList.add('scrolled');
     } else {
         header.classList.remove('scrolled');
     }
-});
+    ticking = false;
+}
 
-// Mobile menu toggle
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navMenu.classList.toggle('active');
-    
-    // Animate hamburger
-    const spans = hamburger.querySelectorAll('span');
-    if (hamburger.classList.contains('active')) {
-        spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-        spans[1].style.opacity = '0';
-        spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
-    } else {
-        spans[0].style.transform = 'none';
-        spans[1].style.opacity = '1';
-        spans[2].style.transform = 'none';
+function requestHeaderUpdate() {
+    if (!ticking) {
+        requestAnimationFrame(updateHeader);
+        ticking = true;
     }
-});
+}
+
+// Header scroll effect with throttling
+window.addEventListener('scroll', requestHeaderUpdate, { passive: true });
+
+// Mobile menu toggle with improved performance
+if (hamburger) {
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+        
+        // Animate hamburger with better performance
+        const spans = hamburger.querySelectorAll('span');
+        if (hamburger.classList.contains('active')) {
+            spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+            spans[1].style.opacity = '0';
+            spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+        } else {
+            spans[0].style.transform = 'none';
+            spans[1].style.opacity = '1';
+            spans[2].style.transform = 'none';
+        }
+    });
+}
 
 // Close mobile menu when clicking on a link
 navLinks.forEach(link => {
     link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
-        
-        // Reset hamburger animation
-        const spans = hamburger.querySelectorAll('span');
-        spans[0].style.transform = 'none';
-        spans[1].style.opacity = '1';
-        spans[2].style.transform = 'none';
+        if (hamburger && navMenu) {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            
+            // Reset hamburger animation
+            const spans = hamburger.querySelectorAll('span');
+            spans[0].style.transform = 'none';
+            spans[1].style.opacity = '1';
+            spans[2].style.transform = 'none';
+        }
     });
 });
 
-// Smooth scrolling for navigation links
+// Optimized smooth scrolling for navigation links
 navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
@@ -80,15 +117,26 @@ navLinks.forEach(link => {
             const headerHeight = header.offsetHeight;
             const targetPosition = targetSection.offsetTop - headerHeight;
             
-            window.scrollTo({
-                top: targetPosition,
-                behavior: 'smooth'
-            });
+            // Use smooth scrolling with requestAnimationFrame
+            const startPosition = window.pageYOffset;
+            const distance = targetPosition - startPosition;
+            const duration = 800;
+            let start = null;
+            
+            function animation(currentTime) {
+                if (start === null) start = currentTime;
+                const timeElapsed = currentTime - start;
+                const run = easeInOutCubic(timeElapsed, startPosition, distance, duration);
+                window.scrollTo(0, run);
+                if (timeElapsed < duration) requestAnimationFrame(animation);
+            }
+            
+            requestAnimationFrame(animation);
         }
     });
 });
 
-// Intersection Observer for scroll animations
+// Optimized Intersection Observer for scroll animations
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
@@ -118,10 +166,10 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe all elements with data-aos attribute
+// Observe elements with data-aos attribute
 document.addEventListener('DOMContentLoaded', () => {
-    const animatedElements = document.querySelectorAll('[data-aos]');
-    animatedElements.forEach(el => observer.observe(el));
+    const aosElements = document.querySelectorAll('[data-aos]');
+    aosElements.forEach(el => observer.observe(el));
 });
 
 // Parallax effect for hero section
