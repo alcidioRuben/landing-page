@@ -229,7 +229,7 @@ const Home = () => {
               </div>
             </motion.div>
 
-            {/* Imagem Principal */}
+            {/* Vídeo Principal */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -237,14 +237,19 @@ const Home = () => {
               className="relative"
             >
               <div className="relative bg-white rounded-2xl p-8 shadow-2xl">
-                <img 
-                  src="/logo.png" 
-                  alt="LacasaDigital" 
-                  className="w-full h-auto rounded-xl"
-                />
+                <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+                  <iframe
+                    className="absolute top-0 left-0 w-full h-full rounded-xl"
+                    src="https://www.youtube.com/embed/XrB7z5pn-zo?rel=0&modestbranding=1&showinfo=0&controls=1&fs=1"
+                    title="Curso de Dropshipping - LacasaDigital"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  />
+                </div>
                 <div className="absolute -top-4 -right-4 w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg">
-                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                   </svg>
                 </div>
               </div>
