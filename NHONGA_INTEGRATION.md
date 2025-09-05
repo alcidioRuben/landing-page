@@ -87,7 +87,7 @@ X-Nhonga-Signature: [assinatura_hmac]
 {
   "transactionId": "txn_123456789",
   "status": "approved",
-  "amount": 1500,
+  "amount": 300,
   "currency": "MZN",
   "context": "Aprenda dropshipping do zero e comece a faturar online",
   "timestamp": "2024-01-15T10:30:00Z"

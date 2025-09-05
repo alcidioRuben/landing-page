@@ -197,10 +197,98 @@ const Recursos = () => {
       category: "Implementação",
       isCompleted: false,
       youtubeId: "JeVV-Py7A-Q"
+    },
+    {
+      id: 9,
+      title: "9. Configurar Baixar Facebook WhatsApp e Gestor de Anúncio",
+      description: "Aprenda a configurar e baixar o Facebook, WhatsApp e Gestor de Anúncios.",
+      duration: "5:59",
+      thumbnail: "https://img.youtube.com/vi/-Vi3TZY0zdE/maxresdefault.jpg",
+      videoUrl: "https://www.youtube.com/watch?v=-Vi3TZY0zdE",
+      category: "Facebook & WhatsApp",
+      isCompleted: false,
+      youtubeId: "-Vi3TZY0zdE"
+    },
+    {
+      id: 10,
+      title: "10. Criação de Loja e Logo",
+      description: "Como criar uma loja profissional e desenvolver um logo atrativo.",
+      duration: "7:12",
+      thumbnail: "https://img.youtube.com/vi/-X1dh4mFbuI/maxresdefault.jpg",
+      videoUrl: "https://www.youtube.com/watch?v=-X1dh4mFbuI",
+      category: "Facebook & WhatsApp",
+      isCompleted: false,
+      youtubeId: "-X1dh4mFbuI"
+    },
+    {
+      id: 11,
+      title: "11. Configuração do Facebook",
+      description: "Configuração completa da conta Facebook para negócios.",
+      duration: "7:11",
+      thumbnail: "https://img.youtube.com/vi/AuP3RJZZyIQ/maxresdefault.jpg",
+      videoUrl: "https://www.youtube.com/watch?v=AuP3RJZZyIQ",
+      category: "Facebook & WhatsApp",
+      isCompleted: false,
+      youtubeId: "AuP3RJZZyIQ"
+    },
+    {
+      id: 12,
+      title: "12. Criação de Anúncio",
+      description: "Passo a passo para criar anúncios eficazes no Facebook.",
+      duration: "3:38",
+      thumbnail: "https://img.youtube.com/vi/jrLstvfbIYs/maxresdefault.jpg",
+      videoUrl: "https://www.youtube.com/watch?v=jrLstvfbIYs",
+      category: "Facebook & WhatsApp",
+      isCompleted: false,
+      youtubeId: "jrLstvfbIYs"
+    },
+    {
+      id: 13,
+      title: "13. Configuração do Gestor de Anúncio",
+      description: "Como configurar e otimizar o Gestor de Anúncios do Facebook.",
+      duration: "6:00",
+      thumbnail: "https://img.youtube.com/vi/pIHN1rMcYrc/maxresdefault.jpg",
+      videoUrl: "https://www.youtube.com/watch?v=pIHN1rMcYrc",
+      category: "Facebook & WhatsApp",
+      isCompleted: false,
+      youtubeId: "pIHN1rMcYrc"
+    },
+    {
+      id: 14,
+      title: "14. Direcionamento do Público Alvo",
+      description: "Estratégias avançadas para direcionar o público certo.",
+      duration: "9:21",
+      thumbnail: "https://img.youtube.com/vi/5RsEGikCaCs/maxresdefault.jpg",
+      videoUrl: "https://www.youtube.com/watch?v=5RsEGikCaCs",
+      category: "Facebook & WhatsApp",
+      isCompleted: false,
+      youtubeId: "5RsEGikCaCs"
+    },
+    {
+      id: 15,
+      title: "15. Adicionando Dados Bancários",
+      description: "Como adicionar dados bancários de forma segura.",
+      duration: "6:30",
+      thumbnail: "https://img.youtube.com/vi/3RxeobirXbo/maxresdefault.jpg",
+      videoUrl: "https://www.youtube.com/watch?v=3RxeobirXbo",
+      category: "Facebook & WhatsApp",
+      isCompleted: false,
+      youtubeId: "3RxeobirXbo"
+    },
+    {
+      id: 16,
+      title: "16. Configuração de Últimos Detalhes",
+      description: "Finalizando a configuração com os últimos detalhes importantes.",
+      duration: "6:16",
+      thumbnail: "https://img.youtube.com/vi/8PKzDqeXz8o/maxresdefault.jpg",
+      videoUrl: "https://www.youtube.com/watch?v=8PKzDqeXz8o",
+      category: "Facebook & WhatsApp",
+      isCompleted: false,
+      youtubeId: "8PKzDqeXz8o"
     }
   ]
 
-  const categories = ["Todos", "Fundamentos", "Mentalidade", "Estratégia", "Aceleração", "Implementação"]
+  const categories = ["Todos", "Fundamentos", "Mentalidade", "Estratégia", "Aceleração", "Implementação", "Facebook & WhatsApp"]
 
   const filteredVideos = selectedCategory === "Todos" 
     ? videoLessons 

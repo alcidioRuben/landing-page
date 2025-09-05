@@ -28,7 +28,10 @@ export const createPayment = async (paymentData) => {
       callbackUrl: paymentData.callbackUrl,
       returnUrl: paymentData.returnUrl,
       currency: paymentData.currency || DEFAULT_CONFIG.currency,
-      environment: paymentData.environment || DEFAULT_CONFIG.environment
+      environment: paymentData.environment || DEFAULT_CONFIG.environment,
+      // Adicionar metadados do usuário se disponível
+      ...(paymentData.userId && { userId: paymentData.userId }),
+      ...(paymentData.userEmail && { userEmail: paymentData.userEmail })
     }
 
     const response = await fetch(`${NHONGA_API_BASE}/payment/create`, {
@@ -187,9 +190,9 @@ export const toCents = (value) => {
 export const COURSE_CONFIG = {
   name: 'Curso Completo de Dropshipping',
   description: 'Aprenda dropshipping do zero e comece a faturar online',
-  amount: 300, // 300 MZN (valor direto para Nhonga.net)
+  amount: 299, // 299 MZN (valor direto para Nhonga.net)
   currency: 'MZN',
-  amountMZN: 300 // 300 MZN
+  amountMZN: 299 // 299 MZN
 }
 
 /**
@@ -213,6 +216,112 @@ export const SYSTEM_URLS = {
   }
 }
 
+/**
+ * Armazenar mapeamento de transação para usuário
+ * Isso é necessário porque o webhook não tem acesso direto ao usuário logado
+ */
+const transactionUserMap = new Map()
+
+/**
+ * Registrar transação com usuário
+ * @param {string} transactionId - ID da transação
+ * @param {string} userId - UID do usuário
+ * @param {string} userEmail - Email do usuário
+ */
+export const registerTransactionUser = (transactionId, userId, userEmail) => {
+  const transactionData = {
+    userId,
+    userEmail,
+    timestamp: new Date().toISOString()
+  }
+  
+  // Armazenar em memória
+  transactionUserMap.set(transactionId, transactionData)
+  
+  // Armazenar no localStorage como backup
+  try {
+    const existingTransactions = JSON.parse(localStorage.getItem('nhonga_transactions') || '{}')
+    existingTransactions[transactionId] = transactionData
+    localStorage.setItem('nhonga_transactions', JSON.stringify(existingTransactions))
+  } catch (error) {
+    console.error('Erro ao salvar transação no localStorage:', error)
+  }
+  
+  console.log('Transação registrada:', { transactionId, userId, userEmail })
+}
+
+/**
+ * Obter usuário da transação
+ * @param {string} transactionId - ID da transação
+ * @returns {Object|null} Dados do usuário ou null
+ */
+export const getTransactionUser = (transactionId) => {
+  // Tentar obter da memória primeiro
+  let transactionData = transactionUserMap.get(transactionId)
+  
+  // Se não encontrar na memória, tentar do localStorage
+  if (!transactionData) {
+    try {
+      const existingTransactions = JSON.parse(localStorage.getItem('nhonga_transactions') || '{}')
+      transactionData = existingTransactions[transactionId]
+      
+      // Se encontrar no localStorage, restaurar na memória
+      if (transactionData) {
+        transactionUserMap.set(transactionId, transactionData)
+      }
+    } catch (error) {
+      console.error('Erro ao ler transação do localStorage:', error)
+    }
+  }
+  
+  return transactionData || null
+}
+
+/**
+ * Limpar transação (após processamento)
+ * @param {string} transactionId - ID da transação
+ */
+export const clearTransactionUser = (transactionId) => {
+  // Remover da memória
+  transactionUserMap.delete(transactionId)
+  
+  // Remover do localStorage
+  try {
+    const existingTransactions = JSON.parse(localStorage.getItem('nhonga_transactions') || '{}')
+    delete existingTransactions[transactionId]
+    localStorage.setItem('nhonga_transactions', JSON.stringify(existingTransactions))
+  } catch (error) {
+    console.error('Erro ao limpar transação do localStorage:', error)
+  }
+}
+
+/**
+ * Limpar transações antigas (mais de 1 hora)
+ */
+export const clearOldTransactions = () => {
+  try {
+    const existingTransactions = JSON.parse(localStorage.getItem('nhonga_transactions') || '{}')
+    const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000)
+    
+    let cleanedCount = 0
+    Object.entries(existingTransactions).forEach(([transactionId, data]) => {
+      const transactionTime = new Date(data.timestamp)
+      if (transactionTime < oneHourAgo) {
+        delete existingTransactions[transactionId]
+        transactionUserMap.delete(transactionId)
+        cleanedCount++
+      }
+    })
+    
+    if (cleanedCount > 0) {
+      localStorage.setItem('nhonga_transactions', JSON.stringify(existingTransactions))
+      console.log(`🧹 Limpeza: ${cleanedCount} transações antigas removidas`)
+    }
+  } catch (error) {
+    console.error('Erro ao limpar transações antigas:', error)
+  }
+}
+
 export default {
   createPayment,
   getTransactionStatus,
@@ -221,5 +330,9 @@ export default {
   formatAmount,
   toCents,
   COURSE_CONFIG,
-  SYSTEM_URLS
+  SYSTEM_URLS,
+  registerTransactionUser,
+  getTransactionUser,
+  clearTransactionUser,
+  clearOldTransactions
 }

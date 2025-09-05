@@ -112,6 +112,77 @@ const Dashboard = () => {
           completed: false
         }
       ]
+    },
+    {
+      id: 6,
+      title: "Facebook & WhatsApp",
+      description: "Configuração e gestão de anúncios no Facebook",
+      lessons: [
+        {
+          id: 9,
+          title: "9. Configurar Baixar Facebook WhatsApp e Gestor de Anúncio",
+          duration: "5:59",
+          videoUrl: "https://www.youtube.com/embed/-Vi3TZY0zdE",
+          youtubeId: "-Vi3TZY0zdE",
+          completed: false
+        },
+        {
+          id: 10,
+          title: "10. Criação de Loja e Logo",
+          duration: "7:12",
+          videoUrl: "https://www.youtube.com/embed/-X1dh4mFbuI",
+          youtubeId: "-X1dh4mFbuI",
+          completed: false
+        },
+        {
+          id: 11,
+          title: "11. Configuração do Facebook",
+          duration: "7:11",
+          videoUrl: "https://www.youtube.com/embed/AuP3RJZZyIQ",
+          youtubeId: "AuP3RJZZyIQ",
+          completed: false
+        },
+        {
+          id: 12,
+          title: "12. Criação de Anúncio",
+          duration: "3:38",
+          videoUrl: "https://www.youtube.com/embed/jrLstvfbIYs",
+          youtubeId: "jrLstvfbIYs",
+          completed: false
+        },
+        {
+          id: 13,
+          title: "13. Configuração do Gestor de Anúncio",
+          duration: "6:00",
+          videoUrl: "https://www.youtube.com/embed/pIHN1rMcYrc",
+          youtubeId: "pIHN1rMcYrc",
+          completed: false
+        },
+        {
+          id: 14,
+          title: "14. Direcionamento do Público Alvo",
+          duration: "9:21",
+          videoUrl: "https://www.youtube.com/embed/5RsEGikCaCs",
+          youtubeId: "5RsEGikCaCs",
+          completed: false
+        },
+        {
+          id: 15,
+          title: "15. Adicionando Dados Bancários",
+          duration: "6:30",
+          videoUrl: "https://www.youtube.com/embed/3RxeobirXbo",
+          youtubeId: "3RxeobirXbo",
+          completed: false
+        },
+        {
+          id: 16,
+          title: "16. Configuração de Últimos Detalhes",
+          duration: "6:16",
+          videoUrl: "https://www.youtube.com/embed/8PKzDqeXz8o",
+          youtubeId: "8PKzDqeXz8o",
+          completed: false
+        }
+      ]
     }
   ];
 
@@ -321,7 +392,7 @@ const Dashboard = () => {
               <span className="relative z-10">Ver Todo o Curso Premium</span>
             </motion.button>
             <p className="text-sm text-gray-500 mt-2">
-              <span className="text-purple-600 font-medium">✨ Acesso Exclusivo:</span> Todos os 8 vídeos organizados por categoria
+              <span className="text-purple-600 font-medium">✨ Acesso Exclusivo:</span> Todos os 16 vídeos organizados por categoria
             </p>
           </div>
         </div>
@@ -594,7 +665,7 @@ const Dashboard = () => {
                     <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4zM14 13h-3v3H9v-3H6v-2h3V8h2v3h3v2z"/>
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold mb-2">8 Vídeos Exclusivos</h3>
+                <h3 className="text-xl font-bold mb-2">16 Vídeos Exclusivos</h3>
                 <p className="text-purple-100">Acesso completo a todo o conteúdo premium do curso</p>
               </motion.div>
 

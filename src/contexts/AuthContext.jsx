@@ -332,7 +332,7 @@ export const AuthProvider = ({ children }) => {
         isPaid: true,
         paymentDate: new Date(),
         paymentMethod: 'simulado',
-        paymentAmount: 300 // MZN 300,00 em centavos
+        paymentAmount: 299 // MZN 299,00
       })
       
       setUserProfile(prev => ({
@@ -340,13 +340,13 @@ export const AuthProvider = ({ children }) => {
         isPaid: true,
         paymentDate: new Date(),
         paymentMethod: 'simulado',
-        paymentAmount: 29700
+        paymentAmount: 299
       }))
       
       return {
         success: true,
         sessionId: `sim_${Date.now()}`,
-        amount: 29700
+        amount: 299
       }
     } catch (error) {
       throw error

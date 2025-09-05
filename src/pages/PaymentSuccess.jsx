@@ -2,39 +2,160 @@ import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useAuth } from '../contexts/AuthContext'
+import { getTransactionUser, getTransactionStatus, clearTransactionUser, clearOldTransactions } from '../services/nhonga'
 
 const PaymentSuccess = () => {
   const location = useLocation()
   const navigate = useNavigate()
-  const { currentUser, userProfile } = useAuth()
-  const [countdown, setCountdown] = useState(2)
+  const { currentUser, userProfile, updatePaymentFromWebhook } = useAuth()
+  const [countdown, setCountdown] = useState(3)
+  const [isCheckingPayment, setIsCheckingPayment] = useState(true)
   
-  const { sessionId } = location.state || {}
+  // Obter dados do pagamento (pode vir do state ou da URL)
+  const { sessionId, transactionId, amount } = location.state || {}
+  const urlParams = new URLSearchParams(location.search)
+  const urlTransactionId = urlParams.get('transactionId')
+  const urlAmount = urlParams.get('amount')
+  const urlStatus = urlParams.get('status')
+
+  // Usar dados do state ou da URL
+  const paymentData = {
+    sessionId: sessionId || urlTransactionId,
+    transactionId: transactionId || urlTransactionId,
+    amount: amount || urlAmount || 299,
+    status: urlStatus
+  }
 
   useEffect(() => {
-    // Se não tiver dados do pagamento, redirecionar para home
-    if (!sessionId) {
-      navigate('/')
+    // Se usuário não estiver logado, redirecionar para login
+    if (!currentUser) {
+      navigate('/login')
       return
     }
 
-    // Contagem regressiva mais rápida
+    // Se usuário já pagou, redirecionar para dashboard IMEDIATAMENTE
+    if (userProfile?.isPaid) {
+      console.log('✅ Usuário já pagou, redirecionando para Dashboard')
+      navigate('/dashboard', { replace: true })
+      return
+    }
+
+    // Se não tiver dados do pagamento, verificar se é um retorno do Nhonga.net
+    if (!paymentData.sessionId && !paymentData.transactionId) {
+      console.log('🔍 Sem dados de pagamento, verificando transações pendentes...')
+      
+      // Verificar se há transações pendentes do usuário
+      const checkPendingTransactions = () => {
+        try {
+          // Limpar transações antigas primeiro
+          clearOldTransactions()
+          
+          const existingTransactions = JSON.parse(localStorage.getItem('nhonga_transactions') || '{}')
+          const userTransactions = Object.entries(existingTransactions).filter(
+            ([_, data]) => data.userId === currentUser.uid
+          )
+          
+          if (userTransactions.length > 0) {
+            console.log('⏳ Transações pendentes encontradas:', userTransactions)
+            
+            // Processar transações pendentes (assumir que se retornou do Nhonga.net, pagamento foi concluído)
+            const processPendingTransactions = async () => {
+              try {
+                // Pegar a transação mais recente
+                const latestTransaction = userTransactions[userTransactions.length - 1]
+                const [transactionId, data] = latestTransaction
+                
+                console.log(`✅ Processando transação mais recente: ${transactionId}`)
+                console.log(`👤 Usuário: ${data.userId}`)
+                
+                // Assumir que se o usuário retornou do Nhonga.net, o pagamento foi concluído
+                // Atualizar status do usuário
+                await updatePaymentFromWebhook(data.userId, {
+                  amount: 299,
+                  transactionId: transactionId,
+                  currency: 'MZN',
+                  context: 'Curso Completo de Dropshipping'
+                })
+                
+                console.log('✅ Status do usuário atualizado - pagamento assumido como concluído')
+                
+                // Limpar todas as transações do usuário após processamento
+                userTransactions.forEach(([txnId, _]) => {
+                  clearTransactionUser(txnId)
+                })
+                
+                setIsCheckingPayment(false)
+                
+              } catch (error) {
+                console.error('❌ Erro ao processar transações:', error)
+                setTimeout(() => {
+                  setIsCheckingPayment(false)
+                  navigate('/')
+                }, 2000)
+              }
+            }
+            
+            processPendingTransactions()
+            return
+          }
+        } catch (error) {
+          console.error('Erro ao verificar transações pendentes:', error)
+        }
+        
+        // Se não há transações pendentes, redirecionar imediatamente
+        console.log('❌ Nenhuma transação pendente encontrada')
+        setTimeout(() => {
+          setIsCheckingPayment(false)
+          navigate('/')
+        }, 2000)
+      }
+      
+      checkPendingTransactions()
+      return
+    }
+
+    console.log('✅ Dados de pagamento encontrados:', paymentData)
+    setIsCheckingPayment(false)
+
+    // Contagem regressiva
     const countdownInterval = setInterval(() => {
       setCountdown(prev => prev - 1)
     }, 1000)
 
     return () => clearInterval(countdownInterval)
-  }, [sessionId])
+  }, [currentUser, userProfile, paymentData.sessionId, paymentData.transactionId, navigate])
 
   // Efeito separado para redirecionamento
   useEffect(() => {
-    if (countdown <= 0) {
-      // Sempre redirecionar para o Dashboard após pagamento
-      navigate('/dashboard', { replace: true })
+    if (countdown <= 0 && !isCheckingPayment) {
+      console.log('⏰ Contagem regressiva finalizada, verificando status do pagamento...')
+      
+      // Verificar se usuário pagou antes de redirecionar
+      if (userProfile?.isPaid) {
+        console.log('✅ Pagamento confirmado, redirecionando para Dashboard')
+        navigate('/dashboard', { replace: true })
+      } else {
+        console.log('❌ Pagamento não confirmado, redirecionando para recursos')
+        // Se não pagou, redirecionar para recursos (que vai redirecionar para payment)
+        navigate('/recursos', { replace: true })
+      }
     }
-  }, [countdown, navigate])
+  }, [countdown, isCheckingPayment, userProfile, navigate])
 
-  if (!sessionId) {
+  // Mostrar loading enquanto verifica pagamento
+  if (isCheckingPayment) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-purple-50 flex items-center justify-center p-4">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-green-600 mx-auto mb-6"></div>
+          <h2 className="text-xl font-semibold text-gray-700 mb-2">Verificando pagamento...</h2>
+          <p className="text-gray-500">Aguarde um momento</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (!paymentData.sessionId && !paymentData.transactionId) {
     return null
   }
 
@@ -112,7 +233,10 @@ const PaymentSuccess = () => {
             className="bg-gradient-to-r from-green-50 to-blue-50 rounded-2xl p-4 mb-6"
           >
             <p className="text-sm text-gray-600 mb-1">Valor Pago</p>
-            <p className="text-2xl font-bold text-green-600">300 MZN</p>
+            <p className="text-2xl font-bold text-green-600">{paymentData.amount} MZN</p>
+            {paymentData.transactionId && (
+              <p className="text-xs text-gray-500 mt-1">ID: {paymentData.transactionId}</p>
+            )}
           </motion.div>
 
           {/* Contagem Regressiva */}

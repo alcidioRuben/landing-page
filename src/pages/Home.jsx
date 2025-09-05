@@ -9,6 +9,8 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [newComment, setNewComment] = useState('');
   const [userComments, setUserComments] = useState([]);
+  const [userRating, setUserRating] = useState(0);
+  const [hoveredRating, setHoveredRating] = useState(0);
 
   // Simular carregamento rápido da página
   useEffect(() => {
@@ -23,7 +25,14 @@ const Home = () => {
   useEffect(() => {
     const savedComments = localStorage.getItem('userComments');
     if (savedComments) {
-      setUserComments(JSON.parse(savedComments));
+      try {
+        const parsedComments = JSON.parse(savedComments);
+        setUserComments(parsedComments);
+        console.log('Comentários carregados do localStorage:', parsedComments);
+      } catch (error) {
+        console.error('Erro ao carregar comentários do localStorage:', error);
+        setUserComments([]);
+      }
     }
   }, []);
 
@@ -116,22 +125,44 @@ const Home = () => {
   ];
 
   const handleAddComment = () => {
-    if (newComment.trim()) {
+    if (newComment.trim() && userRating > 0) {
       const comment = {
         id: Date.now(),
         content: newComment,
         date: new Date().toLocaleDateString('pt-BR'),
-        name: "Usuário Anônimo"
+        name: "Usuário Anônimo",
+        rating: userRating,
+        isUserComment: true
       };
       
       const updatedComments = [...userComments, comment];
       setUserComments(updatedComments);
       localStorage.setItem('userComments', JSON.stringify(updatedComments));
+      
+      // Log para debug
+      console.log('Comentário adicionado:', comment);
+      console.log('Comentários salvos no localStorage:', updatedComments);
+      
+      // Reset form
       setNewComment('');
+      setUserRating(0);
+      setHoveredRating(0);
+      
+      // Feedback visual de sucesso
+      alert('Comentário enviado com sucesso! Obrigado pela sua avaliação! 🌟');
     }
   };
 
-  const allComments = [...testimonials, ...userComments];
+  // Função para limpar comentários (útil para testes)
+  const clearUserComments = () => {
+    setUserComments([]);
+    localStorage.removeItem('userComments');
+    console.log('Comentários limpos do localStorage');
+  };
+
+  // Ordenar comentários de usuários por data (mais recentes primeiro)
+  const sortedUserComments = [...userComments].sort((a, b) => b.id - a.id);
+  const allComments = [...testimonials, ...sortedUserComments];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-white via-blue-50 to-purple-50">
@@ -317,37 +348,78 @@ const Home = () => {
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               Histórias reais de transformação em apenas 2 semanas
             </p>
+            {userComments.length > 0 && (
+              <div className="mt-4">
+                <span className="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
+                  <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  {userComments.length} comentário{userComments.length !== 1 ? 's' : ''} de alunos
+                </span>
+              </div>
+            )}
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
             {allComments.slice(0, 6).map((testimonial, index) => (
               <motion.div
-                key={index}
+                key={testimonial.id || index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
+                className={`bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 ${
+                  testimonial.isUserComment ? 'border-l-4 border-blue-500' : ''
+                }`}
               >
                 <div className="flex items-center mb-4">
-                  <img
-                    src={testimonial.image}
-                    alt={testimonial.name}
-                    className="w-12 h-12 rounded-full object-cover mr-4"
-                  />
+                  {testimonial.isUserComment ? (
+                    // Avatar padrão para comentários de usuários
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center mr-4">
+                      <span className="text-white font-bold text-lg">
+                        {testimonial.name.charAt(0)}
+                      </span>
+                    </div>
+                  ) : (
+                    // Imagem para depoimentos padrão
+                    <img
+                      src={testimonial.image}
+                      alt={testimonial.name}
+                      className="w-12 h-12 rounded-full object-cover mr-4"
+                    />
+                  )}
                   <div>
                     <h3 className="font-semibold text-gray-900">{testimonial.name}</h3>
-                    <p className="text-sm text-gray-600">{testimonial.role}</p>
+                    <p className="text-sm text-gray-600">
+                      {testimonial.isUserComment ? 'Aluno do Curso' : testimonial.role}
+                    </p>
+                    {testimonial.isUserComment && (
+                      <p className="text-xs text-gray-500">{testimonial.date}</p>
+                    )}
                   </div>
                 </div>
                 <p className="text-gray-700 mb-4">{testimonial.content}</p>
                 {testimonial.rating && (
-                  <div className="flex items-center">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <svg key={i} className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                      </svg>
-                    ))}
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                      {[...Array(5)].map((_, i) => (
+                        <svg 
+                          key={i} 
+                          className={`w-4 h-4 ${
+                            i < testimonial.rating ? 'text-yellow-400' : 'text-gray-300'
+                          }`} 
+                          fill="currentColor" 
+                          viewBox="0 0 20 20"
+                        >
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                      ))}
+                    </div>
+                    {testimonial.isUserComment && (
+                      <span className="text-xs text-blue-600 font-medium">
+                        ✓ Verificado
+                      </span>
+                    )}
                   </div>
                 )}
               </motion.div>
@@ -364,25 +436,79 @@ const Home = () => {
           >
             <div className="bg-white rounded-xl p-6 shadow-lg">
               <h3 className="text-xl font-semibold text-gray-900 mb-4 text-center">
-                Deixe seu comentário
+                Deixe seu comentário e avaliação
               </h3>
               <div className="space-y-4">
+                {/* Sistema de Estrelas */}
+                <div className="text-center">
+                  <p className="text-sm text-gray-600 mb-2">Avalie o curso:</p>
+                  <div className="flex justify-center space-x-1">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <button
+                        key={star}
+                        onClick={() => setUserRating(star)}
+                        onMouseEnter={() => setHoveredRating(star)}
+                        onMouseLeave={() => setHoveredRating(0)}
+                        className="text-2xl transition-colors duration-200"
+                      >
+                        <svg
+                          className={`w-8 h-8 ${
+                            star <= (hoveredRating || userRating)
+                              ? 'text-yellow-400'
+                              : 'text-gray-300'
+                          }`}
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                      </button>
+                    ))}
+                  </div>
+                  {userRating > 0 && (
+                    <p className="text-sm text-gray-500 mt-1">
+                      {userRating === 1 && "Péssimo"}
+                      {userRating === 2 && "Ruim"}
+                      {userRating === 3 && "Regular"}
+                      {userRating === 4 && "Bom"}
+                      {userRating === 5 && "Excelente"}
+                    </p>
+                  )}
+                </div>
+
                 <textarea
                   value={newComment}
                   onChange={(e) => setNewComment(e.target.value)}
-                  placeholder="Conte-nos sua experiência..."
+                  placeholder="Conte-nos sua experiência com o curso..."
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 resize-none"
                   rows={4}
                 />
                 <div className="flex justify-center">
                   <BotaoCTA
                     onClick={handleAddComment}
-                    disabled={!newComment.trim()}
+                    disabled={!newComment.trim() || userRating === 0}
                     className="px-8 py-3"
                   >
                     Enviar Comentário
                   </BotaoCTA>
                 </div>
+                {userRating === 0 && (
+                  <p className="text-sm text-red-500 text-center">
+                    ⭐ Por favor, selecione uma avaliação com estrelas
+                  </p>
+                )}
+                
+                {/* Botão de debug para limpar comentários (apenas em desenvolvimento) */}
+                {process.env.NODE_ENV === 'development' && userComments.length > 0 && (
+                  <div className="text-center mt-4">
+                    <button
+                      onClick={clearUserComments}
+                      className="text-xs text-gray-500 hover:text-red-500 underline"
+                    >
+                      🗑️ Limpar comentários (Debug)
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           </motion.div>
@@ -416,14 +542,14 @@ const Home = () => {
           >
             <div className="mb-6">
               <div className="text-4xl md:text-5xl font-bold text-gray-900 mb-2">
-                 300 MT
+                 299 MT
               </div>
               <div className="text-lg text-gray-600"></div>
             </div>
 
             <div className="space-y-3 mb-8 text-left max-w-md mx-auto">
               {[
-                "50+ aulas em vídeo HD",
+                "16 aulas em vídeo",
                 "Materiais de apoio completos",
                 "Suporte técnico 24/7",
                 "Acesso vitalício",
