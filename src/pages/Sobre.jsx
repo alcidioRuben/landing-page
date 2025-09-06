@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useInView, useAnimation } from 'framer-motion';
+import metaPixelService from '../services/metaPixel';
 
 const Sobre = () => {
   const ref = useRef(null);
@@ -12,6 +13,11 @@ const Sobre = () => {
       mainControls.start("visible");
     }
   }, [isInView, mainControls]);
+
+  // Meta Pixel - Rastrear visualização da página sobre
+  useEffect(() => {
+    metaPixelService.trackAboutPageView();
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },

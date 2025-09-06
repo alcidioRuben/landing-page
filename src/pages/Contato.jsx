@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import metaPixelService from '../services/metaPixel';
 
 const Contato = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +14,11 @@ const Contato = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+
+  // Meta Pixel - Rastrear visualização da página de contato
+  useEffect(() => {
+    metaPixelService.trackContactPageView();
+  }, []);
 
   const handleChange = (e) => {
     setFormData({

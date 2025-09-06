@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useAuth } from '../contexts/AuthContext'
 import { PageLoadingSpinner } from '../components/LoadingSpinner'
+import metaPixelService from '../services/metaPixel'
 
 const Recursos = () => {
   const { currentUser, userProfile, saveCourseProgress, loadCourseProgress } = useAuth()
@@ -102,6 +103,11 @@ const Recursos = () => {
     }, 600) // 600ms para dar sensação de rapidez
 
     return () => clearTimeout(timer)
+  }, [])
+
+  // Meta Pixel - Rastrear visualização da página de recursos
+  useEffect(() => {
+    metaPixelService.trackResourcesPageView();
   }, [])
 
   if (isLoading) {

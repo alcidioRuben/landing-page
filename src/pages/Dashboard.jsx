@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { PageLoadingSpinner } from '../components/LoadingSpinner';
+import metaPixelService from '../services/metaPixel';
 
 const Dashboard = () => {
   const { currentUser, userProfile, saveCourseProgress, loadCourseProgress } = useAuth();
@@ -286,6 +287,11 @@ const Dashboard = () => {
     }, 500) // 500ms para dashboard
 
     return () => clearTimeout(timer)
+  }, [])
+
+  // Meta Pixel - Rastrear visualização do dashboard
+  useEffect(() => {
+    metaPixelService.trackDashboardView();
   }, [])
 
   if (isLoading) {

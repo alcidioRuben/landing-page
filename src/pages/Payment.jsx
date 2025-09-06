@@ -5,6 +5,7 @@ import { useAuth } from '../contexts/AuthContext'
 import { createPayment, COURSE_CONFIG, SYSTEM_URLS, formatAmount, registerTransactionUser } from '../services/nhonga'
 import { ButtonSpinner } from '../components/LoadingSpinner'
 import BotaoCTA from '../components/BotaoCTA'
+import metaPixelService from '../services/metaPixel'
 import '../styles/animations.css'
 
 const Payment = () => {
@@ -19,6 +20,11 @@ const Payment = () => {
       navigate('/recursos')
     }
   }, [currentUser, userProfile, navigate])
+
+  // Meta Pixel - Rastrear visualização da página de pagamento
+  useEffect(() => {
+    metaPixelService.trackPaymentStart();
+  }, [])
 
   const handlePayment = async () => {
     if (!currentUser) {
