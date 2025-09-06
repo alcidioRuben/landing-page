@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Meta Pixel - LacasaDigital</title>
+    
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1366085291900813');
+    fbq('track', 'PageView');
+    </script>
+    <!-- End Meta Pixel Code -->
+</head>
+<body>
+    <!-- Meta Pixel noscript -->
+    <noscript>
+        <img height="1" width="1" style="display:none" 
+             src="https://www.facebook.com/tr?id=1366085291900813&ev=PageView&noscript=1" />
+    </noscript>
+    
+    <h1>Teste Meta Pixel - LacasaDigital</h1>
+    <p>Esta página testa se o Meta Pixel está funcionando corretamente.</p>
+    
+    <button onclick="testPixel()">Testar Pixel</button>
+    <button onclick="testCustomEvent()">Testar Evento Customizado</button>
+    
+    <div id="status"></div>
+    
+    <script>
+        function testPixel() {
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'ViewContent', {
+                    content_name: 'Teste Pixel',
+                    content_category: 'Test'
+                });
+                document.getElementById('status').innerHTML = '<p style="color: green;">✅ Pixel funcionando! Evento ViewContent enviado.</p>';
+                console.log('Pixel testado com sucesso');
+            } else {
+                document.getElementById('status').innerHTML = '<p style="color: red;">❌ Pixel não encontrado!</p>';
+                console.error('Pixel não está carregado');
+            }
+        }
+        
+        function testCustomEvent() {
+            if (typeof fbq !== 'undefined') {
+                fbq('trackCustom', 'Test_Event', {
+                    test_parameter: 'valor_teste',
+                    timestamp: new Date().toISOString()
+                });
+                document.getElementById('status').innerHTML = '<p style="color: green;">✅ Evento customizado enviado!</p>';
+                console.log('Evento customizado testado');
+            } else {
+                document.getElementById('status').innerHTML = '<p style="color: red;">❌ Pixel não encontrado!</p>';
+                console.error('Pixel não está carregado');
+            }
+        }
+        
+        // Verificar se o pixel carregou
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                if (typeof fbq !== 'undefined') {
+                    console.log('✅ Meta Pixel carregado com sucesso');
+                    console.log('Pixel ID:', fbq.getState().pixelId);
+                } else {
+                    console.error('❌ Meta Pixel não carregou');
+                }
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

@@ -14,6 +14,7 @@ import Profile from './pages/Profile';
 import Sobre from './pages/Sobre';
 import Contato from './pages/Contato';
 import ProtectedRoute from './components/ProtectedRoute';
+import { pixelDiagnostic } from './utils/pixelDiagnostic';
 
 // Componente interno para gerenciar loading
 const AppContent = () => {
@@ -66,6 +67,16 @@ const AppContent = () => {
 }
 
 function App() {
+  // Executar diagnóstico do pixel em produção
+  React.useEffect(() => {
+    if (window.location.hostname !== 'localhost') {
+      console.log('🚀 App iniciado em produção - executando diagnóstico do pixel');
+      setTimeout(() => {
+        pixelDiagnostic.runDiagnostic();
+      }, 2000);
+    }
+  }, []);
+
   return (
     <AuthProvider>
       <AppContent />

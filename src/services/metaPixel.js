@@ -16,9 +16,21 @@ class MetaPixelService {
   init() {
     if (typeof window !== 'undefined' && window.fbq) {
       this.isInitialized = true;
-      console.log('Meta Pixel inicializado com sucesso');
+      console.log('✅ Meta Pixel inicializado com sucesso');
+      console.log('📍 Domínio atual:', window.location.hostname);
+      console.log('🔗 URL completa:', window.location.href);
+      
+      // Verificar se é o domínio correto
+      if (window.location.hostname.includes('lacasadigital') || 
+          window.location.hostname.includes('amsync') ||
+          window.location.hostname === 'localhost') {
+        console.log('✅ Domínio autorizado detectado');
+      } else {
+        console.warn('⚠️ Domínio não reconhecido:', window.location.hostname);
+      }
     } else {
-      console.warn('Meta Pixel não está disponível');
+      console.warn('❌ Meta Pixel não está disponível');
+      console.log('🔍 Verificando se fbq existe:', typeof window !== 'undefined' ? typeof window.fbq : 'window não existe');
     }
   }
 
@@ -36,15 +48,18 @@ class MetaPixelService {
    */
   track(eventName, parameters = {}) {
     if (!this.isAvailable()) {
-      console.warn(`Meta Pixel não disponível para evento: ${eventName}`);
+      console.warn(`❌ Meta Pixel não disponível para evento: ${eventName}`);
+      console.log('🔍 Domínio atual:', window.location.hostname);
+      console.log('🔍 fbq disponível:', typeof window.fbq);
       return;
     }
 
     try {
       window.fbq('track', eventName, parameters);
-      console.log(`Evento Meta Pixel rastreado: ${eventName}`, parameters);
+      console.log(`✅ Evento Meta Pixel rastreado: ${eventName}`, parameters);
+      console.log('📍 Enviado do domínio:', window.location.hostname);
     } catch (error) {
-      console.error(`Erro ao rastrear evento Meta Pixel ${eventName}:`, error);
+      console.error(`❌ Erro ao rastrear evento Meta Pixel ${eventName}:`, error);
     }
   }
 
