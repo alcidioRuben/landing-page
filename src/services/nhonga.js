@@ -1,7 +1,7 @@
 // Serviço para integração com Nhonga.net
 const NHONGA_API_BASE = 'https://nhonga.net/api'
-const API_KEY = '03gdpgmaoh6o46m7pqg3v8d6ggecik8p68dyou7zvvwvr8qjclms5mprowv9'
-const WEBHOOK_SECRET = 'hmthkoukhk5z47jul0nvys68h9ihyglykt43iokjtck0sn6nx37ghkd3qwlr5emo8zrx73nxbrmuvw0xukb8qidque9ztz7ru9uys2srvh8sc0ihukn0wsd0'
+const API_KEY = 'uo4aka655z6hpgad33jb5e6zvrttbtw55y5mebwsxs796ird21xpu1r33os8'
+const WEBHOOK_SECRET = 'm8bhs9cqjq54yiq8t57buctihx887mtoj329gwqvivq2gn5zw95svo9908xv6cvpc882r7ugety60lwwny4gbpuzs1vh2ovy9yuimlt2zc5arqpzsscp2qsz'
 
 // Configurações padrão
 const DEFAULT_CONFIG = {

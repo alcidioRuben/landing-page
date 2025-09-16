@@ -304,13 +304,13 @@ const Home = () => {
                 <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
                   <iframe
                     className="absolute top-0 left-0 w-full h-full rounded-xl"
-                    src="https://www.youtube.com/embed/XrB7z5pn-zo?rel=0&modestbranding=1&showinfo=0&controls=1&fs=1"
-                    title="Curso de Dropshipping - LacasaDigital"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                    onLoad={() => metaPixelService.trackVideoView('Vídeo Principal - Curso Dropshipping')}
-                  />
+                                        src="https://www.youtube.com/embed/TaQMJa3zmPU?rel=0&modestbranding=1&showinfo=0&controls=1&fs=1"
+                                        title="Curso de Dropshipping - LacasaDigital"
+                                        frameBorder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        allowFullScreen
+                                        onLoad={() => metaPixelService.trackVideoView('Vídeo Principal - Curso Dropshipping')}
+                                      />
                 </div>
                 <div className="absolute -top-4 -right-4 w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg">
                   <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
