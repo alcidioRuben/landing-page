@@ -5,7 +5,7 @@
 O Meta Pixel (Facebook Pixel) foi implementado de forma completa no projeto LacasaDigital para rastrear conversões, engajamento dos usuários e otimizar campanhas de marketing.
 
 ## 🎯 Pixel ID
-- **ID do Pixel**: `1366085291900813`
+- **ID do Pixel**: `772984945125522`
 - **Localização**: `index.html` (código base)
 
 ## 🛠️ Arquivos Implementados
@@ -227,5 +227,5 @@ Evento Meta Pixel rastreado: PageView {content_name: "Página Inicial - Curso Dr
 ---
 
 **Implementação concluída em**: $(date)
-**Pixel ID**: 1366085291900813
+**Pixel ID**: 772984945125522
 **Status**: ✅ Ativo e Funcionando

@@ -1,5 +1,5 @@
 {
-  "name": "lacasa-digital",
+  "name": "amsync",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -32,7 +32,7 @@
     "tailwindcss": "^3.3.6",
     "vite": "^5.0.0"
   },
-  "description": "Plataforma de cursos online da LacasaDigital com foco em Dropshipping",
+  "description": "Plataforma de cursos online da AMSync com foco em Dropshipping",
   "keywords": [
     "react",
     "vite",
@@ -42,6 +42,6 @@
     "dropshipping",
     "cursos-online"
   ],
-  "author": "LacasaDigital",
+  "author": "AMSync",
   "license": "MIT"
 }

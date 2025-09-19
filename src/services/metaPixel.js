@@ -6,7 +6,7 @@
 class MetaPixelService {
   constructor() {
     this.isInitialized = false;
-    this.pixelId = '1366085291900813';
+    this.pixelId = '772984945125522';
     this.init();
   }
 
