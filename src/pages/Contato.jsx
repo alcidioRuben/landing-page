@@ -58,8 +58,8 @@ const Contato = () => {
         </svg>
       ),
       title: "Telefone",
-      value: "+55 16 98105-8577",
-      link: "tel:+5516981058577"
+      value: "+258 84 000 0062",
+      link: "tel:+258841000062"
     },
     {
       icon: (
@@ -224,7 +224,7 @@ const Contato = () => {
                       value={formData.telefone}
                       onChange={handleChange}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-                      placeholder="(+258) 84100-6962"
+                      placeholder="(+258) 84100-0062"
                     />
                   </div>
                   <div>
@@ -357,7 +357,7 @@ const Contato = () => {
 
       {/* Botão Flutuante do WhatsApp */}
       <motion.a
-        href="https://wa.me/5516981058577"
+        href="https://wa.me/25887400696"
         target="_blank"
         rel="noopener noreferrer"
         initial={{ scale: 0 }}

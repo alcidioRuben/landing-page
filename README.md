@@ -103,7 +103,7 @@ src/
 
 Para suporte técnico, entre em contato:
 - Email: suporte@lacasadigital.com
-- WhatsApp: +55 16 98105-8577
+- WhatsApp: +25887400696
 
 ## 📄 Licença
 
