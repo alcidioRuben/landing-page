@@ -239,9 +239,9 @@ const Home = () => {
               </div>
 
               <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight">
-              Perder vendas nao e normal trasforme o seu WhatsApp em uma maquina de vendas com{' '}
+              Cada venda perdida é dinheiro jogado fora. {' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-                  IA
+                Transforme seu WhatsApp em uma máquina de vendas com IA
                 </span>
               </h1>
 
