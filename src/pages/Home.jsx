@@ -75,7 +75,7 @@ const Home = () => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
         </svg>
       ),
-      title: "Aprenda do Zero",
+      title: "Crie seu em 2 minutos",
       description: "Metodologia passo a passo para iniciantes"
     },
     {
@@ -111,28 +111,28 @@ const Home = () => {
     {
       name: "João Silva",
       role: "Empreendedor",
-      content: "Transformei minha vida financeira com este curso. Em 2 semanas já estava lucrando!",
+      content: "Transformei minha vida usando a IA para atender clientes no WhatsApp",
       image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
       rating: 5
     },
     {
       name: "Maria Santos",
       role: "Mãe Solteira",
-      content: "Consegui criar uma renda extra trabalhando de casa. O curso é incrível!",
+      content: "Consegui criar meu asistente de vendas no WhatsApp em 2 minutos facil",
       image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
       rating: 5
     },
     {
       name: "Carlos Oliveira",
       role: "Estudante",
-      content: "Melhor investimento que fiz. Em 2 semanas já estava diferente!",
+      content: "Melhor investimento que fiz. Em 2 semanas ja estava lucrando com o meu asistente de vendas no WhatsApp",
       image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
       rating: 5
     },
     {
       name: "Aisha Johnson",
       role: "Empresária",
-      content: "Como africana, este curso me deu oportunidades que nunca imaginei!",
+      content: "Eu perdia vendas no WhatsApp, agora com o AMSync Ads eu tenho um asistente de vendas que atende 24/7 mesmo com telefone apagado",
       image: "https://images.unsplash.com/photo-1589156191108-c762ff4b96ab?w=150&h=150&fit=crop&crop=face",
       rating: 5
     },
@@ -146,7 +146,7 @@ const Home = () => {
     {
       name: "Fatima Diallo",
       role: "Designer",
-      content: "O curso me permitiu trabalhar de casa e cuidar da família. Gratidão!",
+      content: "O AMSync Ads me ajudou a vender mais no WhatsApp, Eu perdia vendas porquê não tinha tempo para atender todos os clientes e nao tinha tempo de atender todos os clientes",
       image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face",
       rating: 5
     }
@@ -196,7 +196,7 @@ const Home = () => {
   const allComments = [...testimonials, ...sortedUserComments];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-blue-50 to-purple-50">
+    <div className="min-h-screen bg-[#121212]">
       {/* Banner de Destaque */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
@@ -212,7 +212,7 @@ const Home = () => {
               </svg>
             </div>
             <span className="font-semibold text-base">
-              Aula completa de Dropshipping que já ajudou centenas a ter sucesso!
+              AMSync Ads: Automação inteligente para WhatsApp com IA de verdade.
             </span>
           </div>
         </div>
@@ -234,20 +234,19 @@ const Home = () => {
                   <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
-                  Curso Completo de Dropshipping
+                  AMSync Ads • Assistente de Vendas no WhatsApp
                 </div>
               </div>
 
-              <h1 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight">
-                Transforme sua vida com{' '}
+              <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight">
+              Perder vendas nao e normal trasforme o seu WhatsApp em uma maquina de vendas com{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-                  Dropshipping
+                  IA
                 </span>
               </h1>
 
-              <p className="text-lg text-gray-600 mb-6 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                Aprenda a criar uma loja online lucrativa do zero, sem estoque e com baixo investimento. 
-                Metodologia comprovada que já transformou centenas de vidas.
+              <p className="text-lg text-gray-300 mb-6 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                O AMSync Ads automatiza seu atendimento no WhatsApp usando a intiligencia artificial, com uma plataforma visual, fácil e segura. Configure regras, produtos e respostas inteligentes e atenda clientes 24/7.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
@@ -265,30 +264,30 @@ const Home = () => {
                   variant="outline" 
                   size="lg"
                   className="text-base px-6 py-3"
-                  onClick={() => metaPixelService.trackCTAClick('Saiba mais', 'Hero Section')}
+                  onClick={() => metaPixelService.trackCTAClick('Ver Planos', 'Hero Section')}
                 >
-                  Saiba mais
+                  Ver Planos
                 </BotaoCTA>
               </div>
 
-              <div className="mt-6 flex items-center justify-center lg:justify-start space-x-4 text-sm text-gray-500">
+              <div className="mt-6 flex items-center justify-center lg:justify-start space-x-4 text-sm text-gray-300">
                 <div className="flex items-center space-x-1">
                   <svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <span>637+ alunos formados</span>
+                  <span>+500 empresas</span>
                 </div>
                 <div className="flex items-center space-x-1">
                   <svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <span>94% de sucesso</span>
+                  <span>+1M mensagens</span>
                 </div>
                 <div className="flex items-center space-x-1">
                   <svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <span>50+ aulas</span>
+                  <span>99% satisfação</span>
                 </div>
               </div>
             </motion.div>
@@ -300,16 +299,16 @@ const Home = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="relative"
             >
-              <div className="relative bg-white rounded-2xl p-8 shadow-2xl">
+              <div className="relative bg-white/5 rounded-2xl p-8 shadow-2xl border border-white/10">
                 <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
                   <iframe
                     className="absolute top-0 left-0 w-full h-full rounded-xl"
-                                        src="https://www.youtube.com/embed/TaQMJa3zmPU?rel=0&modestbranding=1&showinfo=0&controls=1&fs=1"
-                                        title="Curso de Dropshipping - LacasaDigital"
+                                        src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0&modestbranding=1&showinfo=0&controls=1&fs=1"
+                                        title="AMSync Ads - Como conectar seu WhatsApp"
                                         frameBorder="0"
                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                         allowFullScreen
-                                        onLoad={() => metaPixelService.trackVideoView('Vídeo Principal - Curso Dropshipping')}
+                                        onLoad={() => metaPixelService.trackVideoView('Vídeo Principal - AMSync Ads')}
                                       />
                 </div>
                 <div className="absolute -top-4 -right-4 w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg">
@@ -333,11 +332,11 @@ const Home = () => {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-              Por que escolher a LacasaDigital?
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+              Por que escolher o AMSync Ads?
             </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Metodologia comprovada que já transformou centenas de vidas
+            <p className="text-lg text-gray-300 max-w-3xl mx-auto">
+              A solução definitiva para automatizar seu atendimento no WhatsApp com IA real
             </p>
           </motion.div>
 
@@ -349,15 +348,15 @@ const Home = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                className="bg-white/5 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-white/10"
               >
                 <div className="mb-4">
                   {benefit.icon}
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                <h3 className="text-lg font-semibold text-white mb-2">
                   {benefit.title}
                 </h3>
-                <p className="text-gray-600">
+                <p className="text-gray-300">
                   {benefit.description}
                 </p>
               </motion.div>
@@ -367,7 +366,7 @@ const Home = () => {
       </section>
 
       {/* Depoimentos */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white/50">
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white/5">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -376,11 +375,11 @@ const Home = () => {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              O que nossos alunos dizem
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              O que nossos clientes dizem
             </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Histórias reais de transformação em apenas 2 semanas
+            <p className="text-lg text-gray-300 max-w-3xl mx-auto">
+              Resultados reais de empresas que confiam no AMSync Ads
             </p>
             {userComments.length > 0 && (
               <div className="mt-4">
@@ -405,7 +404,7 @@ const Home = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className={`bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 ${
+                className={`bg-white/5 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/10 ${
                   testimonial.isUserComment ? 'border-l-4 border-blue-500' : ''
                 }`}
               >
@@ -426,16 +425,16 @@ const Home = () => {
                     />
                   )}
                   <div>
-                    <h3 className="font-semibold text-gray-900">{testimonial.name}</h3>
-                    <p className="text-sm text-gray-600">
-                      {testimonial.isUserComment ? 'Aluno do Curso' : testimonial.role}
+                    <h3 className="font-semibold text-white">{testimonial.name}</h3>
+                    <p className="text-sm text-gray-300">
+                      {testimonial.isUserComment ? 'Cliente' : testimonial.role}
                     </p>
                     {testimonial.isUserComment && (
-                      <p className="text-xs text-gray-500">{testimonial.date}</p>
+                      <p className="text-xs text-gray-400">{testimonial.date}</p>
                     )}
                   </div>
                 </div>
-                <p className="text-gray-700 mb-4">{testimonial.content}</p>
+                <p className="text-gray-200 mb-4">{testimonial.content}</p>
                 {testimonial.rating && (
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
@@ -471,14 +470,14 @@ const Home = () => {
             viewport={{ once: true }}
             className="max-w-2xl mx-auto"
           >
-            <div className="bg-white rounded-xl p-6 shadow-lg">
-              <h3 className="text-xl font-semibold text-gray-900 mb-4 text-center">
+            <div className="bg-white/5 rounded-xl p-6 shadow-lg border border-white/10">
+              <h3 className="text-xl font-semibold text-white mb-4 text-center">
                 Deixe seu comentário e avaliação
               </h3>
               <div className="space-y-4">
                 {/* Sistema de Estrelas */}
                 <div className="text-center">
-                  <p className="text-sm text-gray-600 mb-2">Avalie o curso:</p>
+                  <p className="text-sm text-gray-300 mb-2">Avalie a plataforma:</p>
                   <div className="flex justify-center space-x-1">
                     {[1, 2, 3, 4, 5].map((star) => (
                       <button
@@ -503,7 +502,7 @@ const Home = () => {
                     ))}
                   </div>
                   {userRating > 0 && (
-                    <p className="text-sm text-gray-500 mt-1">
+                    <p className="text-sm text-gray-400 mt-1">
                       {userRating === 1 && "Péssimo"}
                       {userRating === 2 && "Ruim"}
                       {userRating === 3 && "Regular"}
@@ -516,8 +515,8 @@ const Home = () => {
                 <textarea
                   value={newComment}
                   onChange={(e) => setNewComment(e.target.value)}
-                  placeholder="Conte-nos sua experiência com o curso..."
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 resize-none"
+                  placeholder="Conte-nos sua experiência com o AMSync Ads..."
+                  className="w-full px-4 py-3 border border-gray-600 bg-transparent text-white placeholder-gray-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 resize-none"
                   rows={4}
                 />
                 <div className="flex justify-center">
@@ -552,7 +551,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Seção de Preços */}
+      {/* Seção de Planos e Preços */}
       <section className="py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-600 to-purple-600">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
@@ -563,72 +562,118 @@ const Home = () => {
             className="mb-8"
           >
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-              Investimento Único, Resultados Para Sempre
+              Planos e Preços
             </h2>
             <p className="text-lg text-blue-100 mb-6">
-              Acesso vitalício a todo o conteúdo, atualizações e suporte especializado
+              Escolha o plano ideal para o seu negócio e comece hoje mesmo
             </p>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
-            className="bg-white rounded-2xl p-8 md:p-10 shadow-2xl"
           >
-            <div className="mb-6">
-              <div className="text-4xl md:text-5xl font-bold text-gray-900 mb-2">
-                 299 MT
+            <div className="overflow-x-auto pb-4 -mx-4 sm:mx-0">
+              <div className="flex gap-4 px-4 snap-x snap-mandatory">
+                {[
+                  {
+                    name: 'Grátis',
+                    old: null,
+                    current: '0',
+                    badge: 'Plano Gratuito',
+                    features: ['50 mensagens/mês', 'Gerenciamento de bloqueios'],
+                    link: 'https://assistente.amsync.online',
+                    external: true
+                  },
+                  {
+                    name: 'Inicial',
+                    old: '399',
+                    current: '199',
+                    badge: null,
+                    features: ['500 mensagens/mês', 'Gerenciamento de bloqueios']
+                  },
+                  {
+                    name: 'Essencial',
+                    old: '999',
+                    current: '499',
+                    badge: 'Mais Popular',
+                    features: ['1.200 mensagens/mês', 'Gerenciamento de bloqueios']
+                  },
+                  {
+                    name: 'Crescimento',
+                    old: '2.000',
+                    current: '1.000',
+                    badge: null,
+                    features: ['2.500 mensagens/mês', 'Suporte prioritário', 'Remarketing', 'Envio de fotos e vídeos']
+                  },
+                  {
+                    name: 'Profissional',
+                    old: '3.600',
+                    current: '1.800',
+                    badge: null,
+                    features: ['10.000 mensagens/mês', 'Múltiplos usuários', 'API', 'Remarketing', 'Envio de fotos e vídeos']
+                  },
+                  {
+                    name: 'Ilimitado',
+                    old: '4.950',
+                    current: '2.475',
+                    badge: null,
+                    features: ['Mensagens ilimitadas', 'Suporte dedicado no WhatsApp']
+                  }
+                ].map((plan, idx) => (
+                  <div key={plan.name} className={`snap-start min-w-[280px] sm:min-w-[300px] bg-white rounded-2xl p-6 shadow-2xl ${plan.badge ? 'ring-2 ring-yellow-400' : ''}`}>
+                    {plan.badge && (
+                      <div className="mb-3 inline-flex items-center px-2 py-1 text-xs font-semibold bg-yellow-100 text-yellow-800 rounded-full">{plan.badge}</div>
+                    )}
+                    <h3 className="text-xl font-bold text-gray-900 mb-1">{plan.name}</h3>
+                    {plan.old && plan.current ? (
+                      <>
+                        <div className="text-sm text-gray-500 mb-4">Economia de 50%</div>
+                        <div className="mb-1 text-gray-400 line-through">MT {plan.old} /mês</div>
+                        <div className="text-3xl font-extrabold text-gray-900">MT {plan.current} <span className="text-base font-medium">/mês</span></div>
+                      </>
+                    ) : (
+                      <div className="text-3xl font-extrabold text-gray-900">MT 0 <span className="text-base font-medium">/mês</span></div>
+                    )}
+                    <ul className="mt-4 space-y-2">
+                      {plan.features.map((f, i) => (
+                        <li key={i} className="flex items-center text-gray-700">
+                          <svg className="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                          {f}
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="mt-6">
+                      {plan.link ? (
+                        <a
+                          href={plan.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-3 px-6 rounded-lg w-full inline-block text-center shadow-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300"
+                          onClick={() => metaPixelService.trackCTAClick(`Quero este plano - ${plan.name}`, 'Pricing Section')}
+                        >
+                          Quero este plano
+                        </a>
+                      ) : (
+                        <BotaoCTA
+                          to="/login"
+                          variant="gradient"
+                          className="w-full"
+                          onClick={() => metaPixelService.trackCTAClick(`Quero este plano - ${plan.name}`, 'Pricing Section')}
+                        >
+                          Quero este plano
+                        </BotaoCTA>
+                      )}
+                    </div>
+                  </div>
+                ))}
               </div>
-              <div className="text-lg text-gray-600"></div>
             </div>
-
-            <div className="space-y-3 mb-8 text-left max-w-md mx-auto">
-              {[
-                "16 aulas em vídeo",
-                "Materiais de apoio completos",
-                "Suporte técnico 24/7",
-                "Acesso vitalício",
-                "Atualizações gratuitas",
-                "Grupo exclusivo de alunos",
-                "Consultoria individual"
-              ].map((feature, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3, delay: 0.3 + index * 0.05 }}
-                  viewport={{ once: true }}
-                  className="flex items-center space-x-2"
-                >
-                  <svg className="w-4 h-4 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span className="text-gray-700">{feature}</span>
-                </motion.div>
-              ))}
-            </div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <BotaoCTA 
-                to="/login" 
-                variant="gradient" 
-                size="xl"
-                className="w-full text-lg py-3"
-                onClick={() => metaPixelService.trackCTAClick('Começar Agora', 'Pricing Section')}
-              >
-                Começar Agora
-              </BotaoCTA>
-              <p className="text-sm text-gray-500 mt-3">
-                Risco zero: 30 dias de garantia incondicional
-              </p>
-            </motion.div>
+            <p className="text-sm text-blue-100 mt-3">Arraste para o lado para ver mais planos</p>
           </motion.div>
         </div>
       </section>
@@ -642,12 +687,11 @@ const Home = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-              Pronto para Transformar Sua Vida?
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+              Pronto para automatizar seu atendimento no WhatsApp?
             </h2>
             <p className="text-lg text-gray-600 mb-6">
-              Junte-se a milhares de alunos que já transformaram seus sonhos em realidade. 
-              O momento é agora!
+              Conecte seu número em poucos minutos e venda mais com a ajuda do AMSync Ads, 24/7.
             </p>
             <BotaoCTA 
               to="/login" 
@@ -682,3 +726,4 @@ const Home = () => {
 };
 
 export default Home;
+

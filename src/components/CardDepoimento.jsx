@@ -43,7 +43,7 @@ const CardDepoimento = ({
   };
 
   return (
-    <div className="card hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+    <div className="bg-white/5 border border-white/10 rounded-xl p-6 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
       {/* Cabeçalho do Card */}
       <div className="flex items-start space-x-4 mb-4">
         {/* Foto do usuário */}
@@ -65,14 +65,14 @@ const CardDepoimento = ({
 
         {/* Informações do usuário */}
         <div className="flex-1 min-w-0">
-          <h4 className="text-lg font-semibold text-gray-900 mb-1">
+          <h4 className="text-lg font-semibold text-white mb-1">
             {displayName || 'Usuário'}
           </h4>
-          <p className="text-sm text-gray-600 mb-1">
+          <p className="text-sm text-gray-300 mb-1">
             {displayRole || 'Aluno'}
           </p>
           {empresa && (
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-gray-400">
               {empresa}
             </p>
           )}
@@ -85,7 +85,7 @@ const CardDepoimento = ({
       </div>
 
       {/* Depoimento */}
-      <blockquote className="text-gray-700 leading-relaxed">
+      <blockquote className="text-gray-200 leading-relaxed">
         "{displayTestimonial || 'Depoimento não disponível'}"
       </blockquote>
 
@@ -103,13 +103,13 @@ const CardDepoimento = ({
               clipRule="evenodd"
             />
           </svg>
-          <span className="text-xs text-green-600 font-medium">
+          <span className="text-xs text-green-400 font-medium">
             Aluno Verificado
           </span>
         </div>
 
         {/* Data do depoimento (mock) */}
-        <span className="text-xs text-gray-400">
+        <span className="text-xs text-gray-500">
           Há 2 semanas
         </span>
       </div>

@@ -128,13 +128,13 @@ const Profile = () => {
   // Debug: Mostrar informações de debug temporariamente
   if (!currentUser) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-[#121212] flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-blue-600 mx-auto mb-6"></div>
-          <h2 className="text-xl font-semibold text-gray-700 mb-2">Verificando autenticação...</h2>
-          <p className="text-gray-500">Aguarde um momento</p>
-          <div className="mt-4 p-4 bg-yellow-100 rounded-lg">
-            <p className="text-sm text-yellow-800">Debug: currentUser é null</p>
+          <h2 className="text-xl font-semibold text-white mb-2">Verificando autenticação...</h2>
+          <p className="text-gray-300">Aguarde um momento</p>
+          <div className="mt-4 p-4 bg-yellow-900/20 rounded-lg">
+            <p className="text-sm text-yellow-300">Debug: currentUser é null</p>
           </div>
         </div>
       </div>
@@ -144,15 +144,15 @@ const Profile = () => {
   // Se há usuário mas não há perfil ainda, mostrar loading com debug
   if (!userProfile) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-[#121212] flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-blue-600 mx-auto mb-6"></div>
-          <h2 className="text-xl font-semibold text-gray-700 mb-2">Carregando perfil...</h2>
-          <p className="text-gray-500">Buscando suas informações</p>
-          <div className="mt-4 p-4 bg-blue-100 rounded-lg">
-            <p className="text-sm text-blue-800">Debug: currentUser existe mas userProfile é null</p>
-            <p className="text-xs text-blue-600 mt-1">Email: {currentUser.email}</p>
-            <p className="text-xs text-blue-600">UID: {currentUser.uid}</p>
+          <h2 className="text-xl font-semibold text-white mb-2">Carregando perfil...</h2>
+          <p className="text-gray-300">Buscando suas informações</p>
+          <div className="mt-4 p-4 bg-blue-900/20 rounded-lg">
+            <p className="text-sm text-blue-300">Debug: currentUser existe mas userProfile é null</p>
+            <p className="text-xs text-blue-300 mt-1">Email: {currentUser.email}</p>
+            <p className="text-xs text-blue-300">UID: {currentUser.uid}</p>
           </div>
         </div>
       </div>
@@ -160,18 +160,18 @@ const Profile = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen bg-[#121212] py-12">
       <div className="container-custom">
         <div className="max-w-4xl mx-auto">
           {/* Cabeçalho */}
           <div className="mb-8">
             <div className="flex items-center justify-between">
               <div>
-                <h1 className="text-3xl font-bold text-gray-900 mb-2">
+                <h1 className="text-3xl font-bold text-white mb-2">
                   Meu Perfil
                 </h1>
-                <p className="text-gray-600">
-                  Olá, <span className="font-semibold text-blue-600">
+                <p className="text-gray-300">
+                  Olá, <span className="font-semibold text-blue-400">
                     {userProfile?.name || currentUser?.displayName || currentUser?.email?.split('@')[0] || 'Aluno'}
                   </span>! Gerencie suas informações pessoais e configurações da conta
                 </p>
@@ -185,15 +185,15 @@ const Profile = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Informações do Perfil */}
             <div className="lg:col-span-2">
-              <div className="bg-white rounded-xl shadow-lg p-8">
+              <div className="bg-white/5 rounded-xl shadow-lg p-8 border border-white/10">
                 <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-xl font-semibold text-gray-900">
+                  <h2 className="text-xl font-semibold text-white">
                     Informações Pessoais
                   </h2>
                   {!isEditing && (
                     <button
                       onClick={() => setIsEditing(true)}
-                      className="text-primary-600 hover:text-primary-700 font-medium"
+                      className="text-blue-400 hover:text-blue-300 font-medium"
                     >
                       Editar
                     </button>
@@ -204,7 +204,7 @@ const Profile = () => {
                   <form className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label className="block text-sm font-medium text-gray-300 mb-2">
                           Nome Completo *
                         </label>
                         <input
@@ -212,12 +212,12 @@ const Profile = () => {
                           name="name"
                           value={formData.name}
                           onChange={handleInputChange}
-                          className="input-field"
+                          className="w-full px-4 py-3 border border-gray-600 bg-transparent text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                           required
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label className="block text-sm font-medium text-gray-300 mb-2">
                           Email *
                         </label>
                         <input
@@ -225,11 +225,11 @@ const Profile = () => {
                           name="email"
                           value={formData.email}
                           onChange={handleInputChange}
-                          className="input-field"
+                          className="w-full px-4 py-3 border border-gray-600 bg-transparent text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                           required
                           disabled
                         />
-                        <p className="text-xs text-gray-500 mt-1">
+                        <p className="text-xs text-gray-400 mt-1">
                           O email não pode ser alterado
                         </p>
                       </div>
@@ -237,7 +237,7 @@ const Profile = () => {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label className="block text-sm font-medium text-gray-300 mb-2">
                           Telefone
                         </label>
                         <input
@@ -245,12 +245,12 @@ const Profile = () => {
                           name="phone"
                           value={formData.phone}
                           onChange={handleInputChange}
-                          className="input-field"
+                          className="w-full px-4 py-3 border border-gray-600 bg-transparent text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                           placeholder="(11) 99999-9999"
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label className="block text-sm font-medium text-gray-300 mb-2">
                           Empresa
                         </label>
                         <input
@@ -258,7 +258,7 @@ const Profile = () => {
                           name="company"
                           value={formData.company}
                           onChange={handleInputChange}
-                          className="input-field"
+                          className="w-full px-4 py-3 border border-gray-600 bg-transparent text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                           placeholder="Nome da empresa"
                         />
                       </div>
@@ -266,23 +266,23 @@ const Profile = () => {
 
                     {/* Mensagens de erro/sucesso */}
                     {error && (
-                      <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+                      <div className="bg-red-900/20 border border-red-800/40 rounded-lg p-4">
                         <div className="flex items-center space-x-2">
-                          <svg className="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                          <svg className="w-5 h-5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
                           </svg>
-                          <span className="text-red-700">{error}</span>
+                          <span className="text-red-300">{error}</span>
                         </div>
                       </div>
                     )}
 
                     {success && (
-                      <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                      <div className="bg-green-900/20 border border-green-800/40 rounded-lg p-4">
                         <div className="flex items-center space-x-2">
-                          <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                          <svg className="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                           </svg>
-                          <span className="text-green-700">{success}</span>
+                          <span className="text-green-300">{success}</span>
                         </div>
                       </div>
                     )}
@@ -298,7 +298,7 @@ const Profile = () => {
                       </BotaoCTA>
                       <button
                         onClick={handleCancel}
-                        className="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                        className="px-6 py-3 border border-gray-600 text-gray-200 rounded-lg hover:bg-white/5 transition-colors"
                       >
                         Cancelar
                       </button>
@@ -308,58 +308,58 @@ const Profile = () => {
                   <div className="space-y-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-sm font-medium text-gray-500 mb-1">
+                        <label className="block text-sm font-medium text-gray-400 mb-1">
                           Nome Completo
                         </label>
-                        <p className="text-gray-900">{userProfile.name || 'Não informado'}</p>
+                        <p className="text-white">{userProfile.name || 'Não informado'}</p>
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-500 mb-1">
+                        <label className="block text-sm font-medium text-gray-400 mb-1">
                           Email
                         </label>
-                        <p className="text-gray-900">{userProfile.email}</p>
+                        <p className="text-white">{userProfile.email}</p>
                       </div>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-sm font-medium text-gray-500 mb-1">
+                        <label className="block text-sm font-medium text-gray-400 mb-1">
                           Telefone
                         </label>
-                        <p className="text-gray-900">{userProfile.phone || 'Não informado'}</p>
+                        <p className="text-white">{userProfile.phone || 'Não informado'}</p>
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-500 mb-1">
+                        <label className="block text-sm font-medium text-gray-400 mb-1">
                           Empresa
                         </label>
-                        <p className="text-gray-900">{userProfile.company || 'Não informado'}</p>
+                        <p className="text-white">{userProfile.company || 'Não informado'}</p>
                       </div>
                     </div>
                     
                     {/* Status de Pagamento */}
-                    <div className="border-t pt-4">
+                    <div className="border-t pt-4 border-white/10">
                       <div className="flex items-center justify-between">
                         <div>
-                          <label className="block text-sm font-medium text-gray-500 mb-1">
+                          <label className="block text-sm font-medium text-gray-400 mb-1">
                             Status do Curso
                           </label>
                           <div className="flex items-center space-x-2">
                             {userProfile.isPaid ? (
                               <>
                                 <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                                <span className="text-green-700 font-medium">Acesso Completo</span>
+                                <span className="text-green-300 font-medium">Acesso Completo</span>
                               </>
                             ) : (
                               <>
                                 <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                                <span className="text-red-700 font-medium">Aguardando Pagamento</span>
+                                <span className="text-red-300 font-medium">Aguardando Pagamento</span>
                               </>
                             )}
                           </div>
                         </div>
                         {userProfile.isPaid && (
                           <div className="text-right">
-                            <p className="text-sm text-gray-500">Data do Pagamento</p>
-                            <p className="text-sm font-medium text-gray-900">
+                            <p className="text-sm text-gray-400">Data do Pagamento</p>
+                            <p className="text-sm font-medium text-white">
                               {userProfile.paymentDate ? 
                                 formatDate(userProfile.paymentDate) : 
                                 'Não informado'
@@ -378,18 +378,18 @@ const Profile = () => {
             <div className="lg:col-span-1">
               <div className="space-y-6">
                 {/* Status da Conta */}
-                <div className="bg-white rounded-xl shadow-lg p-6">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                <div className="bg-white/5 rounded-xl shadow-lg p-6 border border-white/10">
+                  <h3 className="text-lg font-semibold text-white mb-4">
                     Status da Conta
                   </h3>
                   
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-600">Status de Pagamento</span>
+                      <span className="text-sm text-gray-300">Status de Pagamento</span>
                       <span className={`px-3 py-1 rounded-full text-xs font-medium ${
                         userProfile.isPaid 
-                          ? 'bg-green-100 text-green-800' 
-                          : 'bg-red-100 text-red-800'
+                          ? 'bg-green-900/30 text-green-300' 
+                          : 'bg-red-900/30 text-red-300'
                       }`}>
                         {userProfile.isPaid ? 'Ativo' : 'Pendente'}
                       </span>
@@ -397,23 +397,23 @@ const Profile = () => {
                     
                     {userProfile.isPaid && (
                       <div className="flex items-center justify-between">
-                        <span className="text-sm text-gray-600">Data do Pagamento</span>
-                        <span className="text-sm text-gray-900">
+                        <span className="text-sm text-gray-300">Data do Pagamento</span>
+                        <span className="text-sm text-white">
                           {formatDate(userProfile.paymentDate)}
                         </span>
                       </div>
                     )}
                     
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-600">Membro desde</span>
-                      <span className="text-sm text-gray-900">
+                      <span className="text-sm text-gray-300">Membro desde</span>
+                      <span className="text-sm text-white">
                         {formatDate(userProfile.createdAt)}
                       </span>
                     </div>
                     
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-600">Último login</span>
-                      <span className="text-sm text-gray-900">
+                      <span className="text-sm text-gray-300">Último login</span>
+                      <span className="text-sm text-white">
                         {formatDate(userProfile.lastLogin)}
                       </span>
                     </div>
@@ -421,8 +421,8 @@ const Profile = () => {
                 </div>
 
                 {/* Ações Rápidas */}
-                <div className="bg-white rounded-xl shadow-lg p-6">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                <div className="bg-white/5 rounded-xl shadow-lg p-6 border border-white/10">
+                  <h3 className="text-lg font-semibold text-white mb-4">
                     Ações Rápidas
                   </h3>
                   
@@ -439,7 +439,7 @@ const Profile = () => {
                     
                     <button
                       onClick={handleLogout}
-                      className="w-full px-4 py-3 border border-red-300 text-red-600 rounded-lg hover:bg-red-50 transition-colors"
+                      className="w-full px-4 py-3 border border-red-600 text-red-400 rounded-lg hover:bg-red-900/20 transition-colors"
                     >
                       Sair da Conta
                     </button>
@@ -447,7 +447,7 @@ const Profile = () => {
                 </div>
 
                 {/* Suporte */}
-                <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-6 text-white">
+                <div className="bg-gradient-to-r from-blue-700 to-purple-700 rounded-xl p-6 text-white">
                   <h3 className="text-lg font-semibold mb-3">
                     Precisa de Ajuda?
                   </h3>
@@ -455,8 +455,8 @@ const Profile = () => {
                     Nossa equipe está sempre pronta para ajudar você
                   </p>
                   <a
-                    href="mailto:suporte@lacasadigital.com"
-                    className="inline-block bg-white bg-opacity-20 hover:bg-opacity-30 text-white px-4 py-2 rounded-lg transition-all duration-200"
+                    href="mailto:suporte@amsyncoficial.com"
+                    className="inline-block bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg transition-all duration-200"
                   >
                     Contatar Suporte
                   </a>
@@ -469,7 +469,7 @@ const Profile = () => {
 
       {/* Botão Flutuante do WhatsApp */}
       <motion.a
-        href="https://wa.me/25887400696"
+        href="https://wa.me/258874006962"
         target="_blank"
         rel="noopener noreferrer"
         initial={{ scale: 0 }}

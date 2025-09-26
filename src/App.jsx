@@ -13,6 +13,7 @@ import Recursos from './pages/Recursos';
 import Profile from './pages/Profile';
 import Sobre from './pages/Sobre';
 import Contato from './pages/Contato';
+import Planos from './pages/Planos';
 import ProtectedRoute from './components/ProtectedRoute';
 import { pixelDiagnostic } from './utils/pixelDiagnostic';
 
@@ -33,6 +34,7 @@ const AppContent = () => {
           <Route path="/payment" element={<Payment />} />
           <Route path="/payment-success" element={<PaymentSuccess />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/planos" element={<Planos />} />
           <Route path="/sobre" element={<Sobre />} />
           <Route path="/contato" element={<Contato />} />
           <Route 

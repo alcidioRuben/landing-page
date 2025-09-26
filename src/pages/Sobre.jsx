@@ -51,9 +51,9 @@ const Sobre = () => {
 
   const team = [
     {
-      name: "Carlos Silva",
+      name: "Alcidio Ruben Macuacua",
       role: "Fundador & CEO",
-      bio: "Especialista em marketing digital com mais de 10 anos de experiência em dropshipping.",
+      bio: "Engenheiro de software com mais de 10 anos de experiência em desenvolvimento de software.",
       image: "/logo.png"
     },
     {
@@ -66,12 +66,12 @@ const Sobre = () => {
         name: "Santos jose",
         role: "Especialista em Dropshipping",
         bio: "Empreendedor que já faturou mais de R$ 2 milhões com dropshipping.",
-        image: "/santos-soje.jpg"
+        image: "/logo.png"
       }
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-blue-50 to-purple-50">
+    <div className="min-h-screen bg-[#121212]">
       {/* Header com botão voltar */}
       <div className="relative">
         <motion.div
@@ -100,11 +100,11 @@ const Sobre = () => {
             animate={mainControls}
             className="max-w-4xl mx-auto"
           >
-            <motion.h1 variants={itemVariants} className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-              Sobre a <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">LacasaDigital</span>
+            <motion.h1 variants={itemVariants} className="text-4xl md:text-6xl font-bold text-white mb-6">
+              Sobre a <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">AMSync Ads</span>
             </motion.h1>
-            <motion.p variants={itemVariants} className="text-xl text-gray-600 mb-8 leading-relaxed">
-              Somos uma plataforma educacional comprometida em transformar sonhos em realidade através do conhecimento em dropshipping e empreendedorismo digital.
+            <motion.p variants={itemVariants} className="text-xl text-gray-300 mb-8 leading-relaxed">
+              Somos uma plataforma de automação de vendas no WhatsApp com IA.
             </motion.p>
           </motion.div>
         </div>
@@ -116,7 +116,7 @@ const Sobre = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="py-16 px-6 bg-white/50 backdrop-blur-sm"
+        className="py-16 px-6 bg-white/5 backdrop-blur-sm"
       >
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -129,8 +129,8 @@ const Sobre = () => {
                 viewport={{ once: true }}
                 className="text-center"
               >
-                <div className="text-3xl md:text-4xl font-bold text-blue-600 mb-2">{stat.number}</div>
-                <div className="text-gray-600 font-medium">{stat.label}</div>
+                <div className="text-3xl md:text-4xl font-bold text-blue-400 mb-2">{stat.number}</div>
+                <div className="text-gray-300 font-medium">{stat.label}</div>
               </motion.div>
             ))}
           </div>
@@ -151,7 +151,7 @@ const Sobre = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12"
+            className="text-3xl md:text-4xl font-bold text-center text-white mb-12"
           >
             Nossa História
           </motion.h2>
@@ -160,19 +160,24 @@ const Sobre = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
-            className="prose prose-lg mx-auto text-gray-600 leading-relaxed"
+            className="prose prose-lg mx-auto text-gray-300 leading-relaxed"
           >
             <p className="mb-6">
-              A LacasaDigital nasceu da paixão por ensinar e da crença de que o conhecimento deve ser acessível a todos. 
-              Fundada em 2020, nossa missão é democratizar o acesso ao conhecimento sobre empreendedorismo digital.
+              O AMSync Ads nasceu de uma dor real que vivenciamos com nossos clientes: atender WhatsApp manualmente é
+              cansativo, lento e cheio de falhas. Mensagens importantes se perdem na fila, respostas demoram, não há
+              histórico centralizado e o horário comercial limita o crescimento. Isso significa oportunidades perdidas,
+              clientes frustrados e equipes sobrecarregadas.
             </p>
             <p className="mb-6">
-              Começamos com um pequeno grupo de alunos e hoje somos referência no ensino de dropshipping no Brasil. 
-              Nossa metodologia única combina teoria sólida com prática real, garantindo que nossos alunos não apenas 
-              aprendam, mas também implementem e obtenham resultados.
+              Criamos o AMSync Ads para virar esse jogo. Com a força da Inteligência Artificial (OpenAI) e uma plataforma
+              visual, fácil e segura, você configura regras, produtos e respostas inteligentes em poucos minutos. Seu
+              atendimento passa a funcionar 24/7, com respostas naturais e personalizadas, registro de conversas e um
+              painel único para monitorar tudo em tempo real — sem ficar pulando entre celulares, abas e planilhas.
             </p>
             <p>
-              Acreditamos que o sucesso não é um destino, mas uma jornada. E estamos aqui para guiar cada passo dessa jornada.
+              Nossa missão é simples: ajudar sua empresa a vender mais, atender melhor e economizar tempo. Com automação
+              inteligente, segurança e confiabilidade, o AMSync Ads se torna seu assistente de vendas no WhatsApp — sempre
+              online, sempre pronto, e continuamente aprendendo para entregar a melhor experiência ao seu cliente.
             </p>
           </motion.div>
         </div>
@@ -184,7 +189,7 @@ const Sobre = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="py-20 px-6 bg-white/50 backdrop-blur-sm"
+        className="py-20 px-6 bg-white/5 backdrop-blur-sm"
       >
         <div className="max-w-6xl mx-auto">
           <motion.h2
@@ -192,7 +197,7 @@ const Sobre = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-16"
+            className="text-3xl md:text-4xl font-bold text-center text-white mb-16"
           >
             Nossa Equipe
           </motion.h2>
@@ -204,20 +209,20 @@ const Sobre = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
                 viewport={{ once: true }}
-                className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                className="bg-white/5 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-white/10"
               >
                 <div className="text-center mb-6">
-                  <div className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
+                  <div className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden bg-gradient-to-br from-blue-900/30 to-purple-900/30 flex items-center justify-center">
                     <img 
                       src={member.image} 
                       alt={member.name}
                       className="w-16 h-16 object-cover rounded-full"
                     />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{member.name}</h3>
-                  <p className="text-blue-600 font-medium">{member.role}</p>
+                  <h3 className="text-xl font-bold text-white mb-2">{member.name}</h3>
+                  <p className="text-blue-400 font-medium">{member.role}</p>
                 </div>
-                <p className="text-gray-600 text-center leading-relaxed">{member.bio}</p>
+                <p className="text-gray-300 text-center leading-relaxed">{member.bio}</p>
               </motion.div>
             ))}
           </div>
@@ -238,7 +243,7 @@ const Sobre = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-16"
+            className="text-3xl md:text-4xl font-bold text-center text-white mb-16"
           >
             Nossos Valores
           </motion.h2>
@@ -246,30 +251,30 @@ const Sobre = () => {
             {[
               {
                 icon: (
-                  <svg className="w-12 h-12 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-12 h-12 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                   </svg>
                 ),
                 title: "Inovação",
-                description: "Sempre buscamos as melhores práticas e tecnologias para nossos alunos."
+                description: "Sempre buscamos as melhores práticas e tecnologias para nossos clientes."
               },
               {
                 icon: (
-                  <svg className="w-12 h-12 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-12 h-12 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                   </svg>
                 ),
                 title: "Paixão",
-                description: "Amamos o que fazemos e isso se reflete na qualidade do nosso ensino."
+                description: "Amamos o que fazemos e isso se reflete na qualidade do nosso atendimento."
               },
               {
                 icon: (
-                  <svg className="w-12 h-12 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-12 h-12 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 ),
                 title: "Resultados",
-                description: "Nosso foco é sempre nos resultados práticos e no sucesso dos alunos."
+                description: "Nosso foco é sempre nos resultados práticos e no sucesso dos clientes."
               }
             ].map((value, index) => (
               <motion.div
@@ -280,11 +285,11 @@ const Sobre = () => {
                 viewport={{ once: true }}
                 className="text-center"
               >
-                <div className="inline-flex items-center justify-center w-20 h-20 mx-auto mb-6 bg-white rounded-full shadow-lg">
+                <div className="inline-flex items-center justify-center w-20 h-20 mx-auto mb-6 bg-white/10 rounded-full shadow-lg">
                   {value.icon}
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">{value.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{value.description}</p>
+                <h3 className="text-xl font-bold text-white mb-4">{value.title}</h3>
+                <p className="text-gray-300 leading-relaxed">{value.description}</p>
               </motion.div>
             ))}
           </div>
@@ -297,7 +302,7 @@ const Sobre = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="py-20 px-6 bg-gradient-to-r from-blue-600 to-purple-600"
+        className="py-20 px-6 bg-gradient-to-r from-blue-700 to-purple-700"
       >
         <div className="max-w-4xl mx-auto text-center">
           <motion.h2
@@ -316,7 +321,7 @@ const Sobre = () => {
             viewport={{ once: true }}
             className="text-xl text-blue-100 mb-8"
           >
-            Junte-se a milhares de alunos que já transformaram seus sonhos em realidade
+            Junte-se a milhares de clientes que já transformaram seus sonhos em realidade
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -326,7 +331,7 @@ const Sobre = () => {
           >
             <Link
               to="/login"
-              className="inline-flex items-center px-8 py-4 bg-white text-blue-600 font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              className="inline-flex items-center px-8 py-4 bg-white text-blue-700 font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
             >
               Começar Agora
               <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -339,7 +344,7 @@ const Sobre = () => {
 
       {/* Botão Flutuante do WhatsApp */}
       <motion.a
-        href="https://wa.me/25887400696"
+        href="https://wa.me/258874006962"
         target="_blank"
         rel="noopener noreferrer"
         initial={{ scale: 0 }}

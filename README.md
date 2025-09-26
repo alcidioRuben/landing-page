@@ -102,7 +102,7 @@ src/
 ## 📞 Suporte
 
 Para suporte técnico, entre em contato:
-- Email: suporte@lacasadigital.com
+- Email: suporte@com
 - WhatsApp: +25887400696
 
 ## 📄 Licença

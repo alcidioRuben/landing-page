@@ -58,8 +58,8 @@ const Contato = () => {
         </svg>
       ),
       title: "Telefone",
-      value: "+258 84 000 0062",
-      link: "tel:+258841000062"
+      value: "+258 87 400 6962",
+      link: "tel:+258874006962"
     },
     {
       icon: (
@@ -68,8 +68,8 @@ const Contato = () => {
         </svg>
       ),
       title: "Email",
-      value: "contato@lacasadigital.com",
-      link: "mailto:contato@lacasadigital.com"
+      value: "amsyncoficial.com",
+      link: "mailto:amsyncoficial.com"
     },
     {
       icon: (
@@ -92,7 +92,7 @@ const Contato = () => {
           <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987 6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.323-1.297C4.198 14.895 3.708 13.744 3.708 12.447s.49-2.448 1.418-3.323c.875-.807 2.026-1.297 3.323-1.297s2.448.49 3.323 1.297c.928.875 1.418 2.026 1.418 3.323s-.49 2.448-1.418 3.323c-.875.807-2.026 1.297-3.323 1.297zm7.718-1.297c-.875.807-2.026 1.297-3.323 1.297s-2.448-.49-3.323-1.297c-.928-.875-1.418-2.026-1.418-3.323s.49-2.448 1.418-3.323c.875-.807 2.026-1.297 3.323-1.297s2.448.49 3.323 1.297c.928.875 1.418 2.026 1.418 3.323s-.49 2.448-1.418 3.323z"/>
         </svg>
       ),
-      link: "https://instagram.com/lacasadigital"
+      link: "https://instagram.com/amsyncoficial"
     },
     {
       name: "YouTube",
@@ -101,7 +101,7 @@ const Contato = () => {
           <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
         </svg>
       ),
-      link: "https://youtube.com/lacasadigital"
+      link: "https://www.youtube.com/channel/UCVbw-wyJA6eTYPnZXuUGO9A"
     },
     {
       name: "LinkedIn",
@@ -110,12 +110,12 @@ const Contato = () => {
           <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
         </svg>
       ),
-      link: "https://linkedin.com/company/lacasadigital"
+      link: "https://linkedin.com/company/amsyncoficial"
     }
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-blue-50 to-purple-50">
+    <div className="min-h-screen bg-[#121212]">
       {/* Header com botão voltar */}
       <div className="relative">
         <motion.div
@@ -143,11 +143,11 @@ const Contato = () => {
             transition={{ duration: 0.8 }}
             className="max-w-4xl mx-auto"
           >
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
               Entre em <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Contato</span>
             </h1>
-            <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-              Estamos aqui para ajudar você a transformar seus sonhos em realidade. 
+            <p className="text-xl text-gray-300 mb-8 leading-relaxed">
+              Estamos aqui para ajudar você a transformar seu WhatsApp em uma maquina de vendas com IA. 
               Entre em contato conosco e vamos conversar sobre como podemos te ajudar.
             </p>
           </motion.div>
@@ -161,27 +161,27 @@ const Contato = () => {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="bg-white rounded-2xl p-8 shadow-xl"
+            className="bg-white/5 rounded-2xl p-8 shadow-xl border border-white/10"
           >
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Envie sua Mensagem</h2>
+            <h2 className="text-2xl font-bold text-white mb-6">Envie sua Mensagem</h2>
             
             {submitSuccess ? (
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="bg-green-50 border border-green-200 rounded-lg p-6 text-center"
+                className="bg-green-900/20 border border-green-800/40 rounded-lg p-6 text-center"
               >
-                <svg className="w-16 h-16 text-green-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-16 h-16 text-green-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                <h3 className="text-xl font-bold text-green-800 mb-2">Mensagem Enviada!</h3>
-                <p className="text-green-600">Obrigado pelo contato. Retornaremos em breve!</p>
+                <h3 className="text-xl font-bold text-green-300 mb-2">Mensagem Enviada!</h3>
+                <p className="text-green-200">Obrigado pelo contato. Retornaremos em breve!</p>
               </motion.div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <label htmlFor="nome" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="nome" className="block text-sm font-medium text-gray-300 mb-2">
                       Nome Completo *
                     </label>
                     <input
@@ -191,12 +191,12 @@ const Contato = () => {
                       required
                       value={formData.nome}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                      className="w-full px-4 py-3 border border-gray-600 bg-transparent text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 placeholder-gray-400"
                       placeholder="Seu nome completo"
                     />
                   </div>
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
                       Email *
                     </label>
                     <input
@@ -206,7 +206,7 @@ const Contato = () => {
                       required
                       value={formData.email}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                      className="w-full px-4 py-3 border border-gray-600 bg-transparent text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 placeholder-gray-400"
                       placeholder="Exemplo@email.com"
                     />
                   </div>
@@ -214,7 +214,7 @@ const Contato = () => {
                 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <label htmlFor="telefone" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="telefone" className="block text-sm font-medium text-gray-300 mb-2">
                       Telefone
                     </label>
                     <input
@@ -223,12 +223,12 @@ const Contato = () => {
                       name="telefone"
                       value={formData.telefone}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-                      placeholder="(+258) 84100-0062"
+                      className="w-full px-4 py-3 border border-gray-600 bg-transparent text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 placeholder-gray-400"
+                      placeholder="(+258) 87400-6962"
                     />
                   </div>
                   <div>
-                    <label htmlFor="assunto" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="assunto" className="block text-sm font-medium text-gray-300 mb-2">
                       Assunto *
                     </label>
                     <select
@@ -237,10 +237,10 @@ const Contato = () => {
                       required
                       value={formData.assunto}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                      className="w-full px-4 py-3 border border-gray-600 bg-transparent text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
                     >
                       <option value="">Selecione um assunto</option>
-                      <option value="curso">Dúvidas sobre o Curso</option>
+                      <option value="curso">Dúvidas sobre o AMSync Ads</option>
                       <option value="pagamento">Problemas com Pagamento</option>
                       <option value="suporte">Suporte Técnico</option>
                       <option value="parceria">Proposta de Parceria</option>
@@ -250,7 +250,7 @@ const Contato = () => {
                 </div>
                 
                 <div>
-                  <label htmlFor="mensagem" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="mensagem" className="block text-sm font-medium text-gray-300 mb-2">
                     Mensagem *
                   </label>
                   <textarea
@@ -260,7 +260,7 @@ const Contato = () => {
                     rows={6}
                     value={formData.mensagem}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 resize-none"
+                    className="w-full px-4 py-3 border border-gray-600 bg-transparent text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 resize-none placeholder-gray-400"
                     placeholder="Conte-nos como podemos te ajudar..."
                   />
                 </div>
@@ -294,8 +294,8 @@ const Contato = () => {
             className="space-y-8"
           >
             {/* Informações Principais */}
-            <div className="bg-white rounded-2xl p-8 shadow-xl">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Informações de Contato</h2>
+            <div className="bg-white/5 rounded-2xl p-8 shadow-xl border border-white/10">
+              <h2 className="text-2xl font-bold text-white mb-6">Informações de Contato</h2>
               <div className="space-y-6">
                 {contactInfo.map((info, index) => (
                   <motion.div
@@ -305,20 +305,20 @@ const Contato = () => {
                     transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
                     className="flex items-start space-x-4"
                   >
-                    <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-blue-100 to-purple-100 rounded-lg flex items-center justify-center text-blue-600">
+                    <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-blue-900/30 to-purple-900/30 rounded-lg flex items-center justify-center text-blue-400">
                       {info.icon}
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900">{info.title}</h3>
+                      <h3 className="font-semibold text-white">{info.title}</h3>
                       {info.link ? (
                         <a
                           href={info.link}
-                          className="text-blue-600 hover:text-blue-800 transition-colors duration-300"
+                          className="text-blue-400 hover:text-blue-300 transition-colors duration-300"
                         >
                           {info.value}
                         </a>
                       ) : (
-                        <p className="text-gray-600">{info.value}</p>
+                        <p className="text-gray-300">{info.value}</p>
                       )}
                     </div>
                   </motion.div>
@@ -327,8 +327,8 @@ const Contato = () => {
             </div>
 
             {/* Redes Sociais */}
-            <div className="bg-white rounded-2xl p-8 shadow-xl">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Redes Sociais</h2>
+            <div className="bg-white/5 rounded-2xl p-8 shadow-xl border border-white/10">
+              <h2 className="text-2xl font-bold text-white mb-6">Redes Sociais</h2>
               <div className="grid grid-cols-3 gap-4">
                 {socialLinks.map((social, index) => (
                   <motion.a
@@ -339,12 +339,12 @@ const Contato = () => {
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6, delay: 0.8 + index * 0.1 }}
-                    className="flex flex-col items-center p-4 bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl hover:from-blue-100 hover:to-purple-100 transition-all duration-300 hover:scale-105 group"
+                    className="flex flex-col items-center p-4 bg-gradient-to-br from-blue-900/20 to-purple-900/20 rounded-xl hover:from-blue-900/30 hover:to-purple-900/30 transition-all duration-300 hover:scale-105 group"
                   >
-                    <div className="text-blue-600 group-hover:text-blue-800 mb-2">
+                    <div className="text-blue-400 group-hover:text-blue-300 mb-2">
                       {social.icon}
                     </div>
-                    <span className="text-sm font-medium text-gray-700 group-hover:text-gray-900">
+                    <span className="text-sm font-medium text-gray-300 group-hover:text-white">
                       {social.name}
                     </span>
                   </motion.a>
@@ -357,7 +357,7 @@ const Contato = () => {
 
       {/* Botão Flutuante do WhatsApp */}
       <motion.a
-        href="https://wa.me/25887400696"
+        href="https://wa.me/258874006962"
         target="_blank"
         rel="noopener noreferrer"
         initial={{ scale: 0 }}

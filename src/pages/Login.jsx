@@ -48,7 +48,7 @@ const Login = () => {
   }, [currentUser, userProfile, navigate]);
 
   // Redirecionar para a página que o usuário tentou acessar
-  const from = location.state?.from?.pathname || '/payment'
+  const from = location.state?.from?.pathname || '/planos'
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -88,15 +88,15 @@ const Login = () => {
         metaPixelService.trackLoginSuccess();
         // Aguardar um momento para o perfil carregar
         setTimeout(() => {
-          // Sempre redirecionar para dashboard após login bem-sucedido
-          navigate('/dashboard')
+          // Após login, ir para seleção de planos
+          navigate('/planos')
         }, 1000)
       } else {
         await register(formData.email, formData.password, formData.name)
         // Meta Pixel - Rastrear registro bem-sucedido
         metaPixelService.trackLoginSuccess();
-        // Após registro, vai para pagamento
-        navigate('/payment')
+        // Após registro, vai para seleção de planos imediatamente
+        navigate('/planos', { replace: true })
       }
     } catch (error) {
       setError(error.message)
@@ -112,11 +112,8 @@ const Login = () => {
       await loginWithGoogle()
       // Meta Pixel - Rastrear login com Google bem-sucedido
       metaPixelService.trackLoginSuccess();
-      // Aguardar um momento para o perfil carregar
-      setTimeout(() => {
-        // Sempre redirecionar para dashboard após login com Google
-        navigate('/dashboard')
-      }, 1000)
+      // Ir direto para seleção de planos
+      navigate('/planos', { replace: true })
     } catch (error) {
       setError('Erro ao fazer login com Google: ' + error.message)
     } finally {
@@ -159,18 +156,18 @@ const Login = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 py-12">
+    <div className="min-h-screen bg-[#121212] py-12">
       <div className="container-custom">
         <div className="max-w-md mx-auto">
           {/* Cabeçalho */}
           <div className="text-center mb-8">
             <div className="mb-4">
-              <span className="text-2xl font-bold text-gray-800">LacasaDigital</span>
+              <span className="text-2xl font-bold text-white">AMSync Ads</span>
             </div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            <h1 className="text-3xl font-bold text-white mb-2">
               {isLogin ? 'Entrar na sua conta' : 'Criar nova conta'}
             </h1>
-            <p className="text-gray-600">
+            <p className="text-gray-300">
               {isLogin 
                 ? 'Acesse seu painel e continue aprendendo' 
                 : 'Comece sua jornada de transformação hoje mesmo'
@@ -179,12 +176,12 @@ const Login = () => {
           </div>
 
           {/* Formulário */}
-          <div className="bg-white rounded-xl shadow-lg p-8">
+          <div className="bg-white/5 border border-white/10 rounded-xl shadow-lg p-8">
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Nome (apenas no registro) */}
               {!isLogin && (
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
                     Nome Completo *
                   </label>
                   <input
@@ -192,7 +189,7 @@ const Login = () => {
                     name="name"
                     value={formData.name}
                     onChange={handleInputChange}
-                    className="input-field"
+                    className="w-full px-4 py-3 border border-gray-600 bg-transparent text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400"
                     placeholder="Seu nome completo"
                     required
                   />
@@ -201,7 +198,7 @@ const Login = () => {
 
               {/* Email */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-300 mb-2">
                   Email *
                 </label>
                 <input
@@ -209,7 +206,7 @@ const Login = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="input-field"
+                  className="w-full px-4 py-3 border border-gray-600 bg-transparent text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400"
                   placeholder="seu@email.com"
                   required
                 />
@@ -217,7 +214,7 @@ const Login = () => {
 
               {/* Senha */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-300 mb-2">
                   Senha *
                 </label>
                 <input
@@ -225,7 +222,7 @@ const Login = () => {
                   name="password"
                   value={formData.password}
                   onChange={handleInputChange}
-                  className="input-field"
+                  className="w-full px-4 py-3 border border-gray-600 bg-transparent text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400"
                   placeholder="Sua senha"
                   required
                 />
@@ -234,7 +231,7 @@ const Login = () => {
               {/* Confirmar Senha (apenas no registro) */}
               {!isLogin && (
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
                     Confirmar Senha *
                   </label>
                   <input
@@ -242,7 +239,7 @@ const Login = () => {
                     name="confirmPassword"
                     value={formData.confirmPassword}
                     onChange={handleInputChange}
-                    className="input-field"
+                    className="w-full px-4 py-3 border border-gray-600 bg-transparent text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400"
                     placeholder="Confirme sua senha"
                     required
                   />
@@ -251,24 +248,24 @@ const Login = () => {
 
               {/* Erro */}
               {error && (
-                <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+                <div className="bg-red-900/20 border border-red-800/40 rounded-lg p-4">
                   <div className="flex items-center space-x-2">
-                    <svg className="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-5 h-5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
                     </svg>
-                    <span className="text-red-700">{error}</span>
+                    <span className="text-red-300">{error}</span>
                   </div>
                 </div>
               )}
 
               {/* Sucesso */}
               {success && (
-                <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                <div className="bg-green-900/20 border border-green-800/40 rounded-lg p-4">
                   <div className="flex items-center space-x-2">
-                    <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </svg>
-                    <span className="text-green-700">{success}</span>
+                    <span className="text-green-300">{success}</span>
                   </div>
                 </div>
               )}
@@ -293,7 +290,7 @@ const Login = () => {
                   <button
                     type="button"
                     onClick={() => setShowResetPassword(!showResetPassword)}
-                    className="text-sm text-blue-600 hover:text-blue-800 transition-colors duration-200"
+                    className="text-sm text-blue-400 hover:text-blue-300 transition-colors duration-200"
                   >
                     Esqueceu sua senha?
                   </button>
@@ -302,11 +299,11 @@ const Login = () => {
 
               {/* Formulário de redefinir senha */}
               {showResetPassword && (
-                <div className="mt-4 p-4 bg-gray-50 rounded-lg">
-                  <h3 className="text-sm font-medium text-gray-700 mb-2">
+                <div className="mt-4 p-4 bg-white/5 border border-white/10 rounded-lg">
+                  <h3 className="text-sm font-medium text-white mb-2">
                     Redefinir Senha
                   </h3>
-                  <p className="text-xs text-gray-600 mb-3">
+                  <p className="text-xs text-gray-300 mb-3">
                     Digite seu email para receber um link de redefinição
                   </p>
                   <div className="flex space-x-2">
@@ -316,7 +313,7 @@ const Login = () => {
                       onChange={handleInputChange}
                       name="email"
                       placeholder="Seu email"
-                      className="flex-1 px-3 py-2 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="flex-1 px-3 py-2 text-sm border border-gray-600 bg-transparent text-white rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400"
                     />
                     <button
                       type="button"
@@ -333,10 +330,10 @@ const Login = () => {
               {/* Divisor */}
               <div className="relative">
                 <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-gray-300" />
+                  <div className="w-full border-t border-white/10" />
                 </div>
                 <div className="relative flex justify-center text-sm">
-                  <span className="px-2 bg-white text-gray-500">ou</span>
+                  <span className="px-2 bg-[#1e1e1e] text-gray-400">ou</span>
                 </div>
               </div>
 
@@ -345,7 +342,7 @@ const Login = () => {
                 type="button"
                 onClick={handleGoogleLogin}
                 disabled={isLoading}
-                className="w-full flex items-center justify-center space-x-3 bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full flex items-center justify-center space-x-3 bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white hover:bg-white/15 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <svg className="w-5 h-5" viewBox="0 0 24 24">
                   <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -363,7 +360,7 @@ const Login = () => {
                 <button
                   type="button"
                   onClick={toggleMode}
-                  className="text-primary-600 hover:text-primary-700 font-medium"
+                  className="text-blue-400 hover:text-blue-300 font-medium"
                 >
                   {isLogin 
                     ? 'Não tem uma conta? Criar conta' 
@@ -378,7 +375,7 @@ const Login = () => {
           <div className="text-center mt-6">
             <Link 
               to="/" 
-              className="text-gray-600 hover:text-gray-800 transition-colors"
+              className="text-gray-300 hover:text-white transition-colors"
             >
               ← Voltar para Home
             </Link>
@@ -386,7 +383,7 @@ const Login = () => {
 
           {/* Informações de segurança */}
           <div className="mt-8 text-center">
-            <div className="flex items-center justify-center space-x-2 text-sm text-gray-500">
+            <div className="flex items-center justify-center space-x-2 text-sm text-gray-400">
               <svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
               </svg>

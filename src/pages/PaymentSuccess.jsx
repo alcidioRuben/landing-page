@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { useAuth } from '../contexts/AuthContext'
 import { getTransactionUser, getTransactionStatus, clearTransactionUser, clearOldTransactions } from '../services/nhonga'
 import metaPixelService from '../services/metaPixel'
+import Navbar from '../components/Navbar'
 
 const PaymentSuccess = () => {
   const location = useLocation()
@@ -164,7 +165,9 @@ const PaymentSuccess = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-purple-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-purple-50">
+      <Navbar />
+      <div className="flex items-center justify-center p-4">
       <motion.div 
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -293,6 +296,7 @@ const PaymentSuccess = () => {
           </svg>
         </motion.a>
       </motion.div>
+      </div>
     </div>
   )
 }

@@ -115,14 +115,14 @@ const LoadingSpinner = ({
   if (fullScreen) {
     return (
       <motion.div
-        className="fixed inset-0 bg-white bg-opacity-90 backdrop-blur-sm flex items-center justify-center z-50"
+        className="fixed inset-0 bg-[#121212] bg-opacity-90 backdrop-blur-sm flex items-center justify-center z-50"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.3 }}
       >
         <motion.div
-          className="bg-white rounded-2xl shadow-2xl p-8 border border-gray-100"
+          className="bg-[#1e1e1e] rounded-2xl shadow-2xl p-8 border border-white/10"
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.1, type: "spring", stiffness: 300, damping: 30 }}
@@ -138,7 +138,7 @@ const LoadingSpinner = ({
 
 // Spinner específico para páginas
 export const PageLoadingSpinner = ({ text = 'Carregando página...' }) => (
-  <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+  <div className="min-h-screen bg-[#121212] flex items-center justify-center">
     <motion.div
       className="text-center"
       initial={{ opacity: 0, y: 20 }}
@@ -147,7 +147,7 @@ export const PageLoadingSpinner = ({ text = 'Carregando página...' }) => (
     >
       <LoadingSpinner 
         size="xlarge" 
-        color="blue" 
+        color="white" 
         text={text}
         showText={true}
       />
@@ -182,14 +182,14 @@ export const CardSpinner = ({ text = 'Carregando...' }) => (
 // Spinner para overlays
 export const OverlaySpinner = ({ text = 'Carregando...' }) => (
   <motion.div
-    className="absolute inset-0 bg-white bg-opacity-80 flex items-center justify-center z-10 rounded-lg"
+    className="absolute inset-0 bg-[#121212] bg-opacity-80 flex items-center justify-center z-10 rounded-lg"
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     exit={{ opacity: 0 }}
   >
     <LoadingSpinner 
       size="large" 
-      color="blue" 
+      color="white" 
       text={text}
       showText={true}
     />

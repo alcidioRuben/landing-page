@@ -63,21 +63,21 @@ const VideoPlayer = ({
   }
 
   return (
-    <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+    <div className="bg-[#1e1e1e] border border-white/10 rounded-xl shadow-lg overflow-hidden">
       {/* Cabeçalho do Vídeo */}
-      <div className="p-6 border-b border-gray-200">
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">
+      <div className="p-6 border-b border-white/10">
+        <h3 className="text-xl font-semibold text-white mb-2">
           {title}
         </h3>
-        <p className="text-gray-600 mb-3">
+        <p className="text-gray-300 mb-3">
           {description}
         </p>
         <div className="flex items-center justify-between">
-          <span className="text-sm text-gray-500">
+          <span className="text-sm text-gray-400">
             Duração: {formatTime(duration)}
           </span>
           {isCompleted && (
-            <span className="flex items-center space-x-2 text-green-600">
+            <span className="flex items-center space-x-2 text-green-400">
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
               </svg>
@@ -127,15 +127,15 @@ const VideoPlayer = ({
       </div>
 
       {/* Controles de Progresso */}
-      <div className="p-4 bg-gray-50">
+      <div className="p-4 bg-[#121212] border-t border-white/10">
         {/* Barra de Progresso */}
         <div className="mb-3">
           <div
-            className="w-full bg-gray-200 rounded-full h-2 cursor-pointer"
+            className="w-full bg-white/10 rounded-full h-2 cursor-pointer"
             onClick={handleProgressClick}
           >
             <div
-              className="bg-primary-600 h-2 rounded-full transition-all duration-200"
+              className="bg-blue-500 h-2 rounded-full transition-all duration-200"
               style={{ width: `${progress}%` }}
             ></div>
           </div>
@@ -144,10 +144,10 @@ const VideoPlayer = ({
         {/* Informações de Tempo e Controles */}
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4">
-            <span className="text-sm text-gray-600">
+            <span className="text-sm text-gray-300">
               {formatTime(currentTime)} / {formatTime(duration)}
             </span>
-            <span className="text-sm text-gray-500">
+            <span className="text-sm text-gray-400">
               {Math.round(progress)}% concluído
             </span>
           </div>
@@ -155,14 +155,14 @@ const VideoPlayer = ({
           <div className="flex items-center space-x-2">
             <button
               onClick={handlePlayPause}
-              className="p-2 rounded-lg hover:bg-gray-200 transition-colors"
+              className="p-2 rounded-lg hover:bg-white/10 transition-colors"
             >
               {isPlaying ? (
-                <svg className="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-5 h-5 text-gray-200" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
                 </svg>
               ) : (
-                <svg className="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-5 h-5 text-gray-200" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
                 </svg>
               )}

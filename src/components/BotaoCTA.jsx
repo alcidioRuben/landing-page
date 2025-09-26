@@ -18,7 +18,7 @@ const BotaoCTA = ({
   const variants = {
     primary: 'btn-primary',
     secondary: 'btn-secondary',
-    outline: 'btn-outline',
+    outline: 'border-2 border-white/20 text-white hover:bg-white/10 rounded-lg',
     gradient: 'bg-gradient-primary text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl'
   }
 
