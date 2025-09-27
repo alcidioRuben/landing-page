@@ -1,25 +1,21 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
+import { PLANS_CONFIG } from '../services/nhonga'
 
 const Planos = () => {
   const navigate = useNavigate()
 
-  const planos = [
-    { name: 'Grátis', amount: 0, badge: 'Plano Gratuito', features: ['50 mensagens/mês', 'Gerenciamento de bloqueios'], link: 'https://assistente.amsync.online' },
-    { name: 'Inicial', amount: 199, old: 399, features: ['500 mensagens/mês', 'Gerenciamento de bloqueios'],link: 'https://assistente.amsync.online' },
-    { name: 'Essencial', amount: 499, old: 999, badge: 'Mais Popular', features: ['1.200 mensagens/mês', 'Gerenciamento de bloqueios'] },
-    { name: 'Crescimento', amount: 1000, old: 2000, features: ['2.500 mensagens/mês', 'Suporte prioritário', 'Remarketing', 'Envio de fotos e vídeos'] },
-    { name: 'Profissional', amount: 1800, old: 3600, features: ['10.000 mensagens/mês', 'Múltiplos usuários', 'API', 'Remarketing', 'Envio de fotos e vídeos'] },
-    { name: 'Ilimitado', amount: 2475, old: 4950, features: ['Mensagens ilimitadas', 'Suporte dedicado no WhatsApp'] }
-  ]
+  // Usar configuração dos planos do nhonga.js
+  const planos = Object.values(PLANS_CONFIG)
 
   const handleEscolher = (plano) => {
     if (plano.amount === 0 && plano.link) {
       window.open(plano.link, '_blank', 'noopener,noreferrer')
       return
     }
-    navigate('/payment', { state: { plan: { name: plano.name, amount: plano.amount, features: plano.features } } })
+    // Passar dados completos do plano para a página de pagamento
+    navigate('/payment', { state: { plan: plano } })
   }
 
   return (
@@ -45,13 +41,13 @@ const Planos = () => {
                 <h3 className="text-xl font-bold text-gray-900 mb-1">{plan.name}</h3>
                 {plan.amount > 0 ? (
                   <>
-                    {plan.old && (
-                      <div className="mb-1 text-gray-400 line-through">MT {plan.old} /mês</div>
+                    {plan.oldAmount && (
+                      <div className="mb-1 text-gray-400 line-through">MZN {plan.oldAmount} /mês</div>
                     )}
-                    <div className="text-3xl font-extrabold text-gray-900">MT {plan.amount} <span className="text-base font-medium">/mês</span></div>
+                    <div className="text-3xl font-extrabold text-gray-900">MZN {plan.amount} <span className="text-base font-medium">/mês</span></div>
                   </>
                 ) : (
-                  <div className="text-3xl font-extrabold text-gray-900">MT 0 <span className="text-base font-medium">/mês</span></div>
+                  <div className="text-3xl font-extrabold text-gray-900">MZN 0 <span className="text-base font-medium">/mês</span></div>
                 )}
                 <ul className="mt-4 space-y-2">
                   {plan.features.map((f, i) => (

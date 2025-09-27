@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useAuth } from '../contexts/AuthContext'
-import { getTransactionUser, getTransactionStatus, clearTransactionUser, clearOldTransactions } from '../services/nhonga'
+import { getTransactionUser, getTransactionStatus, clearTransactionUser, clearOldTransactions, PLANS_CONFIG } from '../services/nhonga'
 import metaPixelService from '../services/metaPixel'
 import Navbar from '../components/Navbar'
 
@@ -71,12 +71,27 @@ const PaymentSuccess = () => {
                 console.log(`👤 Usuário: ${data.userId}`)
                 
                 // Assumir que se o usuário retornou do Nhonga.net, o pagamento foi concluído
+                // Determinar dados do plano baseado no valor pago
+                let planData = null
+                let amount = 299
+                let context = 'Curso Completo de Dropshipping'
+                
+                // Buscar plano pelo valor (assumindo que o valor está em localStorage ou pode ser inferido)
+                const planValues = Object.values(PLANS_CONFIG)
+                const matchingPlan = planValues.find(plan => plan.amount === amount)
+                
+                if (matchingPlan) {
+                  planData = matchingPlan
+                  context = planData.description
+                }
+                
                 // Atualizar status do usuário
                 await updatePaymentFromWebhook(data.userId, {
-                  amount: 299,
+                  amount: amount,
                   transactionId: transactionId,
                   currency: 'MZN',
-                  context: 'Curso Completo de Dropshipping'
+                  context: context,
+                  planName: planData?.name || 'Curso Completo'
                 })
 
                 // Meta Pixel - Rastrear compra bem-sucedida
@@ -229,7 +244,7 @@ const PaymentSuccess = () => {
             transition={{ delay: 0.6, duration: 0.5 }}
             className="text-gray-600 mb-6"
           >
-            Bem-vindo ao curso de Dropshipping!
+            Bem-vindo ao AMSync Ads!
           </motion.p>
 
           {/* Valor do Pagamento */}
@@ -240,7 +255,7 @@ const PaymentSuccess = () => {
             className="bg-gradient-to-r from-green-50 to-blue-50 rounded-2xl p-4 mb-6"
           >
             <p className="text-sm text-gray-600 mb-1">Valor Pago</p>
-            <p className="text-2xl font-bold text-green-600">{paymentData.amount} MZN</p>
+            <p className="text-2xl font-bold text-green-600">MZN {paymentData.amount}</p>
             {paymentData.transactionId && (
               <p className="text-xs text-gray-500 mt-1">ID: {paymentData.transactionId}</p>
             )}

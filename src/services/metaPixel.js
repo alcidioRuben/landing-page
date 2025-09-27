@@ -6,7 +6,7 @@
 class MetaPixelService {
   constructor() {
     this.isInitialized = false;
-    this.pixelId = '772984945125522';
+    this.pixelId = '2096237854232667';
     this.init();
   }
 
@@ -141,6 +141,17 @@ class MetaPixelService {
       content_category: 'Digital Course',
       content_type: 'course',
       value: 299,
+      currency: 'MZN'
+    });
+  }
+
+  // Início do checkout (método específico para checkout)
+  trackInitiateCheckout(value, contentName) {
+    this.track('InitiateCheckout', {
+      content_name: contentName || 'Checkout - AMSync Ads',
+      content_category: 'Digital Service',
+      content_type: 'subscription',
+      value: value,
       currency: 'MZN'
     });
   }

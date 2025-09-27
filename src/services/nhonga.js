@@ -1,5 +1,7 @@
-// Serviço para integração com Nhonga.net
-const NHONGA_API_BASE = 'https://nhonga.net/api'
+// Serviço para integração com VendoraPay
+const VENDORAPAY_API_BASE = process.env.NODE_ENV === 'development' 
+  ? '/api/vendorapay'  // Usar proxy em desenvolvimento
+  : 'https://vendorapay.com/api'  // Usar URL direta em produção
 const API_KEY = '03gdpgmaoh6o46m7pqg3v8d6ggecik8p68dyou7zvvwvr8qjclms5mprowv9'
 const WEBHOOK_SECRET = 'hmthkoukhk5z47jul0nvys68h9ihyglykt43iokjtck0sn6nx37ghkd3qwlr5emo8zrx73nxbrmuvw0xukb8qidque9ztz7ru9uys2srvh8sc0ihukn0wsd0'
 
@@ -28,13 +30,16 @@ export const createPayment = async (paymentData) => {
       callbackUrl: paymentData.callbackUrl,
       returnUrl: paymentData.returnUrl,
       currency: paymentData.currency || DEFAULT_CONFIG.currency,
-      environment: paymentData.environment || DEFAULT_CONFIG.environment,
-      // Adicionar metadados do usuário se disponível
-      ...(paymentData.userId && { userId: paymentData.userId }),
-      ...(paymentData.userEmail && { userEmail: paymentData.userEmail })
+      enviroment: paymentData.environment || DEFAULT_CONFIG.environment  // Note: "enviroment" conforme documentação
     }
 
-    const response = await fetch(`${NHONGA_API_BASE}/payment/create`, {
+    console.log('🚀 Criando pagamento:', {
+      url: `${VENDORAPAY_API_BASE}/payment/create`,
+      payload: { ...payload, callbackUrl: '[REDACTED]', returnUrl: '[REDACTED]' },
+      environment: process.env.NODE_ENV
+    })
+
+    const response = await fetch(`${VENDORAPAY_API_BASE}/payment/create`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -43,12 +48,27 @@ export const createPayment = async (paymentData) => {
       body: JSON.stringify(payload)
     })
 
+    console.log('📡 Resposta da API:', {
+      status: response.status,
+      statusText: response.statusText,
+      ok: response.ok
+    })
+
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}))
-      throw new Error(errorData.message || `HTTP ${response.status}: ${response.statusText}`)
+      let errorMessage = `HTTP ${response.status}: ${response.statusText}`
+      
+      try {
+        const errorData = await response.json()
+        errorMessage = errorData.message || errorData.error || errorMessage
+      } catch (parseError) {
+        console.warn('Não foi possível fazer parse do erro:', parseError)
+      }
+      
+      throw new Error(errorMessage)
     }
 
     const data = await response.json()
+    console.log('✅ Dados recebidos:', data)
     
     if (!data.success) {
       throw new Error(data.error || 'Erro ao criar pagamento')
@@ -61,7 +81,17 @@ export const createPayment = async (paymentData) => {
       data: data
     }
   } catch (error) {
-    console.error('Erro ao criar pagamento:', error)
+    console.error('❌ Erro ao criar pagamento:', error)
+    
+    // Tratamento específico para erros de CORS
+    if (error.message.includes('CORS') || error.message.includes('Failed to fetch')) {
+      return {
+        success: false,
+        error: 'Erro de conexão com o servidor de pagamento. Verifique sua conexão e tente novamente.',
+        isCorsError: true
+      }
+    }
+    
     return {
       success: false,
       error: error.message || 'Erro desconhecido ao criar pagamento'
@@ -76,7 +106,7 @@ export const createPayment = async (paymentData) => {
  */
 export const getTransactionStatus = async (transactionId) => {
   try {
-    const response = await fetch(`${NHONGA_API_BASE}/payment/status/${transactionId}`, {
+    const response = await fetch(`${VENDORAPAY_API_BASE}/payment/status/${transactionId}`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${API_KEY}`,
@@ -185,7 +215,56 @@ export const toCents = (value) => {
 }
 
 /**
- * Configurações do curso
+ * Configurações dos planos AMSync
+ */
+export const PLANS_CONFIG = {
+  grátis: {
+    name: 'Grátis',
+    amount: 0,
+    description: 'Plano Gratuito - 50 mensagens/mês',
+    features: ['50 mensagens/mês', 'Gerenciamento de bloqueios'],
+    link: 'https://assistente.amsync.online'
+  },
+  inicial: {
+    name: 'Inicial',
+    amount: 199,
+    oldAmount: 399,
+    description: 'Plano Inicial - 500 mensagens/mês',
+    features: ['500 mensagens/mês', 'Gerenciamento de bloqueios']
+  },
+  essencial: {
+    name: 'Essencial',
+    amount: 499,
+    oldAmount: 999,
+    badge: 'Mais Popular',
+    description: 'Plano Essencial - 1.200 mensagens/mês',
+    features: ['1.200 mensagens/mês', 'Gerenciamento de bloqueios']
+  },
+  crescimento: {
+    name: 'Crescimento',
+    amount: 1000,
+    oldAmount: 2000,
+    description: 'Plano Crescimento - 2.500 mensagens/mês',
+    features: ['2.500 mensagens/mês', 'Suporte prioritário', 'Remarketing', 'Envio de fotos e vídeos']
+  },
+  profissional: {
+    name: 'Profissional',
+    amount: 1800,
+    oldAmount: 3600,
+    description: 'Plano Profissional - 10.000 mensagens/mês',
+    features: ['10.000 mensagens/mês', 'Múltiplos usuários', 'API', 'Remarketing', 'Envio de fotos e vídeos']
+  },
+  ilimitado: {
+    name: 'Ilimitado',
+    amount: 2475,
+    oldAmount: 4950,
+    description: 'Plano Ilimitado - Mensagens ilimitadas',
+    features: ['Mensagens ilimitadas', 'Suporte dedicado no WhatsApp']
+  }
+}
+
+/**
+ * Configurações do curso (mantido para compatibilidade)
  */
 export const COURSE_CONFIG = {
   name: 'Curso Completo de Dropshipping',
@@ -204,7 +283,7 @@ export const SYSTEM_URLS = {
     : 'http://localhost:3000',
   
   get callbackUrl() {
-    return `${this.base}/api/webhook/nhonga`
+    return `${this.base}/api/webhook/vendorapay`
   },
   
   get returnUrl() {
@@ -329,6 +408,7 @@ export default {
   processWebhook,
   formatAmount,
   toCents,
+  PLANS_CONFIG,
   COURSE_CONFIG,
   SYSTEM_URLS,
   registerTransactionUser,

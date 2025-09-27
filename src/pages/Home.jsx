@@ -112,21 +112,21 @@ const Home = () => {
       name: "João Silva",
       role: "Empreendedor",
       content: "Transformei minha vida usando a IA para atender clientes no WhatsApp",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+      image: "/santos-soje.jpg",
       rating: 5
     },
     {
       name: "Maria Santos",
       role: "Mãe Solteira",
       content: "Consegui criar meu asistente de vendas no WhatsApp em 2 minutos facil",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+      image: "/Mulher.jpg",
       rating: 5
     },
     {
       name: "Carlos Oliveira",
       role: "Estudante",
       content: "Melhor investimento que fiz. Em 2 semanas ja estava lucrando com o meu asistente de vendas no WhatsApp",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+      image: "/Jovem.jpg",
       rating: 5
     },
     {
@@ -137,17 +137,17 @@ const Home = () => {
       rating: 5
     },
     {
-      name: "Kwame Mensah",
+      name: "guyzelh.ramos",
       role: "Consultor",
       content: "Em 2 semanas minha perspectiva mudou completamente. Recomendo!",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
+      image: "/auizel.jpg",
       rating: 5
     },
     {
       name: "Fatima Diallo",
       role: "Designer",
       content: "O AMSync Ads me ajudou a vender mais no WhatsApp, Eu perdia vendas porquê não tinha tempo para atender todos os clientes e nao tinha tempo de atender todos os clientes",
-      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face",
+      image: "/menina.jpg",
       rating: 5
     }
   ];
@@ -260,7 +260,7 @@ const Home = () => {
                   Quero começar agora
                 </BotaoCTA>
                 <BotaoCTA 
-                  to="/sobre" 
+                  to="/planos" 
                   variant="outline" 
                   size="lg"
                   className="text-base px-6 py-3"

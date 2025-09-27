@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useAuth } from '../contexts/AuthContext'
-import { createPayment, COURSE_CONFIG, SYSTEM_URLS, formatAmount, registerTransactionUser } from '../services/nhonga'
+import { createPayment, PLANS_CONFIG, COURSE_CONFIG, SYSTEM_URLS, formatAmount, registerTransactionUser } from '../services/nhonga'
 import { ButtonSpinner } from '../components/LoadingSpinner'
 import BotaoCTA from '../components/BotaoCTA'
 import metaPixelService from '../services/metaPixel'
@@ -40,9 +40,19 @@ const Payment = () => {
     setError('')
 
     try {
-      // Pagamento via Nhonga.net
-      const amountToPay = selectedPlan?.amount || COURSE_CONFIG.amount
-      const contextToUse = selectedPlan ? `Plano ${selectedPlan.name}` : COURSE_CONFIG.description
+      // Determinar dados do plano
+      let planData = null
+      let amountToPay = COURSE_CONFIG.amount
+      let contextToUse = COURSE_CONFIG.description
+
+      if (selectedPlan) {
+        // Buscar configuração completa do plano
+        const planKey = selectedPlan.name?.toLowerCase()
+        planData = PLANS_CONFIG[planKey] || selectedPlan
+        
+        amountToPay = planData.amount || selectedPlan.amount
+        contextToUse = planData.description || `Plano ${selectedPlan.name}`
+      }
 
       const paymentData = {
         amount: amountToPay,
@@ -53,7 +63,10 @@ const Payment = () => {
         environment: 'prod',
         // Incluir dados do usuário para identificação no webhook
         userId: currentUser.uid,
-        userEmail: currentUser.email
+        userEmail: currentUser.email,
+        // Incluir dados do plano para processamento no webhook
+        planName: selectedPlan?.name || 'Curso Completo',
+        planAmount: amountToPay
       }
 
       const result = await createPayment(paymentData)
@@ -62,10 +75,18 @@ const Payment = () => {
         // Registrar transação com usuário para identificação no webhook
         registerTransactionUser(result.transactionId, currentUser.uid, currentUser.email)
         
+        // Meta Pixel - Rastrear início do checkout
+        metaPixelService.trackInitiateCheckout(amountToPay, contextToUse)
+        
         // Redirecionar para o checkout da Nhonga.net
         window.location.href = result.redirectUrl
       } else {
-        setError(result.error || 'Erro ao criar pagamento. Tente novamente.')
+        // Tratamento específico para erros de CORS
+        if (result.isCorsError) {
+          setError('⚠️ Erro de conexão detectado. Por favor, reinicie o servidor de desenvolvimento com "npm run dev" e tente novamente.')
+        } else {
+          setError(result.error || 'Erro ao criar pagamento. Tente novamente.')
+        }
       }
     } catch (error) {
       setError('Erro ao processar pagamento: ' + error.message)
@@ -206,7 +227,7 @@ const Payment = () => {
                     {isProcessing ? (
                         <ButtonSpinner color="white" />
                     ) : (
-                        `Finalizar Compra - ${formatAmount(COURSE_CONFIG.amount, 'MZN')}`
+                        `Finalizar Compra - ${formatAmount(selectedPlan?.amount || COURSE_CONFIG.amount, 'MZN')}`
                     )}
                   </BotaoCTA>
 
@@ -245,24 +266,41 @@ const Payment = () => {
 
                 <div className="space-y-4">
                   <div className="flex justify-between items-center">
-                    <span className="text-gray-300">{selectedPlan ? `Plano ${selectedPlan.name}` : 'Assinatura AMSync Ads'}</span>
-                    <span className="font-medium text-white">MZN {selectedPlan ? selectedPlan.amount : 299},00</span>
+                    <span className="text-gray-300">
+                      {selectedPlan ? `Plano ${selectedPlan.name}` : 'Curso Completo de Dropshipping'}
+                    </span>
+                    <span className="font-medium text-white">
+                      {selectedPlan ? formatAmount(selectedPlan.amount) : formatAmount(COURSE_CONFIG.amount)}
+                    </span>
                   </div>
                   
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-300">Acesso Vitalício</span>
-                    <span className="text-green-400 font-medium">Grátis</span>
-                  </div>
+                  {/* Mostrar features específicas do plano */}
+                  {selectedPlan?.features && selectedPlan.features.map((feature, index) => (
+                    <div key={index} className="flex justify-between items-center">
+                      <span className="text-gray-300">{feature}</span>
+                      <span className="text-green-400 font-medium">Incluso</span>
+                    </div>
+                  ))}
                   
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-300">Suporte Premium</span>
-                    <span className="text-green-400 font-medium">Incluso</span>
-                  </div>
-                  
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-300">Atualizações</span>
-                    <span className="text-green-400 font-medium">Grátis</span>
-                  </div>
+                  {/* Features padrão para curso */}
+                  {!selectedPlan && (
+                    <>
+                      <div className="flex justify-between items-center">
+                        <span className="text-gray-300">Acesso Vitalício</span>
+                        <span className="text-green-400 font-medium">Grátis</span>
+                      </div>
+                      
+                      <div className="flex justify-between items-center">
+                        <span className="text-gray-300">Suporte Premium</span>
+                        <span className="text-green-400 font-medium">Incluso</span>
+                      </div>
+                      
+                      <div className="flex justify-between items-center">
+                        <span className="text-gray-300">Atualizações</span>
+                        <span className="text-green-400 font-medium">Grátis</span>
+                      </div>
+                    </>
+                  )}
 
                   <div className="border-t border-white/10 pt-4">
                     <div className="flex justify-between items-center text-lg font-semibold">
@@ -279,7 +317,7 @@ const Payment = () => {
                           ease: "easeInOut"
                         }}
                       >
-                        MZN {selectedPlan ? selectedPlan.amount : 299},00
+                        MZN {selectedPlan ? selectedPlan.amount : COURSE_CONFIG.amount},00
                       </motion.span>
                     </div>
                   </div>
