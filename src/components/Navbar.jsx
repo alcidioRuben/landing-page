@@ -124,18 +124,22 @@ const Navbar = () => {
               </>
             ) : (
               <>
-                <Link
-                  to="/login"
+                <a
+                  href="https://assistente.amsync.online"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-gray-200 hover:text-blue-400 px-4 py-2 rounded-lg font-medium transition-all duration-300 hover:scale-105"
                 >
                   Entrar
-                </Link>
-                <Link
-                  to="/login"
+                </a>
+                <a
+                  href="https://assistente.amsync.online"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="bg-transparent text-blue-400 border-2 border-blue-500 px-6 py-2 rounded-lg font-medium hover:bg-blue-600 hover:text-white transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
                 >
-                  Começar Agora
-                </Link>
+                  Começar Grátis
+                </a>
               </>
             )}
           </motion.div>
@@ -246,20 +250,24 @@ const Navbar = () => {
                 </>
               ) : (
                 <>
-                  <Link
-                    to="/login"
+                  <a
+                    href="https://assistente.amsync.online"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="block px-3 py-2 text-base font-medium text-gray-200 hover:text-blue-400 hover:bg-white/5 rounded-md transition-colors duration-200"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Entrar
-                  </Link>
-                  <Link
-                    to="/login"
+                  </a>
+                  <a
+                    href="https://assistente.amsync.online"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="block px-3 py-2 text-base font-medium bg-transparent text-blue-400 border-2 border-blue-500 rounded-md hover:bg-blue-600 hover:text-white transition-all duration-300"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    Começar Agora
-                  </Link>
+                    Começar Grátis
+                  </a>
                 </>
               )}
             </div>

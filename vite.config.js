@@ -23,6 +23,22 @@ export default defineConfig({
             console.log('Received Response from the Target:', proxyRes.statusCode, req.url);
           });
         },
+      },
+      '/api/mobile': {
+        target: 'https://vendorapay.com/api',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/mobile/, '/payment/mobile'),
+        configure: (proxy, _options) => {
+          proxy.on('error', (err, _req, _res) => {
+            console.log('proxy error mobile', err);
+          });
+          proxy.on('proxyReq', (proxyReq, req, _res) => {
+            console.log('Sending Request to the Target (Mobile):', req.method, req.url);
+          });
+          proxy.on('proxyRes', (proxyRes, req, _res) => {
+            console.log('Received Response from the Target (Mobile):', proxyRes.statusCode, req.url);
+          });
+        },
       }
     }
   },

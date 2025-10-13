@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { PageLoadingSpinner } from '../components/LoadingSpinner';
 import BotaoCTA from '../components/BotaoCTA';
 import CardDepoimento from '../components/CardDepoimento';
+import MobilePaymentModal from '../components/MobilePaymentModal';
+import { useAuth } from '../contexts/AuthContext';
 import metaPixelService from '../services/metaPixel';
 
 const Home = () => {
@@ -12,6 +14,10 @@ const Home = () => {
   const [userComments, setUserComments] = useState([]);
   const [userRating, setUserRating] = useState(0);
   const [hoveredRating, setHoveredRating] = useState(0);
+  const [paymentModal, setPaymentModal] = useState({ isOpen: false, plan: null });
+  const [autoScrollTriggered, setAutoScrollTriggered] = useState(false);
+  const { currentUser } = useAuth();
+  const [searchParams] = useSearchParams();
 
   // Simular carregamento rápido da página
   useEffect(() => {
@@ -21,6 +27,17 @@ const Home = () => {
 
     return () => clearTimeout(timer)
   }, [])
+
+  // Scroll automático para seção de planos
+  useEffect(() => {
+    const section = searchParams.get('section');
+    if (section === 'planos' && !isLoading && !autoScrollTriggered) {
+      setAutoScrollTriggered(true);
+      setTimeout(() => {
+        scrollToPlanos({ preventDefault: () => {} });
+      }, 500); // Aguarda carregamento completo
+    }
+  }, [searchParams, isLoading, autoScrollTriggered]);
 
   // Meta Pixel - Rastrear visualização da página inicial
   useEffect(() => {
@@ -63,6 +80,29 @@ const Home = () => {
       }
     }
   }, []);
+
+  // Auto-scroll para mostrar que há mais planos (especialmente no mobile)
+  useEffect(() => {
+    if (!autoScrollTriggered) {
+      const timer = setTimeout(() => {
+        const carousel = document.querySelector('.pricing-carousel');
+        if (carousel && window.innerWidth < 768) {
+          // Scroll para mostrar o segundo plano
+          carousel.scrollTo({ left: 350, behavior: 'smooth' });
+          
+          // Volta após 2 segundos
+          setTimeout(() => {
+            carousel.scrollTo({ left: 0, behavior: 'smooth' });
+            setAutoScrollTriggered(true);
+          }, 2000);
+        } else {
+          setAutoScrollTriggered(true);
+        }
+      }, 3000); // Aguarda 3 segundos após carregar
+
+      return () => clearTimeout(timer);
+    }
+  }, [autoScrollTriggered]);
 
   if (isLoading) {
     return <PageLoadingSpinner text="Carregando página inicial..." />
@@ -191,6 +231,41 @@ const Home = () => {
     console.log('Comentários limpos do localStorage');
   };
 
+  // Função para abrir modal de pagamento
+  const handlePaymentClick = (plan) => {
+    setPaymentModal({ isOpen: true, plan });
+  };
+
+  // Função para fechar modal de pagamento
+  const closePaymentModal = () => {
+    setPaymentModal({ isOpen: false, plan: null });
+  };
+
+  const scrollToPlanos = (e) => {
+    e.preventDefault();
+    const planosSection = document.getElementById('planos-section');
+    if (planosSection) {
+      metaPixelService.trackCTAClick('Ver Planos', 'Hero Section');
+      
+      // Adiciona efeito de pulso na seção
+      planosSection.classList.add('animate-pulse-once');
+      
+      // Scroll suave com offset para navbar
+      const yOffset = -80;
+      const y = planosSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      
+      window.scrollTo({
+        top: y,
+        behavior: 'smooth'
+      });
+      
+      // Remove animação após completar
+      setTimeout(() => {
+        planosSection.classList.remove('animate-pulse-once');
+      }, 1500);
+    }
+  };
+
   // Ordenar comentários de usuários por data (mais recentes primeiro)
   const sortedUserComments = [...userComments].sort((a, b) => b.id - a.id);
   const allComments = [...testimonials, ...sortedUserComments];
@@ -251,23 +326,22 @@ const Home = () => {
 
               <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
                 <BotaoCTA 
-                  to="/login" 
+                  to="https://assistente.amsync.online" 
                   variant="gradient" 
                   size="lg"
                   className="text-base px-6 py-3"
-                  onClick={() => metaPixelService.trackCTAClick('Quero começar agora', 'Hero Section')}
+                  onClick={() => metaPixelService.trackCTAClick('Quero começar grátis', 'Hero Section')}
                 >
-                  Quero começar agora
+                  Quero começar grátis
                 </BotaoCTA>
-                <BotaoCTA 
-                  to="/planos" 
-                  variant="outline" 
-                  size="lg"
-                  className="text-base px-6 py-3"
-                  onClick={() => metaPixelService.trackCTAClick('Ver Planos', 'Hero Section')}
+                <motion.button
+                  onClick={scrollToPlanos}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="text-base px-8 py-4 bg-transparent border-2 border-white text-white font-bold rounded-xl hover:bg-white hover:text-[#121212] transition-all duration-300 shadow-lg hover:shadow-xl"
                 >
                   Ver Planos
-                </BotaoCTA>
+                </motion.button>
               </div>
 
               <div className="mt-6 flex items-center justify-center lg:justify-start space-x-4 text-sm text-gray-300">
@@ -299,7 +373,7 @@ const Home = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="relative"
             >
-              <div className="relative bg-white/5 rounded-2xl p-8 shadow-2xl border border-white/10">
+              <div className="relative bg-white/5 rounded-xl p-3 shadow-2xl border border-white/10">
                 <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
                   <iframe
                     className="absolute top-0 left-0 w-full h-full rounded-xl"
@@ -318,6 +392,85 @@ const Home = () => {
                 </div>
               </div>
             </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Carrossel de Screenshots do WhatsApp */}
+      <section className="py-16 bg-white/5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              Veja o AMSync Ads por dentro
+            </h2>
+            <p className="text-lg text-gray-300 max-w-3xl mx-auto">
+              Screenshots reais da plataforma em ação
+            </p>
+          </motion.div>
+        </div>
+
+        {/* Carrossel Infinito - Largura Total */}
+        <div className="relative w-screen left-1/2 -translate-x-1/2 overflow-hidden py-8">
+          <motion.div
+            className="flex gap-6"
+            animate={{
+              x: [0, '-50%'],
+            }}
+            transition={{
+              x: {
+                repeat: Infinity,
+                repeatType: "loop",
+                duration: 25,
+                ease: "linear",
+              },
+            }}
+            style={{ 
+              width: 'max-content'
+            }}
+          >
+              {[
+                '/src/logo/WhatsApp Image 2025-10-13 at 02.10.02.jpeg',
+                '/src/logo/WhatsApp Image 2025-10-13 at 02.10.02 (1).jpeg',
+                '/src/logo/WhatsApp Image 2025-10-13 at 02.10.02 (2).jpeg',
+                '/src/logo/WhatsApp Image 2025-10-13 at 02.10.02 (3).jpeg',
+                '/src/logo/WhatsApp Image 2025-10-13 at 02.10.02 (4).jpeg',
+                // Duplicar exatamente para loop perfeito
+                '/src/logo/WhatsApp Image 2025-10-13 at 02.10.02.jpeg',
+                '/src/logo/WhatsApp Image 2025-10-13 at 02.10.02 (1).jpeg',
+                '/src/logo/WhatsApp Image 2025-10-13 at 02.10.02 (2).jpeg',
+                '/src/logo/WhatsApp Image 2025-10-13 at 02.10.02 (3).jpeg',
+                '/src/logo/WhatsApp Image 2025-10-13 at 02.10.02 (4).jpeg',
+              ].map((img, idx) => (
+                <div
+                  key={idx}
+                  className="flex-shrink-0 w-80 sm:w-96 md:w-[500px] lg:w-[600px]"
+                >
+                  <div className="bg-white/10 rounded-xl p-2 shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 border border-white/20">
+                    <img
+                      src={img}
+                      alt={`WhatsApp Screenshot ${(idx % 5) + 1}`}
+                      className="w-full h-auto rounded-lg shadow-xl object-cover"
+                      style={{
+                        boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(59, 130, 246, 0.3)',
+                      }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </motion.div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+          <div className="text-center">
+            <p className="text-sm text-gray-400">
+               Automatização real funcionando 24/7 no WhatsApp
+            </p>
           </div>
         </div>
       </section>
@@ -551,130 +704,381 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Seção de Planos e Preços */}
-      <section className="py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-600 to-purple-600">
-        <div className="max-w-4xl mx-auto text-center">
+      {/* Carrossel de Planos e Preços */}
+      <section id="planos-section" className="py-16 px-4 sm:px-6 lg:px-8 bg-[#121212] scroll-mt-20">
+        <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="mb-8"
+            className="text-center mb-12"
           >
-            <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
               Planos e Preços
             </h2>
-            <p className="text-lg text-blue-100 mb-6">
+            <p className="text-lg text-gray-300 mb-6">
               Escolha o plano ideal para o seu negócio e comece hoje mesmo
             </p>
           </motion.div>
 
+          {/* Carrossel de Planos */}
+          <div className="relative px-2 py-4">
+            {/* Indicadores de Scroll */}
+            <div className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-8 h-16 bg-gradient-to-r from-[#121212]/80 to-transparent flex items-center justify-start pointer-events-none">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+                animate={{ x: [0, 8, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+                className="text-white text-2xl"
+              >
+                ←
+              </motion.div>
+            </div>
+            
+            <div className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-8 h-16 bg-gradient-to-l from-[#121212]/80 to-transparent flex items-center justify-end pointer-events-none">
+              <motion.div
+                animate={{ x: [0, -8, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+                className="text-white text-2xl"
+              >
+                →
+              </motion.div>
+            </div>
+
+            <motion.div
+              className="flex gap-8 overflow-x-auto pb-4 pt-2 px-2 pricing-carousel snap-x snap-mandatory"
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, staggerChildren: 0.2 }}
             viewport={{ once: true }}
-          >
-            <div className="overflow-x-auto pb-4 -mx-4 sm:mx-0">
-              <div className="flex gap-4 px-4 snap-x snap-mandatory">
+              style={{ 
+                scrollbarWidth: 'thin',
+                scrollbarColor: '#4B5563 #1F2937',
+                msOverflowStyle: 'auto',
+                cursor: 'grab'
+              }}
+              onMouseDown={(e) => {
+                e.currentTarget.style.cursor = 'grabbing';
+              }}
+              onMouseUp={(e) => {
+                e.currentTarget.style.cursor = 'grab';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.cursor = 'grab';
+              }}
+            >
                 {[
                   {
                     name: 'Grátis',
                     old: null,
                     current: '0',
+                  oldUSD: null,
+                  currentUSD: '0',
                     badge: 'Plano Gratuito',
-                    features: ['50 mensagens/mês', 'Gerenciamento de bloqueios'],
+                  features: [
+                    '50 créditos de IA/mês', 
+                    'Gerenciamento de bloqueios',
+                    'Envio de fotos',
+                    'Envio de vídeos',
+                    'Envio de áudios'
+                  ],
                     link: 'https://assistente.amsync.online',
-                    external: true
+                  external: true,
+                  color: 'from-green-500 to-emerald-600'
                   },
                   {
                     name: 'Inicial',
                     old: '399',
                     current: '199',
+                  oldUSD: '6.29',
+                  currentUSD: '3.13',
+                  amount: 199,
+                  description: 'Plano Inicial - 500 créditos de IA/mês',
                     badge: null,
-                    features: ['500 mensagens/mês', 'Gerenciamento de bloqueios']
+                  features: [
+                    '500 créditos de IA/mês',
+                    'Gerenciamento de bloqueios',
+                    'Envio de fotos',
+                    'Envio de vídeos',
+                    'Envio de áudios',
+                    'Gerenciamento avançado',
+                    'Suporte por email'
+                  ],
+                  color: 'from-gray-600 to-gray-700'
                   },
                   {
                     name: 'Essencial',
                     old: '999',
                     current: '499',
+                  oldUSD: '15.73',
+                  currentUSD: '7.86',
+                  amount: 499,
+                  description: 'Plano Essencial - 1.200 créditos de IA/mês',
                     badge: 'Mais Popular',
-                    features: ['1.200 mensagens/mês', 'Gerenciamento de bloqueios']
+                  features: [
+                    '1.200 créditos de IA/mês',
+                    'Gerenciamento de bloqueios',
+                    'Envio de fotos',
+                    'Envio de vídeos',
+                    'Envio de áudios',
+                    'Gerenciamento avançado',
+                    'Suporte por email',
+                    'Até 3 bots',
+                    'Agendamento de mensagens para grupos'
+                  ],
+                  color: 'from-yellow-500 to-orange-500'
                   },
                   {
                     name: 'Crescimento',
                     old: '2.000',
                     current: '1.000',
+                  oldUSD: '31.50',
+                  currentUSD: '15.75',
+                  amount: 1000,
+                  description: 'Plano Crescimento - 2.500 créditos de IA/mês',
                     badge: null,
-                    features: ['2.500 mensagens/mês', 'Suporte prioritário', 'Remarketing', 'Envio de fotos e vídeos']
+                  features: [
+                    '2.500 créditos de IA/mês',
+                    'Gerenciamento de bloqueios',
+                    'Envio de fotos',
+                    'Envio de vídeos',
+                    'Envio de áudios',
+                    'Gerenciamento avançado',
+                    'Suporte por email',
+                    'Até 3 bots',
+                    'Agendamento de mensagens para grupos',
+                    'Follow-up automático',
+                    'Remarketing',
+                    'Suporte prioritário'
+                  ],
+                  color: 'from-purple-500 to-pink-500'
                   },
                   {
                     name: 'Profissional',
                     old: '3.600',
                     current: '1.800',
+                  oldUSD: '56.69',
+                  currentUSD: '28.35',
+                  amount: 1800,
+                  description: 'Plano Profissional - 10.000 créditos de IA/mês',
                     badge: null,
-                    features: ['10.000 mensagens/mês', 'Múltiplos usuários', 'API', 'Remarketing', 'Envio de fotos e vídeos']
+                  features: [
+                    '10.000 créditos de IA/mês',
+                    'Gerenciamento de bloqueios',
+                    'Envio de fotos',
+                    'Envio de vídeos',
+                    'Envio de áudios',
+                    'Gerenciamento avançado',
+                    'Suporte por email',
+                    'Até 3 bots',
+                    'Agendamento de mensagens para grupos',
+                    'Follow-up automático',
+                    'Remarketing',
+                    'Suporte prioritário',
+                    'Gerenciamento de grupos',
+                    'Agendamento de Status',
+                    'Envio de catálogos',
+                    'API completa'
+                  ],
+                  color: 'from-indigo-500 to-blue-500'
                   },
                   {
                     name: 'Ilimitado',
                     old: '4.950',
                     current: '2.475',
+                  oldUSD: '77.95',
+                  currentUSD: '38.98',
+                  amount: 2475,
+                  description: 'Plano Ilimitado - Créditos de IA ilimitados',
                     badge: null,
-                    features: ['Mensagens ilimitadas', 'Suporte dedicado no WhatsApp']
+                  features: [
+                    'Créditos de IA ilimitados',
+                    'Gerenciamento de bloqueios',
+                    'Envio de fotos',
+                    'Envio de vídeos',
+                    'Envio de áudios',
+                    'Gerenciamento avançado',
+                    'Até 3 bots',
+                    'Agendamento de mensagens para grupos',
+                    'Follow-up automático',
+                    'Remarketing',
+                    'Suporte prioritário',
+                    'Gerenciamento de grupos',
+                    'Agendamento de Status',
+                    'Envio de catálogos',
+                    'API completa',
+                    'Registro automático de compras',
+                    'Ranking de clientes (gamificação)',
+                    'Histórico completo de transações',
+                    'Relatórios de vendas diárias/mensais',
+                    'Sistema anti-fraude',
+                    'Controle de concorrência',
+                    'Suporte dedicado no WhatsApp'
+                  ],
+                  color: 'from-red-500 to-pink-600'
                   }
                 ].map((plan, idx) => (
-                  <div key={plan.name} className={`snap-start min-w-[280px] sm:min-w-[300px] bg-white rounded-2xl p-6 shadow-2xl ${plan.badge ? 'ring-2 ring-yellow-400' : ''}`}>
+                <motion.div
+                  key={plan.name}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: idx * 0.1 }}
+                  viewport={{ once: true }}
+                  whileHover={{ y: -10, boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)" }}
+                  className={`snap-start min-w-[280px] sm:min-w-[320px] md:min-w-[350px] bg-white rounded-3xl p-4 sm:p-6 md:p-8 shadow-2xl border-2 ${
+                    plan.badge ? 'border-yellow-400 ring-4 ring-yellow-400/20' : 'border-gray-200'
+                  } transition-all duration-500 flex-shrink-0 flex flex-col ${
+                    idx === 0 ? 'relative ml-2' : ''
+                  }`}
+                  style={{
+                    marginRight: idx === 5 ? '8px' : '0',
+                    height: plan.name === 'Grátis' ? '450px' : 
+                            plan.name === 'Inicial' ? '450px' :
+                            plan.name === 'Essencial' ? '550px' :
+                            plan.name === 'Crescimento' ? '650px' :
+                            plan.name === 'Profissional' ? '750px' :
+                            'auto',
+                    overflow: 'hidden',
+                    display: 'flex',
+                    flexDirection: 'column'
+                  }}
+                >
+                  {/* Indicador de mais planos no primeiro card */}
+                  {idx === 0 && (
+                    <motion.div
+                      initial={{ opacity: 0, x: 20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.5 }}
+                      className="absolute -right-2 top-1/2 -translate-y-1/2 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-3 py-2 rounded-full text-xs font-bold shadow-lg z-10"
+                    >
+                      <motion.div
+                        animate={{ rotate: [0, 10, -10, 0] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                      >
+                        +5 mais →
+                      </motion.div>
+                    </motion.div>
+                  )}
                     {plan.badge && (
-                      <div className="mb-3 inline-flex items-center px-2 py-1 text-xs font-semibold bg-yellow-100 text-yellow-800 rounded-full">{plan.badge}</div>
-                    )}
-                    <h3 className="text-xl font-bold text-gray-900 mb-1">{plan.name}</h3>
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3 }}
+                      className="mb-4 inline-flex items-center px-4 py-2 text-sm font-bold bg-gradient-to-r from-yellow-400 to-orange-500 text-white rounded-full shadow-lg"
+                    >
+                      ⭐ {plan.badge}
+                    </motion.div>
+                  )}
+                  
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ delay: 0.2 }}
+                    className="text-center"
+                  >
+                    <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">{plan.name}</h3>
+                    
                     {plan.old && plan.current ? (
-                      <>
-                        <div className="text-sm text-gray-500 mb-4">Economia de 50%</div>
-                        <div className="mb-1 text-gray-400 line-through">MT {plan.old} /mês</div>
-                        <div className="text-3xl font-extrabold text-gray-900">MT {plan.current} <span className="text-base font-medium">/mês</span></div>
-                      </>
+                      <div className="mb-4">
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          whileInView={{ opacity: 1 }}
+                          transition={{ delay: 0.4 }}
+                          className="text-sm text-green-600 font-semibold mb-2"
+                        >
+                          💰 Economia de 50%
+                        </motion.div>
+                        <div className="mb-1 text-gray-400 line-through text-lg">${plan.oldUSD} /mês</div>
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          whileInView={{ opacity: 1 }}
+                          transition={{ delay: 0.5 }}
+                          className="text-3xl sm:text-4xl font-extrabold text-gray-900"
+                        >
+                          ${plan.currentUSD} <span className="text-base sm:text-lg font-medium">/mês</span>
+                        </motion.div>
+                        <div className="text-xs text-gray-500 mt-1">
+                          💳 Pagamento em Metical (MT)
+                        </div>
+                      </div>
                     ) : (
-                      <div className="text-3xl font-extrabold text-gray-900">MT 0 <span className="text-base font-medium">/mês</span></div>
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        transition={{ delay: 0.5 }}
+                        className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4"
+                      >
+                        $0 <span className="text-base sm:text-lg font-medium">/mês</span>
+                      </motion.div>
                     )}
-                    <ul className="mt-4 space-y-2">
-                      {plan.features.map((f, i) => (
-                        <li key={i} className="flex items-center text-gray-700">
-                          <svg className="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </motion.div>
+
+                  <motion.ul
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ delay: 0.6 }}
+                    className="mt-4 sm:mt-6 space-y-2 sm:space-y-3 mb-6 sm:mb-8 flex-grow overflow-y-auto"
+                    style={{
+                      maxHeight: plan.name === 'Grátis' ? '200px' : 
+                                 plan.name === 'Inicial' ? '200px' :
+                                 plan.name === 'Essencial' ? '250px' :
+                                 plan.name === 'Crescimento' ? '300px' :
+                                 plan.name === 'Profissional' ? '350px' :
+                                 '400px'
+                    }}
+                  >
+                    {plan.features.map((feature, i) => (
+                      <motion.li
+                        key={i}
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.7 + i * 0.05 }}
+                        className="flex items-start text-gray-700"
+                      >
+                        <div className="w-4 h-4 sm:w-5 sm:h-5 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full flex items-center justify-center mr-2 sm:mr-3 flex-shrink-0 mt-0.5">
+                          <svg className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                           </svg>
-                          {f}
-                        </li>
-                      ))}
-                    </ul>
-                    <div className="mt-6">
+                        </div>
+                        <span className="text-xs sm:text-sm leading-tight">{feature}</span>
+                      </motion.li>
+                    ))}
+                  </motion.ul>
+
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.8 }}
+                    className="mt-auto flex-shrink-0"
+                    style={{ minHeight: '60px' }}
+                  >
                       {plan.link ? (
-                        <a
+                      <motion.a
                           href={plan.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-3 px-6 rounded-lg w-full inline-block text-center shadow-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300"
+                        whileHover={{ y: -2 }}
+                        whileTap={{ y: 0 }}
+                        className={`bg-gradient-to-r ${plan.color} text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-2xl w-full inline-block text-center shadow-xl hover:shadow-2xl transition-all duration-300 text-sm sm:text-base`}
                           onClick={() => metaPixelService.trackCTAClick(`Quero este plano - ${plan.name}`, 'Pricing Section')}
                         >
-                          Quero este plano
-                        </a>
-                      ) : (
-                        <BotaoCTA
-                          to="/login"
-                          variant="gradient"
-                          className="w-full"
-                          onClick={() => metaPixelService.trackCTAClick(`Quero este plano - ${plan.name}`, 'Pricing Section')}
+                        🚀 Quero este plano
+                      </motion.a>
+                    ) : (
+                      <motion.button
+                        onClick={() => handlePaymentClick(plan)}
+                        whileHover={{ y: -2 }}
+                        whileTap={{ y: 0 }}
+                        className={`w-full bg-gradient-to-r ${plan.color} text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 text-sm sm:text-base`}
                         >
                           Quero este plano
-                        </BotaoCTA>
+                      </motion.button>
                       )}
-                    </div>
-                  </div>
+                  </motion.div>
+                </motion.div>
                 ))}
-              </div>
-            </div>
-            <p className="text-sm text-blue-100 mt-3">Arraste para o lado para ver mais planos</p>
           </motion.div>
+          </div>
         </div>
       </section>
 
@@ -694,33 +1098,25 @@ const Home = () => {
               Conecte seu número em poucos minutos e venda mais com a ajuda do AMSync Ads, 24/7.
             </p>
             <BotaoCTA 
-              to="/login" 
+              to="https://assistente.amsync.online" 
               variant="gradient" 
               size="xl"
               className="text-lg px-8 py-3"
-              onClick={() => metaPixelService.trackCTAClick('Quero começar agora', 'Final CTA')}
+              onClick={() => metaPixelService.trackCTAClick('Quero começar grátis', 'Final CTA')}
             >
-              Quero começar agora
+              Quero começar grátis
             </BotaoCTA>
           </motion.div>
         </div>
       </section>
 
-      {/* Botão Flutuante do WhatsApp */}
-      <motion.a
-        href="https://wa.me/25887400696"
-        target="_blank"
-        rel="noopener noreferrer"
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ delay: 1, type: "spring", stiffness: 260, damping: 20 }}
-        className="fixed bottom-6 right-6 w-16 h-16 bg-green-500 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 z-50"
-        onClick={() => metaPixelService.trackWhatsAppClick()}
-      >
-        <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
-        </svg>
-      </motion.a>
+      {/* Modal de Pagamento Móvel */}
+      <MobilePaymentModal
+        isOpen={paymentModal.isOpen}
+        onClose={closePaymentModal}
+        plan={paymentModal.plan}
+        user={currentUser}
+      />
     </div>
   );
 };

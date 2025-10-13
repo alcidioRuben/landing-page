@@ -12,6 +12,146 @@ const DEFAULT_CONFIG = {
 }
 
 /**
+ * Criar pagamento móvel direto (M-Pesa/E-Mola)
+ * @param {Object} paymentData - Dados do pagamento
+ * @param {string} paymentData.method - "mpesa" ou "emola"
+ * @param {number} paymentData.amount - Valor em unidades (não centavos)
+ * @param {string} paymentData.context - Descrição do pagamento
+ * @param {string} paymentData.useremail - Email do usuário
+ * @param {string} paymentData.userwhatsApp - WhatsApp do usuário
+ * @param {string} paymentData.phone - Número M-Pesa/E-Mola
+ * @returns {Promise<Object>} Resposta da API
+ */
+export const createMobilePayment = async (paymentData) => {
+  try {
+    // Formatar número de telefone (remover espaços e caracteres especiais)
+    const formatPhone = (phone) => {
+      if (!phone) return phone;
+      return phone.replace(/\D/g, ''); // Remove tudo exceto números
+    };
+
+    const payload = {
+      method: paymentData.method, // "mpesa" ou "emola"
+      amount: paymentData.amount, // Valor em unidades
+      context: paymentData.context,
+      useremail: paymentData.useremail,
+      userwhatsApp: formatPhone(paymentData.userwhatsApp),
+      phone: formatPhone(paymentData.phone)
+    }
+
+    // Validar parâmetros obrigatórios
+    const requiredParams = ['method', 'amount', 'context', 'useremail', 'userwhatsApp', 'phone'];
+    const missingParams = requiredParams.filter(param => !payload[param]);
+    
+    if (missingParams.length > 0) {
+      throw new Error(`Parâmetros obrigatórios faltando: ${missingParams.join(', ')}`);
+    }
+
+    console.log('📱 Criando pagamento móvel:', {
+      url: `${VENDORAPAY_API_BASE}/payment/mobile`,
+      payload: payload,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${API_KEY}`,
+        'X-API-Key': API_KEY
+      },
+      environment: process.env.NODE_ENV
+    })
+
+    // Tentar diferentes endpoints possíveis
+    const endpoints = [
+      '/api/mobile', // Proxy local
+      `${VENDORAPAY_API_BASE}/payment/mobile`,
+      `https://vendorapay.com/api/payment/mobile`
+    ];
+
+    let response;
+    let lastError;
+
+    for (const endpoint of endpoints) {
+      try {
+        console.log(`🔄 Tentando endpoint: ${endpoint}`);
+        
+        response = await fetch(endpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${API_KEY}`,
+            'X-API-Key': API_KEY,
+            'apiKey': API_KEY
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if (response.ok) {
+          console.log(`✅ Sucesso com endpoint: ${endpoint}`);
+          break;
+        } else {
+          console.log(`❌ Falha com endpoint: ${endpoint} - Status: ${response.status}`);
+          lastError = response;
+        }
+      } catch (error) {
+        console.log(`❌ Erro com endpoint: ${endpoint} - ${error.message}`);
+        lastError = error;
+      }
+    }
+
+    if (!response || !response.ok) {
+      response = lastError;
+    }
+
+    console.log('📡 Resposta da API móvel:', {
+      status: response.status,
+      statusText: response.statusText,
+      ok: response.ok
+    })
+
+    if (!response.ok) {
+      let errorMessage = `HTTP ${response.status}: ${response.statusText}`
+      
+      try {
+        const errorData = await response.json()
+        errorMessage = errorData.message || errorData.error || errorMessage
+      } catch (parseError) {
+        console.warn('Não foi possível fazer parse do erro:', parseError)
+      }
+      
+      throw new Error(errorMessage)
+    }
+
+    const data = await response.json()
+    console.log('✅ Dados recebidos (móvel):', data)
+    
+    if (!data.success) {
+      throw new Error(data.error || 'Erro ao criar pagamento móvel')
+    }
+
+    return {
+      success: true,
+      transactionId: data.id,
+      currency: data.currency || 'MZN',
+      data: data
+    }
+  } catch (error) {
+    console.error('❌ Erro ao criar pagamento móvel:', error)
+    
+    // Tratamento específico para erros de CORS
+    if (error.message.includes('CORS') || error.message.includes('Failed to fetch')) {
+      return {
+        success: false,
+        error: 'Erro de conexão com o servidor de pagamento. Verifique sua conexão e tente novamente.',
+        isCorsError: true
+      }
+    }
+    
+    return {
+      success: false,
+      error: error.message || 'Erro desconhecido ao criar pagamento móvel'
+    }
+  }
+}
+
+/**
  * Criar uma transação de pagamento
  * @param {Object} paymentData - Dados do pagamento
  * @param {number} paymentData.amount - Valor em centavos
@@ -403,6 +543,7 @@ export const clearOldTransactions = () => {
 
 export default {
   createPayment,
+  createMobilePayment,
   getTransactionStatus,
   verifyWebhookSignature,
   processWebhook,

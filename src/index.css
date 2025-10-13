@@ -105,4 +105,259 @@
     color: white !important;
     background-color: #2563eb !important;
   }
+
+  /* Carrossel de planos com scroll suave */
+  .pricing-carousel {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Scrollbar customizada para o carrossel */
+  .pricing-carousel::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .pricing-carousel::-webkit-scrollbar-track {
+    background: #1F2937;
+    border-radius: 10px;
+  }
+
+  .pricing-carousel::-webkit-scrollbar-thumb {
+    background: #4B5563;
+    border-radius: 10px;
+    transition: background 0.3s ease;
+  }
+
+  .pricing-carousel::-webkit-scrollbar-thumb:hover {
+    background: #6B7280;
+  }
+
+  /* Cards de planos - prevenir distorção nas bordas */
+  .pricing-carousel > div {
+    transform-origin: center center;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+
+  /* Garantir que bordas arredondadas permaneçam suaves */
+  .pricing-carousel .rounded-3xl {
+    transform: translateZ(0);
+    will-change: transform;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow: visible !important;
+    contain: layout;
+  }
+
+  /* Prevenir corte de bordas em dispositivos móveis */
+  @media (max-width: 768px) {
+    .pricing-carousel {
+      padding: 8px 4px !important;
+      overflow-x: scroll !important;
+      overflow-y: visible !important;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .pricing-carousel > div {
+      overflow: visible !important;
+      border-radius: 24px !important;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+    }
+
+    /* Forçar visibilidade das bordas */
+    .snap-start {
+      overflow: visible !important;
+      clip-path: none !important;
+      -webkit-clip-path: none !important;
+      border-radius: 24px !important;
+      contain: paint !important;
+    }
+
+    /* Garantir que bordas arredondadas sejam visíveis */
+    .rounded-3xl {
+      border-radius: 24px !important;
+      -webkit-mask-image: -webkit-radial-gradient(white, black);
+      mask-image: radial-gradient(white, black);
+    }
+  }
+
+  /* Para telas muito pequenas */
+  @media (max-width: 400px) {
+    .pricing-carousel {
+      padding: 12px 8px !important;
+    }
+
+    .snap-start {
+      min-width: 260px !important;
+      margin: 0 4px !important;
+      padding: 12px !important;
+    }
+  }
+
+  /* Para telas médias */
+  @media (min-width: 401px) and (max-width: 640px) {
+    .snap-start {
+      min-width: 280px !important;
+    }
+  }
+
+  /* Animação de pulso única para scroll */
+  @keyframes pulse-once {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.02);
+      opacity: 0.95;
+    }
+  }
+
+  .animate-pulse-once {
+    animation: pulse-once 1.5s ease-in-out;
+  }
+
+  /* Efeito de highlight ao chegar na seção */
+  @keyframes highlight-section {
+    0% {
+      box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+    }
+    50% {
+      box-shadow: 0 0 40px 10px rgba(59, 130, 246, 0.4);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+    }
+  }
+
+  #planos-section.animate-pulse-once {
+    animation: highlight-section 1.5s ease-in-out;
+  }
+
+  /* Scroll personalizado para lista de features */
+  .pricing-carousel ul::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .pricing-carousel ul::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 2px;
+  }
+
+  .pricing-carousel ul::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 2px;
+  }
+
+  .pricing-carousel ul::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+  }
+
+  .btn-secondary:hover {
+
+    background-color: #4b5563 !important;
+
+    color: white !important;
+
+  }
+
+  
+
+  .btn-gradient:hover {
+
+    background: linear-gradient(to right, #1d4ed8, #7c3aed) !important;
+
+    color: white !important;
+
+  }
+
+  
+
+  .btn-outline {
+
+    color: #2563eb !important;
+
+    border-color: #2563eb !important;
+
+    background-color: transparent !important;
+
+  }
+
+  
+
+  .btn-outline:hover {
+
+    color: white !important;
+
+    background-color: #2563eb !important;
+
+    border-color: #2563eb !important;
+
+  }
+
+
+
+  /* Estilos específicos para botões de chamada para ação */
+
+  .bg-gradient-primary {
+
+    background: linear-gradient(to right, #2563eb, #7c3aed) !important;
+
+    color: white !important;
+
+  }
+
+
+
+  /* Garantir que todos os botões tenham contraste adequado */
+
+  button, .btn-primary, .btn-secondary, .btn-gradient, .btn-outline {
+
+    min-height: 44px !important;
+
+    font-weight: 600 !important;
+
+    text-shadow: none !important;
+
+  }
+
+
+
+  /* Forçar visibilidade em todos os botões CTA */
+
+  a[class*="btn-"], button[class*="btn-"] {
+
+    color: white !important;
+
+    background-color: #2563eb !important;
+
+  }
+
+
+
+  /* Botões outline específicos */
+
+  a[class*="btn-outline"], button[class*="btn-outline"] {
+
+    color: #2563eb !important;
+
+    background-color: transparent !important;
+
+    border: 2px solid #2563eb !important;
+
+  }
+
+
+
+  a[class*="btn-outline"]:hover, button[class*="btn-outline"]:hover {
+
+    color: white !important;
+
+    background-color: #2563eb !important;
+
+  }
 }
+
+
