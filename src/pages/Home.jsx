@@ -435,17 +435,17 @@ const Home = () => {
             }}
           >
               {[
-                '/src/logo/WhatsApp Image 2025-10-13 at 02.10.02.jpeg',
-                '/src/logo/WhatsApp Image 2025-10-13 at 02.10.02 (1).jpeg',
-                '/src/logo/WhatsApp Image 2025-10-13 at 02.10.02 (2).jpeg',
-                '/src/logo/WhatsApp Image 2025-10-13 at 02.10.02 (3).jpeg',
-                '/src/logo/WhatsApp Image 2025-10-13 at 02.10.02 (4).jpeg',
+                '/whatsapp-5.jpeg',
+                '/whatsapp-1.jpeg',
+                '/whatsapp-2.jpeg',
+                '/whatsapp-3.jpeg',
+                '/whatsapp-4.jpeg',
                 // Duplicar exatamente para loop perfeito
-                '/src/logo/WhatsApp Image 2025-10-13 at 02.10.02.jpeg',
-                '/src/logo/WhatsApp Image 2025-10-13 at 02.10.02 (1).jpeg',
-                '/src/logo/WhatsApp Image 2025-10-13 at 02.10.02 (2).jpeg',
-                '/src/logo/WhatsApp Image 2025-10-13 at 02.10.02 (3).jpeg',
-                '/src/logo/WhatsApp Image 2025-10-13 at 02.10.02 (4).jpeg',
+                '/whatsapp-5.jpeg',
+                '/whatsapp-1.jpeg',
+                '/whatsapp-2.jpeg',
+                '/whatsapp-3.jpeg',
+                '/whatsapp-4.jpeg',
               ].map((img, idx) => (
                 <div
                   key={idx}
