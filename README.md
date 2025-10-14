@@ -1,6 +1,6 @@
-# LacasaDigital - Curso de Dropshipping
+# AMSync Ads Chatbot
 
-Uma plataforma completa de ensino online focada em dropshipping e marketing digital.
+Uma plataforma completa de chatbot para WhatsApp com IA, focada em automação de vendas e atendimento.
 
 ## 🚀 Tecnologias Utilizadas
 
@@ -21,15 +21,15 @@ Uma plataforma completa de ensino online focada em dropshipping e marketing digi
 - Recuperação de senha
 
 ### 💳 Pagamentos
-- Integração com Nhonga.net
-- Pagamento de 300 MZN
+- Integração com VendoraPay (M-Pesa/E-Mola)
+- Pagamentos móveis diretos
 - Webhook para confirmação
 - Redirecionamento automático
 
-### 🎓 Curso
-- 8 vídeos exclusivos de dropshipping
-- Sistema de progresso
-- Tracking de vídeos assistidos
+### 🤖 Chatbot
+- IA para WhatsApp
+- Automação de vendas
+- Gerenciamento de leads
 - Dashboard interativo
 
 ### 📱 Interface
@@ -102,13 +102,13 @@ src/
 ## 📞 Suporte
 
 Para suporte técnico, entre em contato:
-- Email: suporte@com
+- Email: suporte@amsync.online
 - WhatsApp: +25887400696
 
 ## 📄 Licença
 
-Este projeto é propriedade da LacasaDigital. Todos os direitos reservados.
+Este projeto é propriedade da AMSync Ads. Todos os direitos reservados.
 
 ---
 
-**LacasaDigital** - Transformando sonhos em realidade através do conhecimento digital.
+**AMSync Ads** - Transformando seu WhatsApp em uma máquina de vendas com IA.

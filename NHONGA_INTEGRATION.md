@@ -13,7 +13,7 @@ O serviço está configurado com:
 
 ```javascript
 export const COURSE_CONFIG = {
-  name: 'Curso Completo de Dropshipping',
+  name: 'AMSync Ads',
   description: 'Aprenda dropshipping do zero e comece a faturar online',
   amount: 300, // MZn 300,00 em centavos
   currency: 'MZN',

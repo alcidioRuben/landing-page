@@ -335,10 +335,10 @@ const Recursos = () => {
             </motion.div>
 
             <h1 className="text-2xl md:text-4xl lg:text-6xl font-black mb-3 md:mb-6 bg-gradient-to-r from-white via-blue-100 to-purple-200 bg-clip-text text-transparent leading-tight">
-              <span className="block md:hidden">Curso de</span>
-              <span className="hidden md:block">Curso Completo de</span>
+              <span className="block md:hidden">AMSync Ads</span>
+              <span className="hidden md:block">AMSync Ads</span>
               <br />
-              <span className="text-yellow-400">Dropshipping</span>
+              <span className="text-yellow-400">Chatbot</span>
             </h1>
             
             <p className="text-sm md:text-xl lg:text-2xl text-blue-100 mb-2 md:mb-4 font-medium">

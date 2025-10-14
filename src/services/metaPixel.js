@@ -83,25 +83,25 @@ class MetaPixelService {
   }
 
   /**
-   * Eventos específicos para o curso de dropshipping
+   * Eventos específicos para o AMSync Ads Chatbot
    */
 
   // Visualização da página inicial
   trackHomePageView() {
     this.track('PageView', {
-      content_name: 'Página Inicial - Curso Dropshipping',
+      content_name: 'Página Inicial - AMSync Ads Chatbot',
       content_category: 'Landing Page',
-      content_type: 'course'
+      content_type: 'chatbot_service'
     });
   }
 
-  // Interesse no curso
+  // Interesse no chatbot
   trackCourseInterest() {
     this.track('ViewContent', {
-      content_name: 'Curso Completo de Dropshipping',
-      content_category: 'Digital Course',
-      content_type: 'course',
-      value: 299,
+      content_name: 'AMSync Ads Chatbot - WhatsApp com IA',
+      content_category: 'Digital Service',
+      content_type: 'chatbot',
+      value: 199,
       currency: 'MZN'
     });
   }
@@ -111,16 +111,16 @@ class MetaPixelService {
     this.trackCustom('CTA_Click', {
       button_text: buttonText,
       location: location,
-      content_name: 'Curso Dropshipping'
+      content_name: 'AMSync Ads Chatbot'
     });
   }
 
   // Início do processo de login
   trackLoginStart() {
     this.track('InitiateCheckout', {
-      content_name: 'Login - Curso Dropshipping',
+      content_name: 'Login - AMSync Ads Chatbot',
       content_category: 'Authentication',
-      value: 299,
+      value: 199,
       currency: 'MZN'
     });
   }
@@ -137,10 +137,10 @@ class MetaPixelService {
   // Início do processo de pagamento
   trackPaymentStart() {
     this.track('InitiateCheckout', {
-      content_name: 'Curso Completo de Dropshipping',
-      content_category: 'Digital Course',
-      content_type: 'course',
-      value: 299,
+      content_name: 'AMSync Ads Chatbot - WhatsApp com IA',
+      content_category: 'Digital Service',
+      content_type: 'chatbot',
+      value: 199,
       currency: 'MZN'
     });
   }
@@ -159,28 +159,28 @@ class MetaPixelService {
   // Pagamento concluído
   trackPurchase(transactionId = null) {
     this.track('Purchase', {
-      content_name: 'Curso Completo de Dropshipping',
-      content_category: 'Digital Course',
-      content_type: 'course',
-      value: 299,
+      content_name: 'AMSync Ads Chatbot - WhatsApp com IA',
+      content_category: 'Digital Service',
+      content_type: 'chatbot',
+      value: 199,
       currency: 'MZN',
       transaction_id: transactionId || `tx_${Date.now()}`
     });
   }
 
   // Visualização do vídeo principal
-  trackVideoView(videoTitle = 'Vídeo Principal - Curso Dropshipping') {
+  trackVideoView(videoTitle = 'Vídeo Principal - AMSync Ads Chatbot') {
     this.track('ViewContent', {
       content_name: videoTitle,
       content_category: 'Video',
-      content_type: 'course_video'
+      content_type: 'chatbot_demo'
     });
   }
 
   // Interação com depoimentos
   trackTestimonialView() {
     this.trackCustom('Testimonial_View', {
-      content_name: 'Depoimentos de Alunos',
+      content_name: 'Depoimentos de Clientes',
       content_category: 'Social Proof'
     });
   }
@@ -197,7 +197,7 @@ class MetaPixelService {
   // Visualização da página "Sobre"
   trackAboutPageView() {
     this.track('PageView', {
-      content_name: 'Página Sobre - LacasaDigital',
+      content_name: 'Página Sobre - AMSync Ads',
       content_category: 'About Page',
       content_type: 'information'
     });
@@ -216,17 +216,17 @@ class MetaPixelService {
   trackResourcesPageView() {
     this.track('PageView', {
       content_name: 'Página Recursos - Dashboard',
-      content_category: 'Course Content',
-      content_type: 'course_resources'
+      content_category: 'Chatbot Features',
+      content_type: 'chatbot_resources'
     });
   }
 
   // Visualização da página "Dashboard"
   trackDashboardView() {
     this.track('PageView', {
-      content_name: 'Dashboard do Aluno',
-      content_category: 'Course Dashboard',
-      content_type: 'course_access'
+      content_name: 'Dashboard do Cliente',
+      content_category: 'Chatbot Dashboard',
+      content_type: 'chatbot_access'
     });
   }
 
@@ -276,7 +276,7 @@ class MetaPixelService {
     this.trackCustom('User_Engagement', {
       action: action,
       ...details,
-      content_name: 'Curso Dropshipping',
+      content_name: 'AMSync Ads Chatbot',
       content_category: 'Engagement'
     });
   }

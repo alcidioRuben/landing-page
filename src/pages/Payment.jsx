@@ -65,7 +65,7 @@ const Payment = () => {
         userId: currentUser.uid,
         userEmail: currentUser.email,
         // Incluir dados do plano para processamento no webhook
-        planName: selectedPlan?.name || 'Curso Completo',
+        planName: selectedPlan?.name || 'AMSync Ads Chatbot',
         planAmount: amountToPay
       }
 
@@ -267,7 +267,7 @@ const Payment = () => {
                 <div className="space-y-4">
                   <div className="flex justify-between items-center">
                     <span className="text-gray-300">
-                      {selectedPlan ? `Plano ${selectedPlan.name}` : 'Curso Completo de Dropshipping'}
+                      {selectedPlan ? `Plano ${selectedPlan.name}` : 'AMSync Ads Chatbot'}
                     </span>
                     <span className="font-medium text-white">
                       {selectedPlan ? formatAmount(selectedPlan.amount) : formatAmount(COURSE_CONFIG.amount)}

@@ -604,9 +604,9 @@ const Dashboard = () => {
                   </h3>
                   <div className="prose prose-lg max-w-none text-gray-700">
                     <p>
-                      Esta é a aula {currentLesson.id} do curso completo de Dropshipping. 
-                      Aqui você aprenderá conceitos essenciais para transformar sua vida financeira 
-                      através do empreendedorismo digital.
+                      Esta é a aula {currentLesson.id} do AMSync Ads Chatbot. 
+                      Aqui você aprenderá conceitos essenciais para transformar seu WhatsApp 
+                      em uma máquina de vendas com IA.
                     </p>
                     <ul>
                       <li>Assista o vídeo completo para absorver todo o conteúdo</li>

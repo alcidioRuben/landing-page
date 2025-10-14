@@ -74,7 +74,7 @@ const PaymentSuccess = () => {
                 // Determinar dados do plano baseado no valor pago
                 let planData = null
                 let amount = 299
-                let context = 'Curso Completo de Dropshipping'
+                let context = 'AMSync Ads Chatbot - WhatsApp com IA'
                 
                 // Buscar plano pelo valor (assumindo que o valor está em localStorage ou pode ser inferido)
                 const planValues = Object.values(PLANS_CONFIG)
@@ -91,7 +91,7 @@ const PaymentSuccess = () => {
                   transactionId: transactionId,
                   currency: 'MZN',
                   context: context,
-                  planName: planData?.name || 'Curso Completo'
+                  planName: planData?.name || 'AMSync Ads Chatbot'
                 })
 
                 // Meta Pixel - Rastrear compra bem-sucedida

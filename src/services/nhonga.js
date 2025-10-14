@@ -407,9 +407,9 @@ export const PLANS_CONFIG = {
  * Configurações do curso (mantido para compatibilidade)
  */
 export const COURSE_CONFIG = {
-  name: 'Curso Completo de Dropshipping',
-  description: 'Aprenda dropshipping do zero e comece a faturar online',
-  amount: 299, // 299 MZN (valor direto para Nhonga.net)
+  name: 'AMSync Ads Chatbot',
+  description: 'Transforme seu WhatsApp em uma máquina de vendas com IA',
+  amount: 199, // 199 MZN (valor direto para VendoraPay)
   currency: 'MZN',
   amountMZN: 299 // 299 MZN
 }

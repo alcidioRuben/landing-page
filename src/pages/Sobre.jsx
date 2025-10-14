@@ -64,8 +64,8 @@ const Sobre = () => {
     },
           {
         name: "Santos jose",
-        role: "Especialista em Dropshipping",
-        bio: "Empreendedor que já faturou mais de R$ 2 milhões com dropshipping.",
+        role: "Especialista em IA e Automação",
+        bio: "Especialista em chatbots e automação de vendas com mais de 5 anos de experiência.",
         image: "/logo.png"
       }
   ];

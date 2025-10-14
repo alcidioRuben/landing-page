@@ -32,15 +32,18 @@
     "tailwindcss": "^3.3.6",
     "vite": "^5.0.0"
   },
-  "description": "Plataforma de cursos online da AMSync com foco em Dropshipping",
+  "description": "AMSync Ads Chatbot - Transforme seu WhatsApp em uma máquina de vendas com IA",
   "keywords": [
     "react",
     "vite",
     "tailwindcss",
     "firebase",
     "stripe",
-    "dropshipping",
-    "cursos-online"
+    "chatbot",
+    "whatsapp",
+    "ia",
+    "vendas",
+    "automação"
   ],
   "author": "AMSync",
   "license": "MIT"

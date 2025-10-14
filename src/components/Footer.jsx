@@ -219,7 +219,7 @@ const Footer = () => {
           <div className="text-center max-w-2xl mx-auto">
             <h3 className="text-2xl font-bold mb-4">Fique por dentro das novidades!</h3>
             <p className="text-blue-100 mb-6">
-              Receba dicas exclusivas sobre dropshipping digital diretamente no seu email.
+              Receba dicas exclusivas sobre automação de vendas e WhatsApp diretamente no seu email.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
               <input
